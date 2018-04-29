@@ -29,5 +29,5 @@ test:app:
     - tags
   script:
   # official way to provide password to psql: http://www.postgresql.org/docs/9.3/static/libpq-envars.html
-  - phpunit --no-configuration /builds/baudev/ZONNY_API/UnitTest --teamcity
+  - phpunit --no-configuration /builds/baudev/ZONNY_API/UnitTest --teamcity --testdox
   allow_failure: false
