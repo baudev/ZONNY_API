@@ -185,6 +185,20 @@ $app->get('/event/request/:event_id/:page', array(new Authentificate(), 'AuthUse
 /**
  * Routes concernant les suggestions d'évènements
  */
+// Permet de récupérer les informations concernant un évènement Facebook sugéré
+$app->get('/events_public/:id',  array(new Authentificate(), 'AuthUser'), function ($event_id) use ($app) {
+    // TODO CONTROLLER
+});
+
+// Permet de récupérer une liste d'évènements Facebook suggérés de la catégorie demandée
+$app->get('/events_public/search/:category/:page',  array(new Authentificate(), 'AuthUser'), function ($category, $page) use ($app) {
+    // TODO CONTROLLER
+});
+
+// Permet une suggestion d'évènement Facebook aléatoirement
+$app->get('/events_public/random/',  array(new Authentificate(), 'AuthUser'), function () use ($app) {
+    // TODO CONTROLLER
+});
 
 /**
  * Routes concernant les lieux suggérés
