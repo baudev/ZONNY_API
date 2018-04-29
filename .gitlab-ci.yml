@@ -30,4 +30,4 @@ test:app:
   script:
   # official way to provide password to psql: http://www.postgresql.org/docs/9.3/static/libpq-envars.html
   - phpunit --no-configuration /builds/baudev/ZONNY_API/UnitTest --teamcity
-  allow_failure: true
+  allow_failure: false
