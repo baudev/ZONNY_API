@@ -1,0 +1,1693 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "ZONNY API",
+        "description": "Swagger documentation of the official API of ZONNY.",
+        "termsOfService": "https://zonny.me/cgu",
+        "contact": {
+            "name": "ZONNY TEAM",
+            "url": "https://zonny.me",
+            "email": "contact@zonny.me"
+        },
+        "version": "0.2.0"
+    },
+    "host": "zonny.me",
+    "basePath": "/api/v0.2",
+    "schemes": [
+        "https"
+    ],
+    "consumes": [
+        "application/x-www-form-urlencoded"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/account": {
+            "get": {
+                "tags": [
+                    "account"
+                ],
+                "summary": "Get information about the current User",
+                "description": "All informations are not necessarily full.",
+                "operationId": "getAccount",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful request",
+                        "schema": {
+                            "$ref": "#/definitions/User"
+                        }
+                    },
+                    "400": {
+                        "description": "error during request",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "account"
+                ],
+                "summary": "Update Facebook user account",
+                "description": "Allow the user to update his Facebook credentials.",
+                "operationId": "updateAccountToken",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "fb_access_token",
+                        "in": "formData",
+                        "description": "User Facebook token",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "expiration_datetime_token",
+                        "in": "formData",
+                        "description": "User Facebook token expiration datetime",
+                        "required": true,
+                        "type": "string",
+                        "format": "datetime"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful request",
+                        "schema": {
+                            "properties": {
+                                "user": {
+                                    "type": "object",
+                                    "$ref": "#/definitions/User"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    },
+                    "400": {
+                        "description": "error during request",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "account"
+                ],
+                "summary": "Create user account",
+                "description": "Allow the user to create an account from his Facebook one.",
+                "operationId": "createAccountToken",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "fb_access_token",
+                        "in": "formData",
+                        "description": "User Facebook token",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "expiration_datetime_token",
+                        "in": "formData",
+                        "description": "User Facebook token expiration datetime",
+                        "required": true,
+                        "type": "string",
+                        "format": "datetime"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful request",
+                        "schema": {
+                            "properties": {
+                                "user": {
+                                    "type": "object",
+                                    "$ref": "#/definitions/User"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    },
+                    "400": {
+                        "description": "error during request",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "account"
+                ],
+                "summary": "Delete user account",
+                "description": "Allow the user to delete all his information.",
+                "operationId": "deleteAccount",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful request",
+                        "schema": {
+                            "properties": {
+                                "response": {
+                                    "type": "string",
+                                    "example": "ok"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    },
+                    "400": {
+                        "description": "error during request",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
+        },
+        "/account/unavailable/start": {
+            "put": {
+                "tags": [
+                    "account"
+                ],
+                "summary": "Make the user unavailable",
+                "description": "Allow the user to be unavailable until the specified datetime. Anybody will see the user on the map.",
+                "operationId": "BecomeUnavailable",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "datetime",
+                        "in": "formData",
+                        "description": "Datetime until which the user will be unavailable. The datetime must be in the next 24h.",
+                        "required": true,
+                        "type": "string",
+                        "format": "datetime"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful request",
+                        "schema": {
+                            "properties": {
+                                "response": {
+                                    "type": "string",
+                                    "example": "ok"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    },
+                    "400": {
+                        "description": "error during request",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
+        },
+        "/account/unavailable/end": {
+            "put": {
+                "tags": [
+                    "account"
+                ],
+                "summary": "Make the user available",
+                "description": "Allow the user to be available again.",
+                "operationId": "BecomeAvailable",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful request",
+                        "schema": {
+                            "properties": {
+                                "response": {
+                                    "type": "string",
+                                    "example": "ok"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    },
+                    "400": {
+                        "description": "error during request",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
+        },
+        "/account/location": {
+            "get": {
+                "tags": [
+                    "account"
+                ],
+                "summary": "Update user account location",
+                "description": "Allow the user to update his current location.",
+                "operationId": "updateAccountLocation",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "latitude",
+                        "in": "formData",
+                        "description": "User's decimal latitude",
+                        "required": true,
+                        "type": "number",
+                        "format": "float"
+                    },
+                    {
+                        "name": "longitude",
+                        "in": "formData",
+                        "description": "User's decimal longitude",
+                        "required": true,
+                        "type": "number",
+                        "format": "float"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful request",
+                        "schema": {
+                            "properties": {
+                                "response": {
+                                    "type": "string",
+                                    "example": "ok"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    },
+                    "400": {
+                        "description": "error during request",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
+        },
+        "/event/request": {
+            "put": {
+                "tags": [
+                    "event"
+                ],
+                "summary": "Answer to a request",
+                "description": "Allow the creator of a public event to respond to a request.",
+                "operationId": "editEventRequest",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "request_id",
+                        "in": "formData",
+                        "description": "Id of the request.",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "response",
+                        "in": "formData",
+                        "description": "Answer to the request. 1 the creator accepts it. 2 the creator ignores it.",
+                        "required": true,
+                        "type": "integer",
+                        "enum": [
+                            1,
+                            2
+                        ]
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful request",
+                        "schema": {
+                            "properties": {
+                                "response": {
+                                    "type": "string",
+                                    "example": "ok"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    },
+                    "400": {
+                        "description": "error during request",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "event"
+                ],
+                "summary": "Create a request",
+                "description": "Allow to the user asking his friend if he can comes to a public event created by the latter.",
+                "operationId": "createEventRequest",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "event_id",
+                        "in": "formData",
+                        "description": "Id of the event.",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful request",
+                        "schema": {
+                            "properties": {
+                                "response": {
+                                    "type": "string",
+                                    "example": "ok"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    },
+                    "400": {
+                        "description": "error during request",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
+        },
+        "/event/request/{event_id}": {
+            "delete": {
+                "tags": [
+                    "event"
+                ],
+                "summary": "Delete a request",
+                "description": "Allow to the user to delete his request to this event.",
+                "operationId": "deleteEventRequest",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "event_id",
+                        "in": "path",
+                        "description": "Id of the event.",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful request",
+                        "schema": {
+                            "properties": {
+                                "response": {
+                                    "type": "string",
+                                    "example": "ok"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    },
+                    "400": {
+                        "description": "error during request",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
+        },
+        "/event": {
+            "put": {
+                "tags": [
+                    "event"
+                ],
+                "summary": "Edit an event",
+                "description": "Allow the user to edit his event.",
+                "operationId": "editEvent",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "event_id",
+                        "in": "formData",
+                        "description": "Id of the event which the user wants to edit.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "name",
+                        "in": "formData",
+                        "description": "Desired name of the event.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "public",
+                        "in": "formData",
+                        "description": "If the event is public or not. 1 if true. 0 if false. If the event is public, all creator's friends would be able to see some information about the event.",
+                        "required": false,
+                        "type": "integer",
+                        "enum": [
+                            0,
+                            1
+                        ]
+                    },
+                    {
+                        "name": "latitude",
+                        "in": "formData",
+                        "description": "Latitude of the event. If null, the latitude will be the equidistant point between all guests (including the creator).",
+                        "required": false,
+                        "type": "number",
+                        "format": "float"
+                    },
+                    {
+                        "name": "longitude",
+                        "in": "formData",
+                        "description": "Longitude of the event. If null, the latitude will be the equidistant point between all guests (including the creator).",
+                        "required": false,
+                        "type": "integer",
+                        "format": "float"
+                    },
+                    {
+                        "name": "start_time",
+                        "in": "formData",
+                        "description": "Datetime of the event's start. The datetime must be in the next 24h.",
+                        "required": false,
+                        "type": "string",
+                        "format": "datetime"
+                    },
+                    {
+                        "name": "end_time",
+                        "in": "formData",
+                        "description": "Datetime of the event's end. The datetime must be in the next 24h after the event's start.",
+                        "required": false,
+                        "type": "string",
+                        "format": "datetime"
+                    },
+                    {
+                        "name": "information",
+                        "in": "formData",
+                        "description": "The creator can give more information concerning the event.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "picture_url",
+                        "in": "formData",
+                        "description": "The picture of the event. If null, it will be replaced by a default one.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "invited_friends_id",
+                        "in": "formData",
+                        "description": "The guests'ids separated by coma. Example: 1378,15256,145",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful request",
+                        "schema": {
+                            "properties": {
+                                "response": {
+                                    "type": "string",
+                                    "example": "ok"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    },
+                    "400": {
+                        "description": "error during request",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "event"
+                ],
+                "summary": "Create an event",
+                "description": "Allow the user to create an event with his friends.",
+                "operationId": "createEvent",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "formData",
+                        "description": "Desired name of the event.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "public",
+                        "in": "formData",
+                        "description": "If the event is public or not. 1 if true. 0 if false. If the event is public, all creator's friends would be able to see some information about the event.",
+                        "required": true,
+                        "type": "integer",
+                        "enum": [
+                            0,
+                            1
+                        ]
+                    },
+                    {
+                        "name": "latitude",
+                        "in": "formData",
+                        "description": "Latitude of the event. If null, the latitude will be the equidistant point between all guests (including the creator).",
+                        "required": false,
+                        "type": "number",
+                        "format": "float"
+                    },
+                    {
+                        "name": "longitude",
+                        "in": "formData",
+                        "description": "Longitude of the event. If null, the latitude will be the equidistant point between all guests (including the creator).",
+                        "required": false,
+                        "type": "integer",
+                        "format": "float"
+                    },
+                    {
+                        "name": "start_time",
+                        "in": "formData",
+                        "description": "Datetime of the event's start. The datetime must be in the next 24h.",
+                        "required": true,
+                        "type": "string",
+                        "format": "datetime"
+                    },
+                    {
+                        "name": "end_time",
+                        "in": "formData",
+                        "description": "Datetime of the event's end. The datetime must be in the next 24h after the event's start.",
+                        "required": true,
+                        "type": "string",
+                        "format": "datetime"
+                    },
+                    {
+                        "name": "information",
+                        "in": "formData",
+                        "description": "The creator can give more information concerning the event.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "picture_url",
+                        "in": "formData",
+                        "description": "The picture of the event. If null, it will be replaced by a default one.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "invited_friends_id",
+                        "in": "formData",
+                        "description": "The guests'ids separated by coma. Example: 1378,15256,145",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful request",
+                        "schema": {
+                            "properties": {
+                                "response": {
+                                    "type": "string",
+                                    "example": "ok"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    },
+                    "400": {
+                        "description": "error during request",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
+        },
+        "/event/{event_id}": {
+            "get": {
+                "tags": [
+                    "event"
+                ],
+                "summary": "Get all information concerning the event",
+                "description": "Return all information concerning the event.",
+                "operationId": "getEvent",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "event_id",
+                        "in": "path",
+                        "description": "Id of the event.",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful request",
+                        "schema": {
+                            "properties": {
+                                "event": {
+                                    "type": "object",
+                                    "$ref": "#/definitions/Event"
+                                },
+                                "guests": {
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "friend": {
+                                                "type": "object",
+                                                "$ref": "#/definitions/NormalFriend"
+                                            },
+                                            "event_member_details": {
+                                                "type": "object",
+                                                "$ref": "#/definitions/EventMemberDetails"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                }
+                            },
+                            "type": "object"
+                        }
+                    },
+                    "400": {
+                        "description": "error during request",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "event"
+                ],
+                "summary": "Delete an event",
+                "description": "Allow the user to delete one of his events.",
+                "operationId": "deleteEvent",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "event_id",
+                        "in": "path",
+                        "description": "Id of the event.",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful request",
+                        "schema": {
+                            "properties": {
+                                "response": {
+                                    "type": "string",
+                                    "example": "ok"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    },
+                    "400": {
+                        "description": "error during request",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
+        },
+        "/event/response": {
+            "put": {
+                "tags": [
+                    "event"
+                ],
+                "summary": "Respond to an event",
+                "description": "Allow the user to respond to an event.",
+                "operationId": "answerEvent",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "event_id",
+                        "in": "formData",
+                        "description": "Id of the event.",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "response",
+                        "in": "formData",
+                        "description": "Response of the user concerning the event. 1 the user is coming. Otherwise, 0.",
+                        "required": true,
+                        "type": "integer",
+                        "enum": [
+                            1,
+                            2
+                        ]
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful request",
+                        "schema": {
+                            "properties": {
+                                "response": {
+                                    "type": "string",
+                                    "example": "ok"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    },
+                    "400": {
+                        "description": "error during request",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
+        },
+        "/event/request/{event_id}/{page}": {
+            "get": {
+                "tags": [
+                    "event"
+                ],
+                "summary": "Get all requests of an event",
+                "description": "Allow the creator of a public event to get all requests concerning an event.",
+                "operationId": "getAllEventRequests",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "event_id",
+                        "in": "path",
+                        "description": "Id of the event.",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "page",
+                        "in": "path",
+                        "description": "Page number. Start to 1",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful request",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "properties": {
+                                    "request": {
+                                        "type": "object",
+                                        "$ref": "#/definitions/EventRequest"
+                                    },
+                                    "friend": {
+                                        "type": "object",
+                                        "$ref": "#/definitions/GoodFriend"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "error during request",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
+        },
+        "/event/historic/{page}": {
+            "get": {
+                "tags": [
+                    "event"
+                ],
+                "summary": "Get all events concerning the user",
+                "description": "Return all events concerning the user such the ones where he was a guests or the creator.",
+                "operationId": "getHistoric",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "page",
+                        "in": "path",
+                        "description": "Number of desired page. Start to 1.",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful request",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "properties": {
+                                    "event": {
+                                        "type": "object",
+                                        "$ref": "#/definitions/Event"
+                                    },
+                                    "event_member_details": {
+                                        "type": "object",
+                                        "$ref": "#/definitions/EventMemberDetails"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "error during request",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
+        },
+        "/account/friends": {
+            "get": {
+                "tags": [
+                    "account"
+                ],
+                "summary": "Get all user's friend",
+                "description": "Return all user's friend and the consideration of the user for each one.",
+                "operationId": "getAllUserFriends",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful request",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "properties": {
+                                    "friend": {
+                                        "type": "object",
+                                        "$ref": "#/definitions/GoodFriend"
+                                    },
+                                    "friend_link": {
+                                        "type": "object",
+                                        "$ref": "#/definitions/FriendLink"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "error during request",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "account"
+                ],
+                "summary": "Edit a friend relation",
+                "description": "Allow the user to consider a friend as a good one or not.",
+                "operationId": "EditFriendRelation",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "friend_id",
+                        "in": "formData",
+                        "description": "Id of the considered friend.",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "authorization",
+                        "in": "formData",
+                        "description": "1 if the friend is considered as a good friend. Otherwise, 0.",
+                        "required": true,
+                        "type": "integer",
+                        "enum": [
+                            0,
+                            1
+                        ]
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful request",
+                        "schema": {
+                            "properties": {
+                                "response": {
+                                    "type": "string",
+                                    "example": "ok"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    },
+                    "400": {
+                        "description": "error during request",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
+        },
+        "/account/friends/{friend_id}": {
+            "get": {
+                "tags": [
+                    "account"
+                ],
+                "summary": "Get information about a friend",
+                "description": "Get all information concerning the friend. Depending of the relation between the user and the friend, all, partial or any information could be returned (Error in the last case).",
+                "operationId": "getFriend",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "friend_id",
+                        "in": "path",
+                        "description": "Id of the considered friend.",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful request. Could be a GoodFriend or NormalFriend model.",
+                        "schema": {
+                            "$ref": "#/definitions/GoodFriend"
+                        }
+                    },
+                    "400": {
+                        "description": "error during request",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
+        },
+        "/account/invitable_friends/{event_id}": {
+            "get": {
+                "tags": [
+                    "account"
+                ],
+                "summary": "Get all user's friend invitable to the event",
+                "description": "Get all friends invitable to the event having the event_id.",
+                "operationId": "getAllInvitableriends",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "event_id",
+                        "in": "path",
+                        "description": "Id of the concerning event.",
+                        "required": false,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful request",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "$ref": "#/definitions/GoodFriend"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "error during request",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
+        },
+        "/place_public/{id}": {
+            "get": {
+                "tags": [
+                    "public place"
+                ],
+                "summary": "Get all information concerning a public place",
+                "description": "Return all information concerning a public place.",
+                "operationId": "editEventRequest",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id of the place.",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful request",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/PublicPlace"
+                        }
+                    },
+                    "400": {
+                        "description": "error during request",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
+        },
+        "/": {
+            "get": {
+                "tags": [
+                    "map"
+                ],
+                "summary": "Get all elements to show on the Map",
+                "description": "Return all elements (friends, events, places and so on) to display on the Map.",
+                "operationId": "getMap",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful request",
+                        "schema": {
+                            "properties": {
+                                "friends": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "$ref": "#/definitions/EventMemberDetails"
+                                    }
+                                },
+                                "events": {
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "event": {
+                                                "type": "object",
+                                                "$ref": "#/definitions/Event"
+                                            },
+                                            "event_member_details": {
+                                                "type": "object",
+                                                "$ref": "#/definitions/EventMemberDetails"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                },
+                                "public_places": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "$ref": "#/definitions/PublicPlace"
+                                    }
+                                }
+                            },
+                            "type": "object"
+                        }
+                    },
+                    "400": {
+                        "description": "error during request",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
+        }
+    },
+    "definitions": {
+        "NormalFriend": {
+            "required": [
+                "_id",
+                "_name"
+            ],
+            "properties": {
+                "_id": {
+                    "description": "The primary id",
+                    "type": "integer",
+                    "example": 1652
+                },
+                "_first_name": {
+                    "description": "Firstame",
+                    "type": "string",
+                    "example": "JOHN"
+                },
+                "_profile_picture_url": {
+                    "description": "URL of the user's profile picture",
+                    "type": "string",
+                    "example": "https://dnntracker.atlassian.net/secure/useravatar?size=small&avatarId=17226"
+                },
+                "_distance": {
+                    "description": "Distance between friend and user",
+                    "type": "number",
+                    "format": "float",
+                    "example": 213.152
+                }
+            },
+            "type": "object"
+        },
+        "GoodFriend": {
+            "type": "object",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/NormalFriend"
+                },
+                {
+                    "required": [
+                        "_name"
+                    ],
+                    "properties": {
+                        "_last_name": {
+                            "type": "string",
+                            "example": "SMITH"
+                        },
+                        "_name": {
+                            "description": "Name including firstname and lastname",
+                            "type": "string",
+                            "example": "JOHN SMITH"
+                        },
+                        "_latitude": {
+                            "type": "number",
+                            "format": "float",
+                            "example": 48.569542
+                        },
+                        "_longitude": {
+                            "type": "number",
+                            "format": "float",
+                            "example": 2.48978
+                        },
+                        "_level": {
+                            "type": "integer",
+                            "example": 12
+                        }
+                    }
+                }
+            ]
+        },
+        "FriendLink": {
+            "required": [
+                "_id",
+                "_user_id",
+                "_friend_id",
+                "_authorization"
+            ],
+            "properties": {
+                "_id": {
+                    "description": "The primary id",
+                    "type": "integer",
+                    "example": 153
+                },
+                "_user_id": {
+                    "description": "The user_id of the relation's owner",
+                    "type": "integer",
+                    "example": 862
+                },
+                "_friend_id": {
+                    "description": "The friend_id of whose the relation is concerning",
+                    "type": "integer",
+                    "example": 1652
+                },
+                "_relation": {
+                    "description": "The relation value. 1 if the user has considered the friend has a good one. Otherwise, 0",
+                    "type": "integer",
+                    "enum": [
+                        0,
+                        1
+                    ]
+                }
+            },
+            "type": "object"
+        },
+        "User": {
+            "type": "object",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/GoodFriend"
+                },
+                {
+                    "required": [
+                        "_key_app"
+                    ],
+                    "properties": {
+                        "_key_app": {
+                            "description": "The API KEY",
+                            "type": "string"
+                        },
+                        "_expire": {
+                            "description": "The expiration datetime of the Facebook Token",
+                            "type": "number",
+                            "format": "datetime",
+                            "example": "2018-04-02 12:12:00"
+                        },
+                        "_unavailable": {
+                            "description": "The datetime until the user is unavailable",
+                            "type": "number",
+                            "format": "datetime",
+                            "example": "2018-03-26 23:52:45"
+                        },
+                        "_location_last_ckeck_up": {
+                            "description": "The datetime when the user sent his last known position",
+                            "type": "number",
+                            "format": "datetime",
+                            "example": "2018-04-01 22:56:10"
+                        }
+                    }
+                }
+            ]
+        },
+        "Event": {
+            "required": [
+                "_id",
+                "_name",
+                "_creator_id",
+                "_latitude",
+                "_longitude",
+                "_start_time",
+                "_end_time",
+                "_percentage_remaining",
+                "_number_guests",
+                "_number_participants",
+                "_distance"
+            ],
+            "properties": {
+                "_id": {
+                    "description": "The primary id",
+                    "type": "integer",
+                    "example": 13649
+                },
+                "_name": {
+                    "description": "Name.",
+                    "type": "string",
+                    "example": "Let's drink a beer !"
+                },
+                "_creator_id": {
+                    "description": "The id of the creator",
+                    "type": "integer",
+                    "example": 365
+                },
+                "_latitude": {
+                    "description": "The latitude",
+                    "type": "number",
+                    "format": "float",
+                    "example": 43.264
+                },
+                "_longitude": {
+                    "description": "The longitude",
+                    "type": "number",
+                    "format": "float",
+                    "example": 3.65412
+                },
+                "_start_time": {
+                    "description": "When the event starts. Must be in the next 24h",
+                    "type": "string",
+                    "format": "date-time",
+                    "example": "2018-04-02 13:00:00"
+                },
+                "_end_time": {
+                    "description": "When the event ends. Must be in the next 24h after the beginning of the event",
+                    "type": "string",
+                    "format": "date-time",
+                    "example": "2018-04-02 18:30:00"
+                },
+                "_information": {
+                    "description": "More details given by the creator",
+                    "type": "string"
+                },
+                "_picture_url": {
+                    "description": "URL of the event's picture",
+                    "type": "string",
+                    "example": "https://images.pexels.com/photos/681847/pexels-photo-681847.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
+                },
+                "_percentage_remaining": {
+                    "description": "Actual percentage remaining of the total duration of the event",
+                    "type": "integer",
+                    "example": 63
+                },
+                "_number_guests": {
+                    "description": "Number of guests",
+                    "type": "integer",
+                    "example": 6
+                },
+                "_number_participants": {
+                    "description": "Number of participants",
+                    "type": "integer",
+                    "example": 2
+                },
+                "_distance": {
+                    "description": "Distance between friend and user",
+                    "type": "number",
+                    "format": "float",
+                    "example": 213.152
+                }
+            },
+            "type": "object"
+        },
+        "EventMemberDetails": {
+            "required": [
+                "_id",
+                "_name",
+                "_creator_id",
+                "_latitude",
+                "_longitude",
+                "_start_time",
+                "_end_time",
+                "_percentage_remaining",
+                "_number_guests",
+                "_number_participants"
+            ],
+            "properties": {
+                "_id": {
+                    "description": "The primary id",
+                    "type": "integer",
+                    "example": 632
+                },
+                "_event_id": {
+                    "description": "The id of the concerning event",
+                    "type": "integer",
+                    "example": 13649
+                },
+                "_invited_friend_id": {
+                    "description": "The id of the friend in question",
+                    "type": "integer",
+                    "example": 123
+                },
+                "_response": {
+                    "description": "Response of the concerning friend. 0 the friend has not answered yet. 1 the friend has answered he comes. 2 the friend doesn't come",
+                    "type": "integer",
+                    "enum": [
+                        0,
+                        1,
+                        2
+                    ]
+                },
+                "_creator": {
+                    "description": "If the friend is the creator of the event or not. 1 is true. 0 is false",
+                    "type": "integer",
+                    "enum": [
+                        0,
+                        1
+                    ]
+                }
+            },
+            "type": "object"
+        },
+        "EventRequest": {
+            "required": [
+                "_id",
+                "_event_id",
+                "_friend_id",
+                "_response"
+            ],
+            "properties": {
+                "_id": {
+                    "description": "The primary id",
+                    "type": "integer",
+                    "example": 13649
+                },
+                "_event_id": {
+                    "description": "The id of the concerning event",
+                    "type": "integer",
+                    "example": 4899
+                },
+                "_friend_id": {
+                    "description": "The id of the concerning friend who wants to come to this event",
+                    "type": "integer",
+                    "example": 1894
+                },
+                "_response": {
+                    "description": "The response of the creator concerning this request. 0 the creator has not respond yet. 1 the creator has invited his friend. 2 the creator ignored this request.",
+                    "type": "integer",
+                    "example": 1
+                }
+            },
+            "type": "object"
+        },
+        "PublicPlace": {
+            "required": [
+                "_id",
+                "_latitude",
+                "_longitude",
+                "_start_time",
+                "_end_time",
+                "_percentage_remaining",
+                "_distance"
+            ],
+            "properties": {
+                "_id": {
+                    "description": "The primary id",
+                    "type": "integer",
+                    "example": 13697
+                },
+                "_name": {
+                    "description": "The name of the place",
+                    "type": "string",
+                    "example": "The fabric of wheelbarrow"
+                },
+                "_latitude": {
+                    "description": "The latitude",
+                    "type": "number",
+                    "format": "float",
+                    "example": 43.264
+                },
+                "_longitude": {
+                    "description": "The longitude",
+                    "type": "number",
+                    "format": "float",
+                    "example": 3.65412
+                },
+                "_picture_url": {
+                    "description": "URL of the event's picture",
+                    "type": "string",
+                    "example": "https://images.pexels.com/photos/681847/pexels-photo-681847.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
+                },
+                "_review": {
+                    "description": "The mark of the place. Min 1. Max 5",
+                    "type": "number",
+                    "format": "float",
+                    "example": 4.3
+                },
+                "_start_time": {
+                    "description": "When the place opens.",
+                    "type": "string",
+                    "format": "date-time",
+                    "example": "2018-04-02 08:00:00"
+                },
+                "_end_time": {
+                    "description": "When the place closes.",
+                    "type": "string",
+                    "format": "date-time",
+                    "example": "2018-04-02 20:00:00"
+                },
+                "_percentage_remaining": {
+                    "description": "Actual percentage remaining of the total duration of the event",
+                    "type": "integer",
+                    "example": 94
+                },
+                "_distance": {
+                    "description": "Distance between friend and user",
+                    "type": "number",
+                    "format": "float",
+                    "example": 213.152
+                }
+            },
+            "type": "object"
+        },
+        "Error": {
+            "required": [
+                "_code",
+                "_message"
+            ],
+            "properties": {
+                "_code": {
+                    "description": "The code of the corresponding error. Useful to translate the error in the application",
+                    "type": "integer",
+                    "example": 16
+                },
+                "_message": {
+                    "description": "",
+                    "type": "string",
+                    "example": "Invalid key_app"
+                }
+            },
+            "type": "object"
+        }
+    },
+    "securityDefinitions": {
+        "api_key": {
+            "type": "apiKey",
+            "name": "Authorization",
+            "in": "header"
+        }
+    }
+}
