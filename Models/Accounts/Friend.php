@@ -53,8 +53,8 @@ class Friend extends User implements \JsonSerializable
     {
         $is_allow_see_friend = parent::getFromDatabase();
         // la relation est bonne, on peut accéder aux données
-        // on calcula la distance entre l'utilisateur et l'ami
-        if($is_allow_see_friend && IS_POSTGRE_SQL){
+        // on calcule la distance entre l'utilisateur et l'ami
+        if($is_allow_see_friend){
             $req_distance = Database::getDb()->prepare("SELECT ST_Distance(geography(ST_Point(:user_longitude,:user_latitude)), geography(ST_Point(longitude,latitude)))/1000 as distance FROM members WHERE id=:id");
             $req_distance->execute(array(
                "user_latitude" => Application::getUser()->getLatitude(),

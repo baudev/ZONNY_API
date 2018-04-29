@@ -1,15 +1,4 @@
 <?php
-/** si la base de données est une base de données mySQL ou PostgreSQL */
-define('IS_POSTGRE_SQL', true);
-
-/**
- *  configuration de la base des donnée MySQL
- */
-define('DB_USERNAME', 'xxxx');
-define('DB_PASSWORD', 'xxxx');
-define('DB_HOST', 'xxxx');
-define('DB_NAME', 'xxxx');
-
 /**
  *  configuration de la base des donnée PostgreSQL
  *  configuration pour le CI de GitLab

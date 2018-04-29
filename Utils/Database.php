@@ -14,21 +14,12 @@ class Database
 
     private static $_db;
 
-    public static function connectMySQL(){
-        // Connexion à la base de données avec PDO
-        self::setDb(new PDO('mysql:host=' . DB_HOST . ';dbname=' . DB_NAME . ';charset=utf8mb4', DB_USERNAME, DB_PASSWORD, array(
-            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-            PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8mb4"
-        )));
-
-    }
-
     public static function connectPostgreSQL(){
         // Connexion à la base de données avec PDO
         self::setDb(new PDO('pgsql:host=' . DB_HOST_POSTGRE . ';dbname=' . DB_NAME_POSTGRE, DB_USERNAME_POSTGRE, DB_PASSWORD_POSTGRE, array(
             PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
         )));
-        // on vérifie que la table members existe
+        // on vérifie que la table members existe. Si ce n'est pas le cas, on crée la structure de la base de données
         if(!self::isTableExists("members")){
             // on crée la base de données
             $sql_create = file_get_contents(dirname(__FILE__) . '/../database.sql');

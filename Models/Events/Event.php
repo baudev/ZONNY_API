@@ -221,20 +221,12 @@ class Event implements \JsonSerializable
                 return false;
             }
         }
-        if(IS_POSTGRE_SQL) {
-            $req = Database::getDb()->prepare('SELECT *, ST_Distance(geography(ST_Point(:user_longitude,:user_latitude)), geography(ST_Point(longitude,latitude)))/1000 as distance from events WHERE id=:id');
-            $req->execute(array(
-                "id" => $this->getId(),
-                "user_longitude" => Application::getUser()->getLongitude(),
-                "user_latitude" => Application::getUser()->getLatitude()
-            ));
-        }
-        else {
-            $req = Database::getDb()->prepare('SELECT * from events WHERE id=:id');
-            $req->execute(array(
-                "id" => $this->getId()
-            ));
-        }
+        $req = Database::getDb()->prepare('SELECT *, ST_Distance(geography(ST_Point(:user_longitude,:user_latitude)), geography(ST_Point(longitude,latitude)))/1000 as distance from events WHERE id=:id');
+        $req->execute(array(
+            "id" => $this->getId(),
+            "user_longitude" => Application::getUser()->getLongitude(),
+            "user_latitude" => Application::getUser()->getLatitude()
+        ));
         $data = $req->fetch();
         if($data!=false){
             $this->hydrate(($data));
@@ -393,20 +385,12 @@ class Event implements \JsonSerializable
     public static function getHistoric(User $user, int $page=1):?array {
         // on fait un système de pagination
         $offset = ($page - 1) * NUMBER_EVENTS_BY_PAGE_HISTORIC;
-        if(IS_POSTGRE_SQL) {
-            $req = Database::getDb()->prepare('SELECT *, ST_Distance(geography(ST_Point(:user_longitude,:user_latitude)), geography(ST_Point(longitude,latitude)))/1000 as distance, events.id AS event_id, events_member_details.id AS detail_id FROM events_member_details INNER JOIN events ON events_member_details.event_id=events.id WHERE events_member_details.invited_friend_id=:user_id ORDER BY events_member_details.datetime DESC LIMIT ' . NUMBER_EVENTS_BY_PAGE_HISTORIC . ' OFFSET ' . $offset);
-            $req->execute(array(
-                "user_id" => $user->getId(),
-                "user_longitude" => $user->getLongitude(),
-                "user_latitude" => $user->getLatitude()
-            ));
-        }
-        else {
-            $req = Database::getDb()->prepare('SELECT *, events.id AS event_id, events_member_details.id AS detail_id FROM events_member_details INNER JOIN events ON events_member_details.event_id=events.id WHERE events_member_details.invited_friend_id=:user_id ORDER BY events_member_details.datetime DESC LIMIT ' . NUMBER_EVENTS_BY_PAGE_HISTORIC . ' OFFSET ' . $offset);
-            $req->execute(array(
-                "user_id" => $user->getId()
-            ));
-        }
+        $req = Database::getDb()->prepare('SELECT *, ST_Distance(geography(ST_Point(:user_longitude,:user_latitude)), geography(ST_Point(longitude,latitude)))/1000 as distance, events.id AS event_id, events_member_details.id AS detail_id FROM events_member_details INNER JOIN events ON events_member_details.event_id=events.id WHERE events_member_details.invited_friend_id=:user_id ORDER BY events_member_details.datetime DESC LIMIT ' . NUMBER_EVENTS_BY_PAGE_HISTORIC . ' OFFSET ' . $offset);
+        $req->execute(array(
+            "user_id" => $user->getId(),
+            "user_longitude" => $user->getLongitude(),
+            "user_latitude" => $user->getLatitude()
+        ));
         $response = array();
         $results = $req->fetchAll();
         foreach ($results as $key => $result){
@@ -429,20 +413,12 @@ class Event implements \JsonSerializable
      * @return array|null
      */
     public static function getAllCurrentsEvents(int $limit=PHP_INT_MAX):?array {
-        if(IS_POSTGRE_SQL) {
-            $req = Database::getDb()->prepare('SELECT *, ST_Distance(geography(ST_Point(:user_longitude,:user_latitude)), geography(ST_Point(longitude,latitude)))/1000 as distance, events.id AS event_id, events_member_details.id AS detail_id FROM events_member_details INNER JOIN events ON events_member_details.event_id=events.id WHERE events_member_details.invited_friend_id=:user_id AND events.start_time<=NOW() AND events.end_time>=NOW() ORDER BY distance DESC LIMIT ' . $limit);
-            $req->execute(array(
-                "user_id" => Application::getUser()->getId(),
-                "user_longitude" => Application::getUser()->getLongitude(),
-                "user_latitude" => Application::getUser()->getLatitude()
-            ));
-        }
-        else {
-            $req = Database::getDb()->prepare('SELECT *, events.id AS event_id, events_member_details.id AS detail_id FROM events_member_details INNER JOIN events ON events_member_details.event_id=events.id WHERE events_member_details.invited_friend_id=:user_id  AND events.start_time<=NOW() AND events.end_time>=NOW() ORDER BY events_member_details.datetime DESC LIMIT ' . $limit);
-            $req->execute(array(
-                "user_id" => Application::getUser()->getId()
-            ));
-        }
+        $req = Database::getDb()->prepare('SELECT *, ST_Distance(geography(ST_Point(:user_longitude,:user_latitude)), geography(ST_Point(longitude,latitude)))/1000 as distance, events.id AS event_id, events_member_details.id AS detail_id FROM events_member_details INNER JOIN events ON events_member_details.event_id=events.id WHERE events_member_details.invited_friend_id=:user_id AND events.start_time<=NOW() AND events.end_time>=NOW() ORDER BY distance DESC LIMIT ' . $limit);
+        $req->execute(array(
+            "user_id" => Application::getUser()->getId(),
+            "user_longitude" => Application::getUser()->getLongitude(),
+            "user_latitude" => Application::getUser()->getLatitude()
+        ));
         $response = array();
         $results = $req->fetchAll();
         foreach ($results as $key => $result){

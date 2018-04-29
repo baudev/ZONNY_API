@@ -162,22 +162,13 @@ class GooglePlaces implements \JsonSerializable
      */
     public function getFromDatabase():bool
     {
-        if(IS_POSTGRE_SQL) {
-            $req = Database::getDb()->prepare('SELECT *, ST_Distance(geography(ST_Point(:user_longitude,:user_latitude)), geography(ST_Point(longitude,latitude)))/1000 as distance from google_places WHERE id=:id OR google_id=:google_id');
-            $req->execute(array(
-                "id" => $this->getId(),
-                "google_id" => $this->getGoogleId(),
-                "user_longitude" => Application::getUser()->getLongitude(),
-                "user_latitude" => Application::getUser()->getLatitude()
-            ));
-        }
-        else {
-            $req = Database::getDb()->prepare('SELECT * from google_places WHERE id=:id OR google_id=:google_id');
-            $req->execute(array(
-                "id" => $this->getId(),
-                "google_id" => $this->getGoogleId(),
-            ));
-        }
+        $req = Database::getDb()->prepare('SELECT *, ST_Distance(geography(ST_Point(:user_longitude,:user_latitude)), geography(ST_Point(longitude,latitude)))/1000 as distance from google_places WHERE id=:id OR google_id=:google_id');
+        $req->execute(array(
+            "id" => $this->getId(),
+            "google_id" => $this->getGoogleId(),
+            "user_longitude" => Application::getUser()->getLongitude(),
+            "user_latitude" => Application::getUser()->getLatitude()
+        ));
         $data = $req->fetch();
         if($data!=false){
             $this->hydrate(($data));
@@ -366,9 +357,6 @@ class GooglePlaces implements \JsonSerializable
      * @return GooglePlaces[]|null
      */
     public static function getNearPlaces(int $limit=PHP_INT_MAX):?array{
-        if(!IS_POSTGRE_SQL) {
-            return array();
-        }
         $response = array();
         $req = Database::getDb()->prepare('SELECT *, ST_Distance(geography(ST_Point(:user_longitude,:user_latitude)), geography(ST_Point(longitude,latitude)))/1000 as distance from google_places ORDER BY distance LIMIT '.$limit);
         $req->execute(array(
@@ -447,7 +435,7 @@ class GooglePlaces implements \JsonSerializable
                 }
                 $place->setPictureUrl($picture_url);
                 $categories = $lieu['types'];
-                // TODO CONVERTIR CHAQUE CATEGORIE OU DIRECTEMENT DANS LES REQUETES DE BASE DE DONNEES
+                // TODO CONVERTIR CHAQUE CATEGORIE DE GOOGLE MAPS EN CATEGORIES DE ZONNY
                 $place->setCategory($categories);
                 if (!empty($opening_hours)) {
                     // on récupère le fuseau horaire des données horaires récupérées

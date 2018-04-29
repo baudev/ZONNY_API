@@ -18,12 +18,7 @@ class DatabaseTest extends TestCase
     {
         $this->_db = new Database();
         try {
-            if(IS_POSTGRE_SQL) {
-                $this->_db->connectPostgreSQL();
-            }
-            else {
-                $this->_db->connectMySQL();
-            }
+            $this->_db->connectPostgreSQL();
             $this->assertEquals(get_class($this->_db->getDb()), 'PDO');
         }
         catch (PDOException $e){

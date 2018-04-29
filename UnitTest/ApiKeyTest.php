@@ -1,4 +1,5 @@
 <?php
+
 use ZONNY\Utils\ApiKey;
 use PHPUnit\Framework\TestCase;
 

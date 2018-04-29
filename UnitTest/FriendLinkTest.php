@@ -1,4 +1,5 @@
 <?php
+
 namespace ZONNY\UnitTest;
 
 use ZONNY\Models\Accounts\FriendLink;

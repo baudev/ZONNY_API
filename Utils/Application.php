@@ -19,12 +19,7 @@ class Application
             self::activateCors();
         }
         // On connecte l'application à la base de donnée
-        if(IS_POSTGRE_SQL){
-            Database::connectPostgreSQL();
-        }
-        else {
-            Database::connectMySQL();
-        }
+        Database::connectPostgreSQL();
         // on défini le fuseau horaire de Paris
         date_default_timezone_set('Europe/Paris');
     }
