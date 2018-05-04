@@ -7,8 +7,8 @@ use ZONNY\Models\Accounts\User;
 class HackAttempts
 {
 
-    private $_key_app_intented;
-    private $_request;
+    private $key_app_intented;
+    private $request;
 
     public function __construct(?string $request=null, ?User $user=null)
     {
@@ -33,7 +33,7 @@ class HackAttempts
      */
     public function getKeyAppIntented()
     {
-        return $this->_key_app_intented;
+        return $this->key_app_intented;
     }
 
     /**
@@ -41,7 +41,7 @@ class HackAttempts
      */
     public function setKeyAppIntented($key_app_intented): void
     {
-        $this->_key_app_intented = $key_app_intented;
+        $this->key_app_intented = $key_app_intented;
     }
 
     /**
@@ -49,7 +49,7 @@ class HackAttempts
      */
     public function getRequest()
     {
-        return $this->_request;
+        return $this->request;
     }
 
     /**
@@ -57,7 +57,7 @@ class HackAttempts
      */
     public function setRequest($request): void
     {
-        $this->_request = $request;
+        $this->request = $request;
     }
 
 

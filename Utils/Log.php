@@ -5,7 +5,7 @@ use ZONNY\Models\Accounts\User;
 
 class Log
 {
-    private $_operation;
+    private $operation;
 
     public function __construct(?User $user=null, $operation)
     {
@@ -25,7 +25,7 @@ class Log
      */
     public function getOperation()
     {
-        return $this->_operation??null;
+        return $this->operation??null;
     }
 
     /**
@@ -37,7 +37,7 @@ class Log
         if($operation==null){
             throw new PrivateError("Log object error. Operation can't be null.", ErrorCode::DATABASE);
         }
-        $this->_operation = $operation;
+        $this->operation = $operation;
     }
 
 }

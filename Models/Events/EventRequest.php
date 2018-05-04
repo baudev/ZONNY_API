@@ -10,7 +10,7 @@ use ZONNY\Utils\PublicError;
  * @SWG\Definition(
  *   definition="EventRequest",
  *   type="object",
- *    required={"_id", "_event_id", "_friend_id", "_response"}
+ *    required={"id", "event_id", "friend_id", "response"}
  * )
  */
 class EventRequest implements \JsonSerializable
@@ -27,7 +27,7 @@ class EventRequest implements \JsonSerializable
      *     example=13649
      * )
      */
-    private $_id;
+    private $id;
     /**
      * @var integer
      * @SWG\Property(
@@ -35,7 +35,7 @@ class EventRequest implements \JsonSerializable
      *     example=4899
      * )
      */
-    private $_event_id;
+    private $event_id;
     /**
      * @var integer
      * @SWG\Property(
@@ -43,7 +43,7 @@ class EventRequest implements \JsonSerializable
      *     example=1894
      * )
      */
-    private $_friend_id;
+    private $friend_id;
     /**
      * @var integer
      * @SWG\Property(
@@ -51,8 +51,8 @@ class EventRequest implements \JsonSerializable
      *     example=1
      * )
      */
-    private $_response;
-    private $_creation_datetime;
+    private $response;
+    private $creation_datetime;
 
     public function __construct(?array $data=null)
     {
@@ -117,8 +117,6 @@ class EventRequest implements \JsonSerializable
             $key_upper = ucwords($key, "_");
             $key_upper = preg_replace("#_#", "", $key_upper);
             $method = 'get' . $key_upper;
-            // on enlève le premier underscore de la variable
-            $key = substr_replace($key, "", 0, 1);
             if (method_exists($this, $method)) {
                 switch ($key) {
                     case 'id':
@@ -155,8 +153,6 @@ class EventRequest implements \JsonSerializable
             $key_upper = ucwords($key, "_");
             $key_upper = preg_replace("#_#", "", $key_upper);
             $method = 'get' . $key_upper;
-            // on enlève le premier underscore de la variable
-            $key = substr_replace($key, "", 0, 1);
             if (method_exists($this, $method)) {
                 switch ($key) {
                     case 'creation_datetime':
@@ -179,8 +175,6 @@ class EventRequest implements \JsonSerializable
             $key_upper = ucwords($key, "_");
             $key_upper = preg_replace("#_#", "", $key_upper);
             $method = 'get' . $key_upper;
-            // on enlève le premier underscore de la variable
-            $key = substr_replace($key, "", 0, 1);
             if (method_exists($this, $method)) {
                 switch ($key){
                     case 'creation_datetime':
@@ -259,7 +253,7 @@ class EventRequest implements \JsonSerializable
      */
     public function getId()
     {
-        return $this->_id;
+        return $this->id;
     }
 
     /**
@@ -271,7 +265,7 @@ class EventRequest implements \JsonSerializable
         if (!empty($id) && !preg_match('#^[0-9]+$#', $id)) {
             throw new PublicError("Invalid id format", ErrorCode::INVALID_VARIABLE_FORMAT);
         }
-        $this->_id = $id;
+        $this->id = $id;
     }
 
     /**
@@ -279,7 +273,7 @@ class EventRequest implements \JsonSerializable
      */
     public function getEventId()
     {
-        return $this->_event_id;
+        return $this->event_id;
     }
 
     /**
@@ -291,7 +285,7 @@ class EventRequest implements \JsonSerializable
         if (!empty($event_id) && !preg_match('#^[0-9]+$#', $event_id)) {
             throw new PublicError("Invalid event_id format", ErrorCode::INVALID_EVENT_ID);
         }
-        $this->_event_id = $event_id;
+        $this->event_id = $event_id;
     }
 
     /**
@@ -299,7 +293,7 @@ class EventRequest implements \JsonSerializable
      */
     public function getFriendId()
     {
-        return $this->_friend_id;
+        return $this->friend_id;
     }
 
     /**
@@ -311,7 +305,7 @@ class EventRequest implements \JsonSerializable
         if (!empty($friend_id) && !preg_match('#^[0-9]+$#', $friend_id)) {
             throw new PublicError("Invalid friend_id format", ErrorCode::INVALID_EVENT_ID);
         }
-        $this->_friend_id = $friend_id;
+        $this->friend_id = $friend_id;
     }
 
     /**
@@ -319,7 +313,7 @@ class EventRequest implements \JsonSerializable
      */
     public function getResponse()
     {
-        return $this->_response;
+        return $this->response;
     }
 
     /**
@@ -331,7 +325,7 @@ class EventRequest implements \JsonSerializable
         if (!empty($response) && !preg_match('#^[0-1-2]$#', $response)) {
             throw new PublicError("Invalid response parameter value.", ErrorCode::INVALID_PUBLIC_VARIABLE);
         }
-        $this->_response = $response;
+        $this->response = $response;
     }
 
     /**
@@ -339,7 +333,7 @@ class EventRequest implements \JsonSerializable
      */
     public function getCreationDatetime()
     {
-        return $this->_creation_datetime;
+        return $this->creation_datetime;
     }
 
     /**
@@ -351,7 +345,7 @@ class EventRequest implements \JsonSerializable
         if (!empty($creation_datetime) && !preg_match('#^([2][01]|[1][6-9])\d{2}\-([0]\d|[1][0-2])\-([0-2]\d|[3][0-1])(\s([0-1]\d|[2][0-3])(\:[0-5]\d){1,2})?$#', $creation_datetime)) {
             throw new PublicError("Datetime format invalid. Ex: 2017-09-13 13:35:59", ErrorCode::INVALID_DATETIME);
         }
-        $this->_creation_datetime = $creation_datetime;
+        $this->creation_datetime = $creation_datetime;
     }
 
 

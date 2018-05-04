@@ -6,8 +6,8 @@ use ZONNY\Models\Accounts\User;
 class Application
 {
 
-    private static $_user;
-    private static $_app;
+    private static $user;
+    private static $app;
 
     public static function init(&$app=null){
         // Pour les tests unitaires
@@ -110,7 +110,7 @@ class Application
      */
     public static function getUser():?User
     {
-        return self::$_user;
+        return self::$user;
     }
 
 
@@ -119,7 +119,7 @@ class Application
      */
     public static function setUser(User $user): void
     {
-        self::$_user = $user;
+        self::$user = $user;
     }
 
     /**
@@ -127,7 +127,7 @@ class Application
      */
     public static function getApp()
     {
-        return self::$_app;
+        return self::$app;
     }
 
     /**
@@ -135,7 +135,7 @@ class Application
      */
     public static function setApp($app): void
     {
-        self::$_app = $app;
+        self::$app = $app;
     }
 
 }

@@ -10,7 +10,7 @@ use ZONNY\Utils\PublicError;
  * @SWG\Definition(
  *   definition="NormalFriend",
  *   type="object",
- *    required={"_id", "_name"}
+ *    required={"id", "name"}
  * )
  */
 class Friend extends User implements \JsonSerializable
@@ -22,7 +22,7 @@ class Friend extends User implements \JsonSerializable
      *     example=1652
      * )
      */
-    private $_id;
+    private $id;
     /**
      * @var string
      * @SWG\Property(
@@ -30,7 +30,7 @@ class Friend extends User implements \JsonSerializable
      *     example="JOHN"
      * )
      */
-    private $_first_name;
+    private $first_name;
     /**
      * @var string
      * @SWG\Property(
@@ -38,7 +38,7 @@ class Friend extends User implements \JsonSerializable
      *     example="https://dnntracker.atlassian.net/secure/useravatar?size=small&avatarId=17226"
      * )
      */
-    private $_profile_picture_url;
+    private $profile_picture_url;
     /**
      * @var float
      * @SWG\Property(
@@ -46,7 +46,7 @@ class Friend extends User implements \JsonSerializable
      *     example=213.152
      * )
      */
-    private $_distance;
+    private $distance;
 
 
     public function getFromDatabase(): bool
@@ -75,13 +75,14 @@ class Friend extends User implements \JsonSerializable
      * @throws PublicError
      */
     public function jsonSerialize(){
+        // TODO REVOIR LES AUTORISATIONS D AFFICHAGE DES INFORMATIONS DES UTILISATEURS. IL PEUT ARRIVER QU UN AMI INVITE UN AMI BLOQUE DE L UTILISATEUR
         // on regarde la relation entre l'utilisateur et l'ami (la décision de l'ami)
         $friend_link_by_friend = new FriendLink();
         // on défini l'identifiant de l'ami (car on regarde ici la décision de l'ami)
         $friend_link_by_friend->setUserId($this->getId());
         $friend_link_by_friend->setFriendId(Application::getUser()->getId());
         // on recupère les informations depuis la base de données
-        if(!$friend_link_by_friend->getFromDatabase()){
+        if(!$friend_link_by_friend->getFromDatabase() && $this->getId() != Application::getUser()->getId()){
             // on vérifie s'il ne s'agit pas de l'ami d'un ami. Dans ce cas, on affiche un mimnimum d'information
             // IMPORTANT dans le cas où un utilisateur invite des amis qui ne se connaissent pas
             if($this->getNumberCommunFriends()>0){
@@ -97,7 +98,7 @@ class Friend extends User implements \JsonSerializable
         $friend_link_by_user->setUserId(Application::getUser()->getId());
         $friend_link_by_user->setFriendId($this->getId());
         // on recupère les informations depuis la base de données
-        if(!$friend_link_by_user->getFromDatabase()){
+        if(!$friend_link_by_user->getFromDatabase() && $this->getId() != Application::getUser()->getId()){
             // on vérifie s'il ne s'agit pas de l'ami d'un ami. Dans ce cas, on affiche un mimnimum d'information
             // IMPORTANT dans le cas où un utilisateur invite des amis qui ne se connaissent pas
             if($this->getNumberCommunFriends()>0){
@@ -159,7 +160,7 @@ class Friend extends User implements \JsonSerializable
         if($this->getLatitude()==null || $this->getLongitude()==null){
             return null;
         }
-        return $this->_distance;
+        return $this->distance;
     }
 
     /**
@@ -167,7 +168,7 @@ class Friend extends User implements \JsonSerializable
      */
     public function setDistance(?float $distance): void
     {
-        $this->_distance = $distance;
+        $this->distance = $distance;
     }
 
 }
@@ -180,12 +181,12 @@ class Friend extends User implements \JsonSerializable
  *   allOf={
  *       @SWG\Schema(ref="#/definitions/NormalFriend"),
  *       @SWG\Schema(
- *           required={"_name"},
- *           @SWG\Property(property="_last_name", type="string", example="SMITH"),
- *           @SWG\Property(property="_name", type="string", description="Name including firstname and lastname", example="JOHN SMITH"),
- *           @SWG\Property(property="_latitude", type="number", format="float", example=48.569542),
- *           @SWG\Property(property="_longitude", type="number", format="float", example=2.48978),
- *           @SWG\Property(property="_level", type="integer", example=12),
+ *           required={"name"},
+ *           @SWG\Property(property="last_name", type="string", example="SMITH"),
+ *           @SWG\Property(property="name", type="string", description="Name including firstname and lastname", example="JOHN SMITH"),
+ *           @SWG\Property(property="latitude", type="number", format="float", example=48.569542),
+ *           @SWG\Property(property="longitude", type="number", format="float", example=2.48978),
+ *           @SWG\Property(property="level", type="integer", example=12),
  *       )
  *   }
  * )

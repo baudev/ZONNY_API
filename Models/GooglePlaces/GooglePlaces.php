@@ -16,7 +16,7 @@ use ZONNY\Utils\PrivateError;
  * @SWG\Definition(
  *   definition="PublicPlace",
  *   type="object",
- *    required={"_id", "_latitude", "_longitude", "_start_time", "_end_time", "_percentage_remaining", "_distance"}
+ *    required={"id", "latitude", "longitude", "start_time", "end_time", "percentage_remaining", "distance"}
  * )
  */
 class GooglePlaces implements \JsonSerializable
@@ -29,8 +29,8 @@ class GooglePlaces implements \JsonSerializable
      *     example=13697
      * )
      */
-    private $_id;
-    private $_google_id;
+    private $id;
+    private $google_id;
     /**
      * @var string
      * @SWG\Property(
@@ -38,7 +38,7 @@ class GooglePlaces implements \JsonSerializable
      *     example="The fabric of wheelbarrow"
      * )
      */
-    private $_name;
+    private $name;
     /**
      * @var float
      * @SWG\Property(
@@ -46,7 +46,7 @@ class GooglePlaces implements \JsonSerializable
      *     example=43.264
      * )
      */
-    private $_latitude;
+    private $latitude;
     /**
      * @var float
      * @SWG\Property(
@@ -54,7 +54,7 @@ class GooglePlaces implements \JsonSerializable
      *     example=3.65412
      * )
      */
-    private $_longitude;
+    private $longitude;
     /**
      * @var string
      * @SWG\Property(
@@ -62,30 +62,30 @@ class GooglePlaces implements \JsonSerializable
      *     example="https://images.pexels.com/photos/681847/pexels-photo-681847.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
      * )
      */
-    private $_picture_url;
-    private $_category;
-    private $_day_0_open;
-    private $_day_1_open;
-    private $_day_2_open;
-    private $_day_3_open;
-    private $_day_4_open;
-    private $_day_5_open;
-    private $_day_6_open;
-    private $_day_0_close;
-    private $_day_1_close;
-    private $_day_2_close;
-    private $_day_3_close;
-    private $_day_4_close;
-    private $_day_5_close;
-    private $_day_6_close;
-    private $_day_0_invert;
-    private $_day_1_invert;
-    private $_day_2_invert;
-    private $_day_3_invert;
-    private $_day_4_invert;
-    private $_day_5_invert;
-    private $_day_6_invert;
-    private $_json;
+    private $picture_url;
+    private $category;
+    private $day_0_open;
+    private $day_1_open;
+    private $day_2_open;
+    private $day_3_open;
+    private $day_4_open;
+    private $day_5_open;
+    private $day_6_open;
+    private $day_0_close;
+    private $day_1_close;
+    private $day_2_close;
+    private $day_3_close;
+    private $day_4_close;
+    private $day_5_close;
+    private $day_6_close;
+    private $day_0_invert;
+    private $day_1_invert;
+    private $day_2_invert;
+    private $day_3_invert;
+    private $day_4_invert;
+    private $day_5_invert;
+    private $day_6_invert;
+    private $json;
     /**
      * @var float
      * @SWG\Property(
@@ -93,7 +93,7 @@ class GooglePlaces implements \JsonSerializable
      *     example=4.3
      * )
      */
-    private $_review;
+    private $review;
 
     /**
      * @var datetime
@@ -102,7 +102,7 @@ class GooglePlaces implements \JsonSerializable
      *     example="2018-04-02 08:00:00"
      * )
      */
-    private $_start_time;
+    private $start_time;
     /**
      * @var datetime
      * @SWG\Property(
@@ -110,7 +110,7 @@ class GooglePlaces implements \JsonSerializable
      *     example="2018-04-02 20:00:00"
      * )
      */
-    private $_end_time;
+    private $end_time;
     /**
      * @var integer
      * @SWG\Property(
@@ -118,7 +118,7 @@ class GooglePlaces implements \JsonSerializable
      *     example=94
      * )
      */
-    private $_percentage_remaining;
+    private $percentage_remaining;
     /**
      * @var float
      * @SWG\Property(
@@ -126,7 +126,7 @@ class GooglePlaces implements \JsonSerializable
      *     example=213.152
      * )
      */
-    private $_distance;
+    private $distance;
 
 
     public function __construct(?array $data=null)
@@ -193,8 +193,6 @@ class GooglePlaces implements \JsonSerializable
             $key_upper = ucwords($key, "_");
             $key_upper = preg_replace("#_#", "", $key_upper);
             $method = 'get' . $key_upper;
-            // on enlève le premier underscore de la variable
-            $key = substr_replace($key, "", 0, 1);
             if (method_exists($this, $method)) {
                 switch ($key) {
                     case 'id':
@@ -258,8 +256,6 @@ class GooglePlaces implements \JsonSerializable
             $key_upper = ucwords($key, "_");
             $key_upper = preg_replace("#_#", "", $key_upper);
             $method = 'get' . $key_upper;
-            // on enlève le premier underscore de la variable
-            $key = substr_replace($key, "", 0, 1);
             if (method_exists($this, $method)) {
                 switch ($key) {
                     case 'creation_datetime':
@@ -286,8 +282,6 @@ class GooglePlaces implements \JsonSerializable
             $key_upper = ucwords($key, "_");
             $key_upper = preg_replace("#_#", "", $key_upper);
             $method = 'get' . $key_upper;
-            // on enlève le premier underscore de la variable
-            $key = substr_replace($key, "", 0, 1);
             if (method_exists($this, $method)) {
                 switch ($key){
                     case 'google_id':
@@ -324,9 +318,9 @@ class GooglePlaces implements \JsonSerializable
         }
         // on ajoute les horaires et le pourcentage restant
         $this->get_current_opening_hours();
-        $array['start_time'] = $this->_start_time;
-        $array['end_time'] = $this->_end_time;
-        $array['pourcentage_remaining'] = $this->_percentage_remaining;
+        $array['start_time'] = $this->start_time;
+        $array['end_time'] = $this->end_time;
+        $array['pourcentage_remaining'] = $this->percentage_remaining;
         return $array;
     }
 
@@ -374,12 +368,12 @@ class GooglePlaces implements \JsonSerializable
      * @return bool
      */
     public function isOver():bool{
-        if($this->_end_time==null){
+        if($this->end_time==null){
             $this->get_current_opening_hours();
         }
-        if($this->_end_time!=null) {
+        if($this->end_time!=null) {
             $current_datetime = new \DateTime();
-            $end_time_datetime = \DateTime::createFromFormat('Y-m-d H:i:s', $this->_end_time);
+            $end_time_datetime = \DateTime::createFromFormat('Y-m-d H:i:s', $this->end_time);
             if (($end_time_datetime->getTimestamp() - $current_datetime->getTimestamp()) < 0) {
                 return true;
             } else {
@@ -545,9 +539,9 @@ class GooglePlaces implements \JsonSerializable
             $pourcentage = 100 - round(100 * ($actual_date - $start_date) / ($end_date - $start_date));
             $pourcentage = $pourcentage >= 0 && $pourcentage <= 100 ? $pourcentage : 0;
         }
-        $this->_start_time = date('Y-m-d H:i:s', $start_date);
-        $this->_end_time =  date('Y-m-d H:i:s', $end_date);
-        $this->_percentage_remaining = $pourcentage;
+        $this->start_time = date('Y-m-d H:i:s', $start_date);
+        $this->end_time =  date('Y-m-d H:i:s', $end_date);
+        $this->percentage_remaining = $pourcentage;
     }
     /**
      * retourne la liste des catégories intéressantes parmi les lieux de google
@@ -571,7 +565,7 @@ class GooglePlaces implements \JsonSerializable
      */
     public function getId()
     {
-        return $this->_id;
+        return $this->id;
     }
 
     /**
@@ -579,7 +573,7 @@ class GooglePlaces implements \JsonSerializable
      */
     public function setId($id): void
     {
-        $this->_id = $id;
+        $this->id = $id;
     }
 
     /**
@@ -587,7 +581,7 @@ class GooglePlaces implements \JsonSerializable
      */
     public function getGoogleId()
     {
-        return $this->_google_id;
+        return $this->google_id;
     }
 
     /**
@@ -595,7 +589,7 @@ class GooglePlaces implements \JsonSerializable
      */
     public function setGoogleId($google_id): void
     {
-        $this->_google_id = $google_id;
+        $this->google_id = $google_id;
     }
 
     /**
@@ -603,7 +597,7 @@ class GooglePlaces implements \JsonSerializable
      */
     public function getName()
     {
-        return $this->_name;
+        return $this->name;
     }
 
     /**
@@ -611,7 +605,7 @@ class GooglePlaces implements \JsonSerializable
      */
     public function setName($name): void
     {
-        $this->_name = $name;
+        $this->name = $name;
     }
 
     /**
@@ -619,7 +613,7 @@ class GooglePlaces implements \JsonSerializable
      */
     public function getLatitude()
     {
-        return $this->_latitude;
+        return $this->latitude;
     }
 
     /**
@@ -627,7 +621,7 @@ class GooglePlaces implements \JsonSerializable
      */
     public function setLatitude($latitude): void
     {
-        $this->_latitude = $latitude;
+        $this->latitude = $latitude;
     }
 
     /**
@@ -635,7 +629,7 @@ class GooglePlaces implements \JsonSerializable
      */
     public function getLongitude()
     {
-        return $this->_longitude;
+        return $this->longitude;
     }
 
     /**
@@ -643,7 +637,7 @@ class GooglePlaces implements \JsonSerializable
      */
     public function setLongitude($longitude): void
     {
-        $this->_longitude = $longitude;
+        $this->longitude = $longitude;
     }
 
     /**
@@ -651,7 +645,7 @@ class GooglePlaces implements \JsonSerializable
      */
     public function getPictureUrl()
     {
-        return $this->_picture_url;
+        return $this->picture_url;
     }
 
     /**
@@ -659,7 +653,7 @@ class GooglePlaces implements \JsonSerializable
      */
     public function setPictureUrl($picture_url): void
     {
-        $this->_picture_url = $picture_url;
+        $this->picture_url = $picture_url;
     }
 
     /**
@@ -667,7 +661,7 @@ class GooglePlaces implements \JsonSerializable
      */
     public function getCategory()
     {
-        return $this->_category;
+        return $this->category;
     }
 
     /**
@@ -675,7 +669,7 @@ class GooglePlaces implements \JsonSerializable
      */
     public function setCategory($category): void
     {
-        $this->_category = $category;
+        $this->category = $category;
     }
 
     /**
@@ -683,7 +677,7 @@ class GooglePlaces implements \JsonSerializable
      */
     public function getDay0Open()
     {
-        return $this->_day_0_open;
+        return $this->day_0_open;
     }
 
     /**
@@ -691,7 +685,7 @@ class GooglePlaces implements \JsonSerializable
      */
     public function setDay0Open($day_0_open): void
     {
-        $this->_day_0_open = $day_0_open;
+        $this->day_0_open = $day_0_open;
     }
 
     /**
@@ -699,7 +693,7 @@ class GooglePlaces implements \JsonSerializable
      */
     public function getDay1Open()
     {
-        return $this->_day_1_open;
+        return $this->day_1_open;
     }
 
     /**
@@ -707,7 +701,7 @@ class GooglePlaces implements \JsonSerializable
      */
     public function setDay1Open($day_1_open): void
     {
-        $this->_day_1_open = $day_1_open;
+        $this->day_1_open = $day_1_open;
     }
 
     /**
@@ -715,7 +709,7 @@ class GooglePlaces implements \JsonSerializable
      */
     public function getDay2Open()
     {
-        return $this->_day_2_open;
+        return $this->day_2_open;
     }
 
     /**
@@ -723,7 +717,7 @@ class GooglePlaces implements \JsonSerializable
      */
     public function setDay2Open($day_2_open): void
     {
-        $this->_day_2_open = $day_2_open;
+        $this->day_2_open = $day_2_open;
     }
 
     /**
@@ -731,7 +725,7 @@ class GooglePlaces implements \JsonSerializable
      */
     public function getDay3Open()
     {
-        return $this->_day_3_open;
+        return $this->day_3_open;
     }
 
     /**
@@ -739,7 +733,7 @@ class GooglePlaces implements \JsonSerializable
      */
     public function setDay3Open($day_3_open): void
     {
-        $this->_day_3_open = $day_3_open;
+        $this->day_3_open = $day_3_open;
     }
 
     /**
@@ -747,7 +741,7 @@ class GooglePlaces implements \JsonSerializable
      */
     public function getDay4Open()
     {
-        return $this->_day_4_open;
+        return $this->day_4_open;
     }
 
     /**
@@ -755,7 +749,7 @@ class GooglePlaces implements \JsonSerializable
      */
     public function setDay4Open($day_4_open): void
     {
-        $this->_day_4_open = $day_4_open;
+        $this->day_4_open = $day_4_open;
     }
 
     /**
@@ -763,7 +757,7 @@ class GooglePlaces implements \JsonSerializable
      */
     public function getDay5Open()
     {
-        return $this->_day_5_open;
+        return $this->day_5_open;
     }
 
     /**
@@ -771,7 +765,7 @@ class GooglePlaces implements \JsonSerializable
      */
     public function setDay5Open($day_5_open): void
     {
-        $this->_day_5_open = $day_5_open;
+        $this->day_5_open = $day_5_open;
     }
 
     /**
@@ -779,7 +773,7 @@ class GooglePlaces implements \JsonSerializable
      */
     public function getDay6Open()
     {
-        return $this->_day_6_open;
+        return $this->day_6_open;
     }
 
     /**
@@ -787,7 +781,7 @@ class GooglePlaces implements \JsonSerializable
      */
     public function setDay6Open($day_6_open): void
     {
-        $this->_day_6_open = $day_6_open;
+        $this->day_6_open = $day_6_open;
     }
 
     /**
@@ -795,7 +789,7 @@ class GooglePlaces implements \JsonSerializable
      */
     public function getDay0Close()
     {
-        return $this->_day_0_close;
+        return $this->day_0_close;
     }
 
     /**
@@ -803,7 +797,7 @@ class GooglePlaces implements \JsonSerializable
      */
     public function setDay0Close($day_0_close): void
     {
-        $this->_day_0_close = $day_0_close;
+        $this->day_0_close = $day_0_close;
     }
 
     /**
@@ -811,7 +805,7 @@ class GooglePlaces implements \JsonSerializable
      */
     public function getDay1Close()
     {
-        return $this->_day_1_close;
+        return $this->day_1_close;
     }
 
     /**
@@ -819,7 +813,7 @@ class GooglePlaces implements \JsonSerializable
      */
     public function setDay1Close($day_1_close): void
     {
-        $this->_day_1_close = $day_1_close;
+        $this->day_1_close = $day_1_close;
     }
 
     /**
@@ -827,7 +821,7 @@ class GooglePlaces implements \JsonSerializable
      */
     public function getDay2Close()
     {
-        return $this->_day_2_close;
+        return $this->day_2_close;
     }
 
     /**
@@ -835,7 +829,7 @@ class GooglePlaces implements \JsonSerializable
      */
     public function setDay2Close($day_2_close): void
     {
-        $this->_day_2_close = $day_2_close;
+        $this->day_2_close = $day_2_close;
     }
 
     /**
@@ -843,7 +837,7 @@ class GooglePlaces implements \JsonSerializable
      */
     public function getDay3Close()
     {
-        return $this->_day_3_close;
+        return $this->day_3_close;
     }
 
     /**
@@ -851,7 +845,7 @@ class GooglePlaces implements \JsonSerializable
      */
     public function setDay3Close($day_3_close): void
     {
-        $this->_day_3_close = $day_3_close;
+        $this->day_3_close = $day_3_close;
     }
 
     /**
@@ -859,7 +853,7 @@ class GooglePlaces implements \JsonSerializable
      */
     public function getDay4Close()
     {
-        return $this->_day_4_close;
+        return $this->day_4_close;
     }
 
     /**
@@ -867,7 +861,7 @@ class GooglePlaces implements \JsonSerializable
      */
     public function setDay4Close($day_4_close): void
     {
-        $this->_day_4_close = $day_4_close;
+        $this->day_4_close = $day_4_close;
     }
 
     /**
@@ -875,7 +869,7 @@ class GooglePlaces implements \JsonSerializable
      */
     public function getDay5Close()
     {
-        return $this->_day_5_close;
+        return $this->day_5_close;
     }
 
     /**
@@ -883,7 +877,7 @@ class GooglePlaces implements \JsonSerializable
      */
     public function setDay5Close($day_5_close): void
     {
-        $this->_day_5_close = $day_5_close;
+        $this->day_5_close = $day_5_close;
     }
 
     /**
@@ -891,7 +885,7 @@ class GooglePlaces implements \JsonSerializable
      */
     public function getDay6Close()
     {
-        return $this->_day_6_close;
+        return $this->day_6_close;
     }
 
     /**
@@ -899,7 +893,7 @@ class GooglePlaces implements \JsonSerializable
      */
     public function setDay6Close($day_6_close): void
     {
-        $this->_day_6_close = $day_6_close;
+        $this->day_6_close = $day_6_close;
     }
 
     /**
@@ -907,7 +901,7 @@ class GooglePlaces implements \JsonSerializable
      */
     public function getDay0Invert()
     {
-        return $this->_day_0_invert??0;
+        return $this->day_0_invert??0;
     }
 
     /**
@@ -915,7 +909,7 @@ class GooglePlaces implements \JsonSerializable
      */
     public function setDay0Invert($day_0_invert): void
     {
-        $this->_day_0_invert = $day_0_invert;
+        $this->day_0_invert = $day_0_invert;
     }
 
     /**
@@ -923,7 +917,7 @@ class GooglePlaces implements \JsonSerializable
      */
     public function getDay1Invert()
     {
-        return $this->_day_1_invert??0;
+        return $this->day_1_invert??0;
     }
 
     /**
@@ -931,7 +925,7 @@ class GooglePlaces implements \JsonSerializable
      */
     public function setDay1Invert($day_1_invert): void
     {
-        $this->_day_1_invert = $day_1_invert;
+        $this->day_1_invert = $day_1_invert;
     }
 
     /**
@@ -939,7 +933,7 @@ class GooglePlaces implements \JsonSerializable
      */
     public function getDay2Invert()
     {
-        return $this->_day_2_invert??0;
+        return $this->day_2_invert??0;
     }
 
     /**
@@ -947,7 +941,7 @@ class GooglePlaces implements \JsonSerializable
      */
     public function setDay2Invert($day_2_invert): void
     {
-        $this->_day_2_invert = $day_2_invert;
+        $this->day_2_invert = $day_2_invert;
     }
 
     /**
@@ -955,7 +949,7 @@ class GooglePlaces implements \JsonSerializable
      */
     public function getDay3Invert()
     {
-        return $this->_day_3_invert??0;
+        return $this->day_3_invert??0;
     }
 
     /**
@@ -963,7 +957,7 @@ class GooglePlaces implements \JsonSerializable
      */
     public function setDay3Invert($day_3_invert): void
     {
-        $this->_day_3_invert = $day_3_invert;
+        $this->day_3_invert = $day_3_invert;
     }
 
     /**
@@ -971,7 +965,7 @@ class GooglePlaces implements \JsonSerializable
      */
     public function getDay4Invert()
     {
-        return $this->_day_4_invert??0;
+        return $this->day_4_invert??0;
     }
 
     /**
@@ -979,7 +973,7 @@ class GooglePlaces implements \JsonSerializable
      */
     public function setDay4Invert($day_4_invert): void
     {
-        $this->_day_4_invert = $day_4_invert;
+        $this->day_4_invert = $day_4_invert;
     }
 
     /**
@@ -987,7 +981,7 @@ class GooglePlaces implements \JsonSerializable
      */
     public function getDay5Invert()
     {
-        return $this->_day_5_invert??0;
+        return $this->day_5_invert??0;
     }
 
     /**
@@ -995,7 +989,7 @@ class GooglePlaces implements \JsonSerializable
      */
     public function setDay5Invert($day_5_invert): void
     {
-        $this->_day_5_invert = $day_5_invert;
+        $this->day_5_invert = $day_5_invert;
     }
 
     /**
@@ -1003,7 +997,7 @@ class GooglePlaces implements \JsonSerializable
      */
     public function getDay6Invert()
     {
-        return $this->_day_6_invert??0;
+        return $this->day_6_invert??0;
     }
 
     /**
@@ -1011,7 +1005,7 @@ class GooglePlaces implements \JsonSerializable
      */
     public function setDay6Invert($day_6_invert): void
     {
-        $this->_day_6_invert = $day_6_invert;
+        $this->day_6_invert = $day_6_invert;
     }
 
     /**
@@ -1019,7 +1013,7 @@ class GooglePlaces implements \JsonSerializable
      */
     public function getJson()
     {
-        return json_encode($this->_json);
+        return json_encode($this->json);
     }
 
     /**
@@ -1027,7 +1021,7 @@ class GooglePlaces implements \JsonSerializable
      */
     public function setJson($json): void
     {
-        $this->_json = $json;
+        $this->json = $json;
     }
 
     /**
@@ -1035,7 +1029,7 @@ class GooglePlaces implements \JsonSerializable
      */
     public function getReview()
     {
-        return $this->_review;
+        return $this->review;
     }
 
     /**
@@ -1043,7 +1037,7 @@ class GooglePlaces implements \JsonSerializable
      */
     public function setReview($review): void
     {
-        $this->_review = $review;
+        $this->review = $review;
     }
 
     /**
@@ -1051,7 +1045,7 @@ class GooglePlaces implements \JsonSerializable
      */
     public function getDistance(): ?float
     {
-        return $this->_distance;
+        return $this->distance;
     }
 
     /**
@@ -1059,7 +1053,7 @@ class GooglePlaces implements \JsonSerializable
      */
     public function setDistance(?float $distance): void
     {
-        $this->_distance = $distance;
+        $this->distance = $distance;
     }
 
 
