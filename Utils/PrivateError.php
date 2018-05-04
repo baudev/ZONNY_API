@@ -12,8 +12,8 @@ use ZONNY\Models\Accounts\User;
 class PrivateError extends Exception implements \JsonSerializable
 {
 
-    private $_code;
-    private $_message;
+    private $code;
+    private $message;
 
     public function __construct($message, $code = 0, Exception $previous = null)
     {
@@ -42,7 +42,7 @@ class PrivateError extends Exception implements \JsonSerializable
      */
     public function setCode(int $code): void
     {
-        $this->_code = $code;
+        $this->code = $code;
     }
 
     /**
@@ -50,7 +50,7 @@ class PrivateError extends Exception implements \JsonSerializable
      */
     public function setMessage($message): void
     {
-        $this->_message = $message;
+        $this->message = $message;
     }
 
 }

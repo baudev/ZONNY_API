@@ -1289,26 +1289,26 @@
     "definitions": {
         "NormalFriend": {
             "required": [
-                "_id",
-                "_name"
+                "id",
+                "name"
             ],
             "properties": {
-                "_id": {
+                "id": {
                     "description": "The primary id",
                     "type": "integer",
                     "example": 1652
                 },
-                "_first_name": {
+                "first_name": {
                     "description": "Firstame",
                     "type": "string",
                     "example": "JOHN"
                 },
-                "_profile_picture_url": {
+                "profile_picture_url": {
                     "description": "URL of the user's profile picture",
                     "type": "string",
                     "example": "https://dnntracker.atlassian.net/secure/useravatar?size=small&avatarId=17226"
                 },
-                "_distance": {
+                "distance": {
                     "description": "Distance between friend and user",
                     "type": "number",
                     "format": "float",
@@ -1325,29 +1325,29 @@
                 },
                 {
                     "required": [
-                        "_name"
+                        "name"
                     ],
                     "properties": {
-                        "_last_name": {
+                        "last_name": {
                             "type": "string",
                             "example": "SMITH"
                         },
-                        "_name": {
+                        "name": {
                             "description": "Name including firstname and lastname",
                             "type": "string",
                             "example": "JOHN SMITH"
                         },
-                        "_latitude": {
+                        "latitude": {
                             "type": "number",
                             "format": "float",
                             "example": 48.569542
                         },
-                        "_longitude": {
+                        "longitude": {
                             "type": "number",
                             "format": "float",
                             "example": 2.48978
                         },
-                        "_level": {
+                        "level": {
                             "type": "integer",
                             "example": 12
                         }
@@ -1357,28 +1357,28 @@
         },
         "FriendLink": {
             "required": [
-                "_id",
-                "_user_id",
-                "_friend_id",
-                "_authorization"
+                "id",
+                "user_id",
+                "friend_id",
+                "authorization"
             ],
             "properties": {
-                "_id": {
+                "id": {
                     "description": "The primary id",
                     "type": "integer",
                     "example": 153
                 },
-                "_user_id": {
+                "user_id": {
                     "description": "The user_id of the relation's owner",
                     "type": "integer",
                     "example": 862
                 },
-                "_friend_id": {
+                "friend_id": {
                     "description": "The friend_id of whose the relation is concerning",
                     "type": "integer",
                     "example": 1652
                 },
-                "_relation": {
+                "relation": {
                     "description": "The relation value. 1 if the user has considered the friend has a good one. Otherwise, 0",
                     "type": "integer",
                     "enum": [
@@ -1397,26 +1397,26 @@
                 },
                 {
                     "required": [
-                        "_key_app"
+                        "key_app"
                     ],
                     "properties": {
-                        "_key_app": {
+                        "key_app": {
                             "description": "The API KEY",
                             "type": "string"
                         },
-                        "_expire": {
+                        "expire": {
                             "description": "The expiration datetime of the Facebook Token",
                             "type": "number",
                             "format": "datetime",
                             "example": "2018-04-02 12:12:00"
                         },
-                        "_unavailable": {
+                        "unavailable": {
                             "description": "The datetime until the user is unavailable",
                             "type": "number",
                             "format": "datetime",
                             "example": "2018-03-26 23:52:45"
                         },
-                        "_location_last_ckeck_up": {
+                        "location_last_ckeck_up": {
                             "description": "The datetime when the user sent his last known position",
                             "type": "number",
                             "format": "datetime",
@@ -1428,83 +1428,83 @@
         },
         "Event": {
             "required": [
-                "_id",
-                "_name",
-                "_creator_id",
-                "_latitude",
-                "_longitude",
-                "_start_time",
-                "_end_time",
-                "_percentage_remaining",
-                "_number_guests",
-                "_number_participants",
-                "_distance"
+                "id",
+                "name",
+                "creator_id",
+                "latitude",
+                "longitude",
+                "start_time",
+                "end_time",
+                "percentage_remaining",
+                "number_guests",
+                "number_participants",
+                "distance"
             ],
             "properties": {
-                "_id": {
+                "id": {
                     "description": "The primary id",
                     "type": "integer",
                     "example": 13649
                 },
-                "_name": {
+                "name": {
                     "description": "Name.",
                     "type": "string",
                     "example": "Let's drink a beer !"
                 },
-                "_creator_id": {
+                "creator_id": {
                     "description": "The id of the creator",
                     "type": "integer",
                     "example": 365
                 },
-                "_latitude": {
+                "latitude": {
                     "description": "The latitude",
                     "type": "number",
                     "format": "float",
                     "example": 43.264
                 },
-                "_longitude": {
+                "longitude": {
                     "description": "The longitude",
                     "type": "number",
                     "format": "float",
                     "example": 3.65412
                 },
-                "_start_time": {
+                "start_time": {
                     "description": "When the event starts. Must be in the next 24h",
                     "type": "string",
                     "format": "date-time",
                     "example": "2018-04-02 13:00:00"
                 },
-                "_end_time": {
+                "end_time": {
                     "description": "When the event ends. Must be in the next 24h after the beginning of the event",
                     "type": "string",
                     "format": "date-time",
                     "example": "2018-04-02 18:30:00"
                 },
-                "_information": {
+                "information": {
                     "description": "More details given by the creator",
                     "type": "string"
                 },
-                "_picture_url": {
+                "picture_url": {
                     "description": "URL of the event's picture",
                     "type": "string",
                     "example": "https://images.pexels.com/photos/681847/pexels-photo-681847.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
                 },
-                "_percentage_remaining": {
+                "percentage_remaining": {
                     "description": "Actual percentage remaining of the total duration of the event",
                     "type": "integer",
                     "example": 63
                 },
-                "_number_guests": {
+                "number_guests": {
                     "description": "Number of guests",
                     "type": "integer",
                     "example": 6
                 },
-                "_number_participants": {
+                "number_participants": {
                     "description": "Number of participants",
                     "type": "integer",
                     "example": 2
                 },
-                "_distance": {
+                "distance": {
                     "description": "Distance between friend and user",
                     "type": "number",
                     "format": "float",
@@ -1515,34 +1515,34 @@
         },
         "EventMemberDetails": {
             "required": [
-                "_id",
-                "_name",
-                "_creator_id",
-                "_latitude",
-                "_longitude",
-                "_start_time",
-                "_end_time",
-                "_percentage_remaining",
-                "_number_guests",
-                "_number_participants"
+                "id",
+                "name",
+                "creator_id",
+                "latitude",
+                "longitude",
+                "start_time",
+                "end_time",
+                "percentage_remaining",
+                "number_guests",
+                "number_participants"
             ],
             "properties": {
-                "_id": {
+                "id": {
                     "description": "The primary id",
                     "type": "integer",
                     "example": 632
                 },
-                "_event_id": {
+                "event_id": {
                     "description": "The id of the concerning event",
                     "type": "integer",
                     "example": 13649
                 },
-                "_invited_friend_id": {
+                "invited_friend_id": {
                     "description": "The id of the friend in question",
                     "type": "integer",
                     "example": 123
                 },
-                "_response": {
+                "response": {
                     "description": "Response of the concerning friend. 0 the friend has not answered yet. 1 the friend has answered he comes. 2 the friend doesn't come",
                     "type": "integer",
                     "enum": [
@@ -1551,7 +1551,7 @@
                         2
                     ]
                 },
-                "_creator": {
+                "creator": {
                     "description": "If the friend is the creator of the event or not. 1 is true. 0 is false",
                     "type": "integer",
                     "enum": [
@@ -1564,28 +1564,28 @@
         },
         "EventRequest": {
             "required": [
-                "_id",
-                "_event_id",
-                "_friend_id",
-                "_response"
+                "id",
+                "event_id",
+                "friend_id",
+                "response"
             ],
             "properties": {
-                "_id": {
+                "id": {
                     "description": "The primary id",
                     "type": "integer",
                     "example": 13649
                 },
-                "_event_id": {
+                "event_id": {
                     "description": "The id of the concerning event",
                     "type": "integer",
                     "example": 4899
                 },
-                "_friend_id": {
+                "friend_id": {
                     "description": "The id of the concerning friend who wants to come to this event",
                     "type": "integer",
                     "example": 1894
                 },
-                "_response": {
+                "response": {
                     "description": "The response of the creator concerning this request. 0 the creator has not respond yet. 1 the creator has invited his friend. 2 the creator ignored this request.",
                     "type": "integer",
                     "example": 1
@@ -1595,66 +1595,66 @@
         },
         "PublicPlace": {
             "required": [
-                "_id",
-                "_latitude",
-                "_longitude",
-                "_start_time",
-                "_end_time",
-                "_percentage_remaining",
-                "_distance"
+                "id",
+                "latitude",
+                "longitude",
+                "start_time",
+                "end_time",
+                "percentage_remaining",
+                "distance"
             ],
             "properties": {
-                "_id": {
+                "id": {
                     "description": "The primary id",
                     "type": "integer",
                     "example": 13697
                 },
-                "_name": {
+                "name": {
                     "description": "The name of the place",
                     "type": "string",
                     "example": "The fabric of wheelbarrow"
                 },
-                "_latitude": {
+                "latitude": {
                     "description": "The latitude",
                     "type": "number",
                     "format": "float",
                     "example": 43.264
                 },
-                "_longitude": {
+                "longitude": {
                     "description": "The longitude",
                     "type": "number",
                     "format": "float",
                     "example": 3.65412
                 },
-                "_picture_url": {
+                "picture_url": {
                     "description": "URL of the event's picture",
                     "type": "string",
                     "example": "https://images.pexels.com/photos/681847/pexels-photo-681847.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
                 },
-                "_review": {
+                "review": {
                     "description": "The mark of the place. Min 1. Max 5",
                     "type": "number",
                     "format": "float",
                     "example": 4.3
                 },
-                "_start_time": {
+                "start_time": {
                     "description": "When the place opens.",
                     "type": "string",
                     "format": "date-time",
                     "example": "2018-04-02 08:00:00"
                 },
-                "_end_time": {
+                "end_time": {
                     "description": "When the place closes.",
                     "type": "string",
                     "format": "date-time",
                     "example": "2018-04-02 20:00:00"
                 },
-                "_percentage_remaining": {
+                "percentage_remaining": {
                     "description": "Actual percentage remaining of the total duration of the event",
                     "type": "integer",
                     "example": 94
                 },
-                "_distance": {
+                "distance": {
                     "description": "Distance between friend and user",
                     "type": "number",
                     "format": "float",
@@ -1665,16 +1665,16 @@
         },
         "Error": {
             "required": [
-                "_code",
-                "_message"
+                "code",
+                "message"
             ],
             "properties": {
-                "_code": {
+                "code": {
                     "description": "The code of the corresponding error. Useful to translate the error in the application",
                     "type": "integer",
                     "example": 16
                 },
-                "_message": {
+                "message": {
                     "description": "",
                     "type": "string",
                     "example": "Invalid key_app"

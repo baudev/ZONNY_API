@@ -14,7 +14,7 @@ use ZONNY\Utils\PublicError;
  * @SWG\Definition(
  *   definition="Event",
  *   type="object",
- *    required={"_id", "_name", "_creator_id", "_latitude", "_longitude", "_start_time", "_end_time", "_percentage_remaining", "_number_guests", "_number_participants", "_distance"}
+ *    required={"id", "name", "creator_id", "latitude", "longitude", "start_time", "end_time", "percentage_remaining", "number_guests", "number_participants", "distance"}
  * )
  */
 class Event implements \JsonSerializable
@@ -29,7 +29,7 @@ class Event implements \JsonSerializable
      *     example=13649
      * )
      */
-    private $_id;
+    private $id;
     /**
      * @var string
      * @SWG\Property(
@@ -37,7 +37,7 @@ class Event implements \JsonSerializable
      *     example="Let's drink a beer !"
      * )
      */
-    private $_name;
+    private $name;
     /**
      * @var integer
      * @SWG\Property(
@@ -45,10 +45,10 @@ class Event implements \JsonSerializable
      *     example=365
      * )
      */
-    private $_creator_id;
-    private $_creator_latitude;
-    private $_creator_longitude;
-    private $_public;
+    private $creator_id;
+    private $creator_latitude;
+    private $creator_longitude;
+    private $public;
     /**
      * @var float
      * @SWG\Property(
@@ -56,7 +56,7 @@ class Event implements \JsonSerializable
      *     example=43.264
      * )
      */
-    private $_latitude;
+    private $latitude;
 
     /**
      * @var float
@@ -65,7 +65,7 @@ class Event implements \JsonSerializable
      *     example=3.65412
      * )
      */
-    private $_longitude;
+    private $longitude;
     /**
      * @var datetime
      * @SWG\Property(
@@ -73,7 +73,7 @@ class Event implements \JsonSerializable
      *     example="2018-04-02 13:00:00"
      * )
      */
-    private $_start_time;
+    private $start_time;
     /**
      * @var datetime
      * @SWG\Property(
@@ -81,14 +81,14 @@ class Event implements \JsonSerializable
      *     example="2018-04-02 18:30:00"
      * )
      */
-    private $_end_time;
+    private $end_time;
     /**
      * @var string
      * @SWG\Property(
      *     description="More details given by the creator"
      * )
      */
-    private $_information;
+    private $information;
     /**
      * @var string
      * @SWG\Property(
@@ -96,7 +96,7 @@ class Event implements \JsonSerializable
      *     example="https://images.pexels.com/photos/681847/pexels-photo-681847.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
      * )
      */
-    private $_picture_url;
+    private $picture_url;
     /**
      * @var integer
      * @SWG\Property(
@@ -104,7 +104,7 @@ class Event implements \JsonSerializable
      *     example=63
      * )
      */
-    private $_percentage_remaining;
+    private $percentage_remaining;
     /**
      * @var integer
      * @SWG\Property(
@@ -112,7 +112,7 @@ class Event implements \JsonSerializable
      *     example=6
      * )
      */
-    private $_number_guests;
+    private $number_guests;
     /**
      * @var integer
      * @SWG\Property(
@@ -120,9 +120,9 @@ class Event implements \JsonSerializable
      *     example=2
      * )
      */
-    private $_number_participants;
-    private $_creation_datetime;
-    private $_with_localisation;
+    private $number_participants;
+    private $creation_datetime;
+    private $with_localisation;
     /**
      * @var float
      * @SWG\Property(
@@ -130,11 +130,11 @@ class Event implements \JsonSerializable
      *     example=213.152
      * )
      */
-    private $_distance;
+    private $distance;
     // vérifie si l'utilisateur est autorisé à obtenir les information concernant l'évènement
-    public $_is_authorized;
+    public $is_authorized;
     // vérifie si l'utilisateur est invité
-    public $_is_invited;
+    public $is_invited;
 
     public function __construct(?array $data=null)
     {
@@ -177,15 +177,15 @@ class Event implements \JsonSerializable
         $event_detail->setInvitedFriendId(Application::getUser()->getId());
         $event_detail->setEventId($this->getId());
         if(!$event_detail->getFromDatabase()){
-            $this->_is_invited = false;
+            $this->is_invited = false;
         }
         else {
-            $this->_is_invited = true;
-            $this->_is_authorized = true;
+            $this->is_invited = true;
+            $this->is_authorized = true;
         }
 
         // on vérifie alors si le créateur de l'évènement est un ami de l'utilisateur si l'évènement est public
-        if(!$this->_is_invited) {
+        if(!$this->is_invited) {
             $req_auth = Database::getDb()->prepare('SELECT creator_id, public from events WHERE id=:id');
             $req_auth->execute(array(
                 "id" => $this->getId()
@@ -203,16 +203,16 @@ class Event implements \JsonSerializable
                         // la relation existe
                         if ($friend_link->getRelation()) {
                             // le créateur considère l'utilisateur comme un bon ami
-                            $this->_is_authorized = true;
+                            $this->is_authorized = true;
                         }
                         else {
                             // le créateur ne considère pas l'utilisateur comme un bon ami
-                            $this->_is_authorized = false;
+                            $this->is_authorized = false;
                             return false;
                         }
                     } else {
                         // le créateur n'est pas ami avec l'utilisateur
-                        $this->_is_authorized = false;
+                        $this->is_authorized = false;
                         return false;
                     }
                 }
@@ -252,8 +252,6 @@ class Event implements \JsonSerializable
             $key_upper = ucwords($key, "_");
             $key_upper = preg_replace("#_#", "", $key_upper);
             $method = 'get' . $key_upper;
-            // on enlève le premier underscore de la variable
-            $key = substr_replace($key, "", 0, 1);
             if (method_exists($this, $method)) {
                 switch ($key) {
                     case 'id':
@@ -293,8 +291,6 @@ class Event implements \JsonSerializable
             $key_upper = ucwords($key, "_");
             $key_upper = preg_replace("#_#", "", $key_upper);
             $method = 'get' . $key_upper;
-            // on enlève le premier underscore de la variable
-            $key = substr_replace($key, "", 0, 1);
             if (method_exists($this, $method)) {
                 switch ($key) {
                     case 'creation_datetime':
@@ -320,8 +316,6 @@ class Event implements \JsonSerializable
             $key_upper = ucwords($key, "_");
             $key_upper = preg_replace("#_#", "", $key_upper);
             $method = 'get' . $key_upper;
-            // on enlève le premier underscore de la variable
-            $key = substr_replace($key, "", 0, 1);
             if (method_exists($this, $method)) {
                 switch ($key){
                     case 'creator_latitude':
@@ -439,10 +433,10 @@ class Event implements \JsonSerializable
      * @throws PublicError
      */
     public function getAllGuests(bool $with_friend_relation=true):?array {
-        if($this->_is_authorized==null){
+        if($this->is_authorized==null){
             $this->getFromDatabase();
         }
-        if($this->_is_authorized){
+        if($this->is_authorized){
             $req = Database::getDb()->prepare('SELECT *, events_member_details.id AS detail_id, members.id AS member_id FROM events_member_details INNER JOIN members ON events_member_details.invited_friend_id = members.id WHERE event_id=:event_id');
             $req->execute(array('event_id' => $this->getId()));
             $response = array();
@@ -481,7 +475,7 @@ class Event implements \JsonSerializable
      */
     public function getId()
     {
-        return $this->_id;
+        return $this->id;
     }
 
     /**
@@ -493,7 +487,7 @@ class Event implements \JsonSerializable
         if (!empty($id) && !preg_match('#^[0-9]+$#', $id)) {
             throw new PublicError("Invalid event_id format", ErrorCode::INVALID_EVENT_ID);
         }
-        $this->_id = $id;
+        $this->id = $id;
     }
 
     /**
@@ -501,7 +495,7 @@ class Event implements \JsonSerializable
      */
     public function getName()
     {
-        return $this->_name;
+        return $this->name;
     }
 
     /**
@@ -509,7 +503,7 @@ class Event implements \JsonSerializable
      */
     public function setName($name): void
     {
-        $this->_name = $name;
+        $this->name = $name;
     }
 
     /**
@@ -517,7 +511,7 @@ class Event implements \JsonSerializable
      */
     public function getCreatorId()
     {
-        return $this->_creator_id;
+        return $this->creator_id;
     }
 
     /**
@@ -529,7 +523,7 @@ class Event implements \JsonSerializable
         if (!empty($id) && !preg_match('#^[0-9]+$#', $id)) {
             throw new PublicError("Invalid creator_id format", ErrorCode::INVALID_VARIABLE_FORMAT);
         }
-        $this->_creator_id = $creator_id;
+        $this->creator_id = $creator_id;
     }
 
     /**
@@ -537,7 +531,7 @@ class Event implements \JsonSerializable
      */
     public function getCreatorLatitude()
     {
-        return $this->_creator_latitude;
+        return $this->creator_latitude;
     }
 
     /**
@@ -550,7 +544,7 @@ class Event implements \JsonSerializable
         if (!empty($latitude) && !preg_match($regex, $latitude)) {
             throw new PublicError("Creator latitude invalid format.", ErrorCode::INVALID_GPS_LOCATION);
         }
-        $this->_creator_latitude = $creator_latitude;
+        $this->creator_latitude = $creator_latitude;
     }
 
     /**
@@ -558,7 +552,7 @@ class Event implements \JsonSerializable
      */
     public function getCreatorLongitude()
     {
-        return $this->_creator_longitude;
+        return $this->creator_longitude;
     }
 
     /**
@@ -571,7 +565,7 @@ class Event implements \JsonSerializable
         if (!empty($longitude) && !preg_match($regex, $longitude)) {
             throw new PublicError("Creator longitude invalid format.", ErrorCode::INVALID_GPS_LOCATION);
         }
-        $this->_creator_longitude = $creator_longitude;
+        $this->creator_longitude = $creator_longitude;
     }
 
     /**
@@ -579,7 +573,7 @@ class Event implements \JsonSerializable
      */
     public function getPublic()
     {
-        return $this->_public;
+        return $this->public;
     }
 
     /**
@@ -591,7 +585,7 @@ class Event implements \JsonSerializable
         if (!empty($public) && !preg_match('#^[0-1]$#', $public)) {
             throw new PublicError("Invalid public parameter value.", ErrorCode::INVALID_PUBLIC_VARIABLE);
         }
-        $this->_public = $public;
+        $this->public = $public;
     }
 
     /**
@@ -599,7 +593,7 @@ class Event implements \JsonSerializable
      */
     public function getLatitude()
     {
-        return $this->_latitude;
+        return $this->latitude;
     }
 
     /**
@@ -612,7 +606,7 @@ class Event implements \JsonSerializable
         if (!empty($latitude) && !preg_match($regex, $latitude)) {
             throw new PublicError("Latitude invalid format.", ErrorCode::INVALID_GPS_LOCATION);
         }
-        $this->_latitude = $latitude;
+        $this->latitude = $latitude;
     }
 
     /**
@@ -620,7 +614,7 @@ class Event implements \JsonSerializable
      */
     public function getLongitude()
     {
-        return $this->_longitude;
+        return $this->longitude;
     }
 
     /**
@@ -633,7 +627,7 @@ class Event implements \JsonSerializable
         if (!empty($longitude) && !preg_match($regex, $longitude)) {
             throw new PublicError("Longitude invalid format.", ErrorCode::INVALID_GPS_LOCATION);
         }
-        $this->_longitude = $longitude;
+        $this->longitude = $longitude;
     }
 
     /**
@@ -641,7 +635,7 @@ class Event implements \JsonSerializable
      */
     public function getStartTime()
     {
-        return $this->_start_time;
+        return $this->start_time;
     }
 
     /**
@@ -653,7 +647,7 @@ class Event implements \JsonSerializable
         if (!empty($start_time) && !preg_match('#^([2][01]|[1][6-9])\d{2}\-([0]\d|[1][0-2])\-([0-2]\d|[3][0-1])(\s([0-1]\d|[2][0-3])(\:[0-5]\d){1,2})?$#', $start_time)) {
             throw new PublicError("Datetime format invalid. Ex: 2017-09-13 13:35:59", ErrorCode::INVALID_DATETIME);
         }
-        $this->_start_time = $start_time;
+        $this->start_time = $start_time;
     }
 
     /**
@@ -661,7 +655,7 @@ class Event implements \JsonSerializable
      */
     public function getEndTime()
     {
-        return $this->_end_time;
+        return $this->end_time;
     }
 
     /**
@@ -673,7 +667,7 @@ class Event implements \JsonSerializable
         if (!empty($end_time) && !preg_match('#^([2][01]|[1][6-9])\d{2}\-([0]\d|[1][0-2])\-([0-2]\d|[3][0-1])(\s([0-1]\d|[2][0-3])(\:[0-5]\d){1,2})?$#', $end_time)) {
             throw new PublicError("Datetime format invalid. Ex: 2017-09-13 13:35:59", ErrorCode::INVALID_DATETIME);
         }
-        $this->_end_time = $end_time;
+        $this->end_time = $end_time;
     }
 
     /**
@@ -681,7 +675,7 @@ class Event implements \JsonSerializable
      */
     public function getInformation()
     {
-        return $this->_information;
+        return $this->information;
     }
 
     /**
@@ -689,7 +683,7 @@ class Event implements \JsonSerializable
      */
     public function setInformation($information): void
     {
-        $this->_information = $information;
+        $this->information = $information;
     }
 
     /**
@@ -697,7 +691,7 @@ class Event implements \JsonSerializable
      */
     public function getPictureUrl()
     {
-        return $this->_picture_url;
+        return $this->picture_url;
     }
 
     /**
@@ -709,7 +703,7 @@ class Event implements \JsonSerializable
         if (!empty($picture_url) && !preg_match('#((https?|ftp)://(\S*?\.\S*?))([\s)\[\]{},;"\':<]|\.\s|$)#i', $picture_url)) {
             throw new PublicError("Invalid URL format.", ErrorCode::INVALID_URL);
         }
-        $this->_picture_url = $picture_url;
+        $this->picture_url = $picture_url;
     }
 
     /**
@@ -756,7 +750,7 @@ class Event implements \JsonSerializable
      */
     public function getCreationDatetime()
     {
-        return $this->_creation_datetime;
+        return $this->creation_datetime;
     }
 
     /**
@@ -768,7 +762,7 @@ class Event implements \JsonSerializable
         if (!empty($creation_datetime) && !preg_match('#^([2][01]|[1][6-9])\d{2}\-([0]\d|[1][0-2])\-([0-2]\d|[3][0-1])(\s([0-1]\d|[2][0-3])(\:[0-5]\d){1,2})?$#', $creation_datetime)) {
             throw new PublicError("Datetime format invalid. Ex: 2017-09-13 13:35:59", ErrorCode::INVALID_DATETIME);
         }
-        $this->_creation_datetime = $creation_datetime;
+        $this->creation_datetime = $creation_datetime;
     }
 
     /**
@@ -776,7 +770,7 @@ class Event implements \JsonSerializable
      */
     public function getWithLocalisation()
     {
-        return $this->_with_localisation;
+        return $this->with_localisation;
     }
 
     /**
@@ -788,7 +782,7 @@ class Event implements \JsonSerializable
         if (!empty($with_localisation) && !is_bool($with_localisation) && !preg_match("#^0|1$#", $with_localisation)) {
             throw new PublicError("With_localisation parameter invalid value.", ErrorCode::INVALID_VARIABLE_FORMAT);
         }
-        $this->_with_localisation = $with_localisation;
+        $this->with_localisation = $with_localisation;
     }
 
     /**
@@ -796,7 +790,7 @@ class Event implements \JsonSerializable
      */
     public function getDistance(): ?float
     {
-        return $this->_distance;
+        return $this->distance;
     }
 
     /**
@@ -804,7 +798,7 @@ class Event implements \JsonSerializable
      */
     public function setDistance(?float $distance): void
     {
-        $this->_distance = $distance;
+        $this->distance = $distance;
     }
 
 

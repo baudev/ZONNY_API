@@ -9,26 +9,26 @@ use ZONNY\Utils\Functions;
 use ZONNY\Utils\PublicError;
 class User implements \JsonSerializable
 {
-    private $_id;
-    private $_key_app;
-    private $_fb_access_token;
-    private $_fb_user_id;
-    private $_expire;
-    private $_name;
-    private $_first_name;
-    private $_last_name;
-    private $_profile_picture_url;
-    private $_latitude;
-    private $_longitude;
-    private $_last_latitude;
-    private $_last_longitude;
-    private $_level;
-    private $_unavailable;
-    private $_gcm_registration_id;
-    private $_location_last_check_up;
-    private $_creation_datetime;
-    private $_last_add_events;
-    private $_last_add_events_google;
+    private $id;
+    private $key_app;
+    private $fb_access_token;
+    private $fb_user_id;
+    private $expire;
+    private $name;
+    private $first_name;
+    private $last_name;
+    private $profile_picture_url;
+    private $latitude;
+    private $longitude;
+    private $last_latitude;
+    private $last_longitude;
+    private $level;
+    private $unavailable;
+    private $gcm_registration_id;
+    private $location_last_check_up;
+    private $creation_datetime;
+    private $last_add_events;
+    private $last_add_events_google;
 
     public function __construct(?array $data=null)
     {
@@ -94,8 +94,7 @@ class User implements \JsonSerializable
             $key_upper = ucwords($key, "_");
             $key_upper = preg_replace("#_#", "", $key_upper);
             $method = 'get' . $key_upper;
-            // on enlève le premier underscore de la variable
-            $key = substr_replace($key, "", 0, 1);
+                        
             if (method_exists($this, $method)) {
                 switch ($key) {
                     case 'id':
@@ -137,8 +136,7 @@ class User implements \JsonSerializable
             $key_upper = ucwords($key, "_");
             $key_upper = preg_replace("#_#", "", $key_upper);
             $method = 'get' . $key_upper;
-            // on enlève le premier underscore de la variable
-            $key = substr_replace($key, "", 0, 1);
+                        
             if (method_exists($this, $method)) {
                 switch ($key) {
                     case 'creation_datetime':
@@ -174,8 +172,7 @@ class User implements \JsonSerializable
             $key_upper = ucwords($key, "_");
             $key_upper = preg_replace("#_#", "", $key_upper);
             $method = 'get' . $key_upper;
-            // on enlève le premier underscore de la variable
-            $key = substr_replace($key, "", 0, 1);
+                        
             if (method_exists($this, $method)) {
                 switch ($key){
                     case 'fb_access_token':
@@ -374,7 +371,7 @@ class User implements \JsonSerializable
      */
     public function getId():?int
     {
-        return $this->_id??null;
+        return $this->id??null;
     }
 
     /**
@@ -386,7 +383,7 @@ class User implements \JsonSerializable
         if (!empty($id) && !preg_match('#^[0-9]+$#', $id)) {
             throw new PublicError("Id invalid format.", ErrorCode::INVALID_FRIEND_ID);
         }
-        $this->_id = $id;
+        $this->id = $id;
     }
 
     /**
@@ -394,7 +391,7 @@ class User implements \JsonSerializable
      */
     public function getKeyApp()
     {
-        return $this->_key_app??null;
+        return $this->key_app??null;
     }
 
     /**
@@ -406,7 +403,7 @@ class User implements \JsonSerializable
         if (!empty($key_app) && !preg_match('#\w{100}$#', $key_app)) {
             throw new PublicError("Key_app invalid format", ErrorCode::INVALID_KEY_APP);
         }
-        $this->_key_app = $key_app;
+        $this->key_app = $key_app;
     }
 
     /**
@@ -414,7 +411,7 @@ class User implements \JsonSerializable
      */
     public function getFbAccessToken()
     {
-        return $this->_fb_access_token??null;
+        return $this->fb_access_token??null;
     }
 
 
@@ -431,7 +428,7 @@ class User implements \JsonSerializable
         if (!empty($fb_access_token) && !preg_match('#^[a-z0-9A-Z]+$#', $fb_access_token)) {
             throw new PublicError("fb_access_token invalid format.", ErrorCode::INVALID_FB_ACCESS_TOKEN);
         }
-        $this->_fb_access_token = $fb_access_token;
+        $this->fb_access_token = $fb_access_token;
     }
 
     /**
@@ -439,7 +436,7 @@ class User implements \JsonSerializable
      */
     public function getFbUserId()
     {
-        return $this->_fb_user_id??null;
+        return $this->fb_user_id??null;
     }
 
     /**
@@ -447,7 +444,7 @@ class User implements \JsonSerializable
      */
     public function setFbUserId($fb_user_id): void
     {
-        $this->_fb_user_id = $fb_user_id;
+        $this->fb_user_id = $fb_user_id;
     }
 
     /**
@@ -455,7 +452,7 @@ class User implements \JsonSerializable
      */
     public function getExpire()
     {
-        return $this->_expire??null;
+        return $this->expire??null;
     }
 
     /**
@@ -467,7 +464,7 @@ class User implements \JsonSerializable
         if (!empty($expire) && !preg_match('#^([2][01]|[1][6-9])\d{2}\-([0]\d|[1][0-2])\-([0-2]\d|[3][0-1])(\s([0-1]\d|[2][0-3])(\:[0-5]\d){1,2})?$#', $expire)) {
             throw new PublicError("Datetime format invalid. Ex: 2017-09-13 13:35:59", ErrorCode::INVALID_DATETIME);
         }
-        $this->_expire = $expire;
+        $this->expire = $expire;
     }
 
     /**
@@ -475,7 +472,7 @@ class User implements \JsonSerializable
      */
     public function getName()
     {
-        return $this->_name??null;
+        return $this->name??null;
     }
 
     /**
@@ -483,7 +480,7 @@ class User implements \JsonSerializable
      */
     public function setName($name): void
     {
-        $this->_name = $name;
+        $this->name = $name;
     }
 
     /**
@@ -491,7 +488,7 @@ class User implements \JsonSerializable
      */
     public function getFirstName()
     {
-        return $this->_first_name??null;
+        return $this->first_name??null;
     }
 
     /**
@@ -499,7 +496,7 @@ class User implements \JsonSerializable
      */
     public function setFirstName($first_name): void
     {
-        $this->_first_name = $first_name;
+        $this->first_name = $first_name;
     }
 
     /**
@@ -507,7 +504,7 @@ class User implements \JsonSerializable
      */
     public function getLastName()
     {
-        return $this->_last_name??null;
+        return $this->last_name??null;
     }
 
     /**
@@ -515,7 +512,7 @@ class User implements \JsonSerializable
      */
     public function setLastName($last_name): void
     {
-        $this->_last_name = $last_name;
+        $this->last_name = $last_name;
     }
 
     /**
@@ -523,7 +520,7 @@ class User implements \JsonSerializable
      */
     public function getProfilePictureUrl()
     {
-        return $this->_profile_picture_url??null;
+        return $this->profile_picture_url??null;
     }
 
     /**
@@ -535,7 +532,7 @@ class User implements \JsonSerializable
         if (!empty($profile_picture_url) && !preg_match('#((https?|ftp)://(\S*?\.\S*?))([\s)\[\]{},;"\':<]|\.\s|$)#i', $profile_picture_url)) {
             throw new PublicError("Invalid URL format.", ErrorCode::INVALID_URL);
         }
-        $this->_profile_picture_url = $profile_picture_url;
+        $this->profile_picture_url = $profile_picture_url;
     }
 
     /**
@@ -543,7 +540,7 @@ class User implements \JsonSerializable
      */
     public function getLatitude()
     {
-        return $this->_latitude??null;
+        return $this->latitude??null;
     }
 
     /**
@@ -563,7 +560,7 @@ class User implements \JsonSerializable
             $current_date = new \DateTime();
             $this->setLocationLastCheckUp($current_date->format('Y-m-d H:i:s'));
             // on met à jour la latitude
-            $this->_latitude = $latitude;
+            $this->latitude = $latitude;
         }
     }
 
@@ -572,7 +569,7 @@ class User implements \JsonSerializable
      */
     public function getLongitude()
     {
-        return $this->_longitude??null;
+        return $this->longitude??null;
     }
 
     /**
@@ -592,7 +589,7 @@ class User implements \JsonSerializable
             $current_date = new \DateTime();
             $this->setLocationLastCheckUp($current_date->format('Y-m-d H:i:s'));
             // on met à jour la longitude
-            $this->_longitude = $longitude;
+            $this->longitude = $longitude;
         }
     }
 
@@ -601,7 +598,7 @@ class User implements \JsonSerializable
      */
     public function getLastLatitude()
     {
-        return $this->_last_latitude??null;
+        return $this->last_latitude??null;
     }
 
     /**
@@ -614,7 +611,7 @@ class User implements \JsonSerializable
         if (!empty($last_latitude) && !preg_match($regex, $last_latitude)) {
             throw new PublicError("Latitude invalid format.", ErrorCode::INVALID_GPS_LOCATION);
         }
-        $this->_last_latitude = $last_latitude;
+        $this->last_latitude = $last_latitude;
     }
 
     /**
@@ -622,7 +619,7 @@ class User implements \JsonSerializable
      */
     public function getLastLongitude()
     {
-        return $this->_last_longitude??null;
+        return $this->last_longitude??null;
     }
 
     /**
@@ -635,7 +632,7 @@ class User implements \JsonSerializable
         if (!empty($last_longitude) && !preg_match($regex, $last_longitude)) {
             throw new PublicError("Longitude invalid format.", ErrorCode::INVALID_GPS_LOCATION);
         }
-        $this->_last_longitude = $last_longitude;
+        $this->last_longitude = $last_longitude;
     }
 
     /**
@@ -643,7 +640,7 @@ class User implements \JsonSerializable
      */
     public function getUnavailable()
     {
-        return $this->_unavailable??null;
+        return $this->unavailable??null;
     }
 
     /**
@@ -655,7 +652,7 @@ class User implements \JsonSerializable
         if (!empty($unavailable) && !preg_match('#^([2][01]|[1][6-9])\d{2}\-([0]\d|[1][0-2])\-([0-2]\d|[3][0-1])(\s([0-1]\d|[2][0-3])(\:[0-5]\d){1,2})?$#', $unavailable)) {
             throw new PublicError("Datetime format invalid. Ex: 2017-09-13 13:35:59", ErrorCode::INVALID_DATETIME);
         }
-        $this->_unavailable = $unavailable;
+        $this->unavailable = $unavailable;
     }
 
     /**
@@ -663,7 +660,7 @@ class User implements \JsonSerializable
      */
     public function getLocationLastCheckUp()
     {
-        return $this->_location_last_check_up??null;
+        return $this->location_last_check_up??null;
     }
 
     /**
@@ -675,7 +672,7 @@ class User implements \JsonSerializable
         if (!empty($location_last_check_up) && !preg_match('#^([2][01]|[1][6-9])\d{2}\-([0]\d|[1][0-2])\-([0-2]\d|[3][0-1])(\s([0-1]\d|[2][0-3])(\:[0-5]\d){1,2})?$#', $location_last_check_up)) {
             throw new PublicError("Datetime format invalid. Ex: 2017-09-13 13:35:59", ErrorCode::INVALID_DATETIME);
         }
-        $this->_location_last_check_up = $location_last_check_up;
+        $this->location_last_check_up = $location_last_check_up;
     }
 
     /**
@@ -683,7 +680,7 @@ class User implements \JsonSerializable
      */
     public function getGcmRegistrationId()
     {
-        return $this->_gcm_registration_id??null;
+        return $this->gcm_registration_id??null;
     }
 
     /**
@@ -695,7 +692,7 @@ class User implements \JsonSerializable
         if (!empty($gcm_registration_id) && !preg_match('#^[a-z0-9A-Z:_-]+$#', $gcm_registration_id)) {
             throw new PublicError("gcm_id invalid format.", ErrorCode::GCM_INVALID_FORMAT);
         }
-        $this->_gcm_registration_id = $gcm_registration_id;
+        $this->gcm_registration_id = $gcm_registration_id;
     }
 
     /**
@@ -703,7 +700,7 @@ class User implements \JsonSerializable
      */
     public function getCreationDatetime()
     {
-        return $this->_creation_datetime??null;
+        return $this->creation_datetime??null;
     }
 
     /**
@@ -715,7 +712,7 @@ class User implements \JsonSerializable
         if (!empty($creation_datetime) && !preg_match('#^([2][01]|[1][6-9])\d{2}\-([0]\d|[1][0-2])\-([0-2]\d|[3][0-1])(\s([0-1]\d|[2][0-3])(\:[0-5]\d){1,2})?$#', $creation_datetime)) {
             throw new PublicError("Datetime format invalid. Ex: 2017-09-13 13:35:59", ErrorCode::INVALID_DATETIME);
         }
-        $this->_creation_datetime = $creation_datetime;
+        $this->creation_datetime = $creation_datetime;
     }
 
     /**
@@ -723,7 +720,7 @@ class User implements \JsonSerializable
      */
     public function getLastAddEvents()
     {
-        return $this->_last_add_events??null;
+        return $this->last_add_events??null;
     }
 
     /**
@@ -735,7 +732,7 @@ class User implements \JsonSerializable
         if (!empty($last_add_events) && !preg_match('#^([2][01]|[1][6-9])\d{2}\-([0]\d|[1][0-2])\-([0-2]\d|[3][0-1])(\s([0-1]\d|[2][0-3])(\:[0-5]\d){1,2})?$#', $last_add_events)) {
             throw new PublicError("Datetime format invalid. Ex: 2017-09-13 13:35:59", ErrorCode::INVALID_DATETIME);
         }
-        $this->_last_add_events = $last_add_events;
+        $this->last_add_events = $last_add_events;
     }
 
     /**
@@ -743,7 +740,7 @@ class User implements \JsonSerializable
      */
     public function getLastAddEventsGoogle()
     {
-        return $this->_last_add_events_google??null;
+        return $this->last_add_events_google??null;
     }
 
     /**
@@ -755,7 +752,7 @@ class User implements \JsonSerializable
         if (!empty($last_add_events_google) && !preg_match('#^([2][01]|[1][6-9])\d{2}\-([0]\d|[1][0-2])\-([0-2]\d|[3][0-1])(\s([0-1]\d|[2][0-3])(\:[0-5]\d){1,2})?$#', $last_add_events_google)) {
             throw new PublicError("Datetime format invalid. Ex: 2017-09-13 13:35:59", ErrorCode::INVALID_DATETIME);
         }
-        $this->_last_add_events_google = $last_add_events_google;
+        $this->last_add_events_google = $last_add_events_google;
     }
 
 
@@ -770,11 +767,11 @@ class User implements \JsonSerializable
  *   allOf={
  *       @SWG\Schema(ref="#/definitions/GoodFriend"),
  *       @SWG\Schema(
- *           required={"_key_app"},
- *           @SWG\Property(property="_key_app", type="string", description="The API KEY"),
- *           @SWG\Property(property="_expire", format="datetime", type="number", description="The expiration datetime of the Facebook Token", example="2018-04-02 12:12:00"),
- *           @SWG\Property(property="_unavailable", format="datetime", type="number", description="The datetime until the user is unavailable", example="2018-03-26 23:52:45"),
- *           @SWG\Property(property="_location_last_ckeck_up", format="datetime", type="number", description="The datetime when the user sent his last known position", example="2018-04-01 22:56:10"),
+ *           required={"key_app"},
+ *           @SWG\Property(property="key_app", type="string", description="The API KEY"),
+ *           @SWG\Property(property="expire", format="datetime", type="number", description="The expiration datetime of the Facebook Token", example="2018-04-02 12:12:00"),
+ *           @SWG\Property(property="unavailable", format="datetime", type="number", description="The datetime until the user is unavailable", example="2018-03-26 23:52:45"),
+ *           @SWG\Property(property="location_last_ckeck_up", format="datetime", type="number", description="The datetime when the user sent his last known position", example="2018-04-01 22:56:10"),
  *       )
  *   }
  * )

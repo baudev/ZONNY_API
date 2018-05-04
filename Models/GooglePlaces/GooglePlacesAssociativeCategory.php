@@ -7,9 +7,9 @@ use ZONNY\Utils\Database;
 class GooglePlacesAssociativeCategory implements \JsonSerializable
 {
 
-    private $_id;
-    private $_place_id;
-    private $_cat_id;
+    private $id;
+    private $place_id;
+    private $cat_id;
 
 
     /**
@@ -64,8 +64,6 @@ class GooglePlacesAssociativeCategory implements \JsonSerializable
             $key_upper = ucwords($key, "_");
             $key_upper = preg_replace("#_#", "", $key_upper);
             $method = 'get' . $key_upper;
-            // on enlève le premier underscore de la variable
-            $key = substr_replace($key, "", 0, 1);
             if (method_exists($this, $method)) {
                 switch ($key) {
                     case 'id':
@@ -102,8 +100,6 @@ class GooglePlacesAssociativeCategory implements \JsonSerializable
             $key_upper = ucwords($key, "_");
             $key_upper = preg_replace("#_#", "", $key_upper);
             $method = 'get' . $key_upper;
-            // on enlève le premier underscore de la variable
-            $key = substr_replace($key, "", 0, 1);
             if (method_exists($this, $method)) {
                 switch ($key) {
                     default:
@@ -123,8 +119,6 @@ class GooglePlacesAssociativeCategory implements \JsonSerializable
             $key_upper = ucwords($key, "_");
             $key_upper = preg_replace("#_#", "", $key_upper);
             $method = 'get' . $key_upper;
-            // on enlève le premier underscore de la variable
-            $key = substr_replace($key, "", 0, 1);
             if (method_exists($this, $method)) {
                 switch ($key){
                     default:
@@ -164,7 +158,7 @@ class GooglePlacesAssociativeCategory implements \JsonSerializable
      */
     public function getId()
     {
-        return $this->_id;
+        return $this->id;
     }
 
     /**
@@ -172,7 +166,7 @@ class GooglePlacesAssociativeCategory implements \JsonSerializable
      */
     public function setId($id): void
     {
-        $this->_id = $id;
+        $this->id = $id;
     }
 
     /**
@@ -180,7 +174,7 @@ class GooglePlacesAssociativeCategory implements \JsonSerializable
      */
     public function getPlaceId()
     {
-        return $this->_place_id;
+        return $this->place_id;
     }
 
     /**
@@ -188,7 +182,7 @@ class GooglePlacesAssociativeCategory implements \JsonSerializable
      */
     public function setPlaceId($place_id): void
     {
-        $this->_place_id = $place_id;
+        $this->place_id = $place_id;
     }
 
     /**
@@ -196,7 +190,7 @@ class GooglePlacesAssociativeCategory implements \JsonSerializable
      */
     public function getCatId()
     {
-        return $this->_cat_id;
+        return $this->cat_id;
     }
 
     /**
@@ -204,7 +198,7 @@ class GooglePlacesAssociativeCategory implements \JsonSerializable
      */
     public function setCatId($cat_id): void
     {
-        $this->_cat_id = $cat_id;
+        $this->cat_id = $cat_id;
     }
 
 

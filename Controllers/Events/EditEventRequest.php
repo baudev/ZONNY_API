@@ -112,7 +112,7 @@ class EditEventRequest implements \JsonSerializable
                 }
             }
             else{
-                if($event->_is_authorized){
+                if($event->is_authorized){
                     throw new PublicError("This event does'nt seem to exist anymore.", ErrorCode::EVENT_DOESNT_EXIST_ANYMORE);
                 }else {
                     // on retient la tentative de piratage

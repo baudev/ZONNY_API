@@ -12,7 +12,7 @@ use PDO;
 class Database
 {
 
-    private static $_db;
+    private static $db;
 
     public static function connectPostgreSQL(){
         // Connexion à la base de données avec PDO
@@ -47,7 +47,7 @@ class Database
      */
     public static function getDb():?PDO
     {
-        return self::$_db;
+        return self::$db;
     }
 
     /**
@@ -55,7 +55,7 @@ class Database
      */
     public static function setDb($db): void
     {
-        self::$_db = $db;
+        self::$db = $db;
     }
 
 }

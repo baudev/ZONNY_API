@@ -66,7 +66,7 @@ class GetEvent implements \JsonSerializable
         if($event->getFromDatabase()){
             $this->setEvent($event);
             // si l'utilisateur est autorisé à afficher les informations concernant l'évènement
-            if($event->_is_authorized){
+            if($event->is_authorized){
                 $guests = $event->getAllGuests(true);
                 $this->setGuests($guests);
             }

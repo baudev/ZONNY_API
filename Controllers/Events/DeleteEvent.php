@@ -87,7 +87,7 @@ class DeleteEvent implements \JsonSerializable
             }
         }
         else {
-            if($event->_is_authorized){
+            if($event->is_authorized){
                 throw new PublicError("This event does'nt seem to exist anymore.", ErrorCode::EVENT_DOESNT_EXIST_ANYMORE);
             }else {
                 throw new PublicError("You can't delete this event. You're not the creator.", ErrorCode::EVENT_NOT_CREATOR);

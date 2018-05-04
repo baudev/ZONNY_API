@@ -9,7 +9,7 @@ use ZONNY\Models\Push\PushNotification;
 class FacebookUser
 {
 
-    private static $_fb;
+    private static $fb;
 
     /**
      * On initialise l'API de Facebook
@@ -82,7 +82,7 @@ class FacebookUser
      */
     public static function getFb(): Facebook
     {
-        return self::$_fb;
+        return self::$fb;
     }
 
     /**
@@ -90,7 +90,7 @@ class FacebookUser
      */
     public static function setFb(Facebook $fb): void
     {
-        self::$_fb = $fb;
+        self::$fb = $fb;
     }
 
 

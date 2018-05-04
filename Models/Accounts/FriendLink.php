@@ -8,7 +8,7 @@ use ZONNY\Utils\PublicError;
  * @SWG\Definition(
  *   definition="FriendLink",
  *   type="object",
- *    required={"_id", "_user_id", "_friend_id", "_authorization"}
+ *    required={"id", "user_id", "friend_id", "authorization"}
  * )
  */
 class FriendLink implements \JsonSerializable
@@ -24,7 +24,7 @@ class FriendLink implements \JsonSerializable
      *     example=153
      * )
      */
-    private $_id;
+    private $id;
     /**
      * @var integer
      * @SWG\Property(
@@ -32,7 +32,7 @@ class FriendLink implements \JsonSerializable
      *     example=862
      * )
      */
-    private $_user_id;
+    private $user_id;
     /**
      * @var integer
      * @SWG\Property(
@@ -40,9 +40,9 @@ class FriendLink implements \JsonSerializable
      *     example=1652
      * )
      */
-    private $_friend_id;
-    private $_mutual_friends;
-    private $_mutual_likes;
+    private $friend_id;
+    private $mutual_friends;
+    private $mutual_likes;
     /**
      * @var integer
      * @SWG\Property(
@@ -50,7 +50,7 @@ class FriendLink implements \JsonSerializable
      *     enum={0,1}
      * )
      */
-    private $_relation;
+    private $relation;
 
 
     public function __construct(?array $data=null)
@@ -111,8 +111,6 @@ class FriendLink implements \JsonSerializable
             $key_upper = ucwords($key, "_");
             $key_upper = preg_replace("#_#", "", $key_upper);
             $method = 'get' . $key_upper;
-            // on enlève le premier underscore de la variable
-            $key = substr_replace($key, "", 0, 1);
             if (method_exists($this, $method)) {
                 switch ($key) {
                     case 'id':
@@ -146,8 +144,6 @@ class FriendLink implements \JsonSerializable
             $key_upper = ucwords($key, "_");
             $key_upper = preg_replace("#_#", "", $key_upper);
             $method = 'get' . $key_upper;
-            // on enlève le premier underscore de la variable
-            $key = substr_replace($key, "", 0, 1);
             if (method_exists($this, $method)) {
                 switch ($key) {
                     default:
@@ -176,8 +172,6 @@ class FriendLink implements \JsonSerializable
             $key_upper = ucwords($key, "_");
             $key_upper = preg_replace("#_#", "", $key_upper);
             $method = 'get' . $key_upper;
-            // on enlève le premier underscore de la variable
-            $key = substr_replace($key, "", 0, 1);
             if (method_exists($this, $method)) {
                 switch ($key){
                     case 'mutual_friends':
@@ -222,7 +216,7 @@ class FriendLink implements \JsonSerializable
      */
     public function getId()
     {
-        return $this->_id;
+        return $this->id;
     }
 
     /**
@@ -234,7 +228,7 @@ class FriendLink implements \JsonSerializable
         if (!empty($id) && !preg_match('#^\d+$#i', $id)) {
         throw new PublicError("Invalid number format.", ErrorCode::INVALID_VARIABLE_FORMAT);
         }
-        $this->_id = $id;
+        $this->id = $id;
     }
 
     /**
@@ -242,7 +236,7 @@ class FriendLink implements \JsonSerializable
      */
     public function getUserId()
     {
-        return $this->_user_id;
+        return $this->user_id;
     }
 
     /**
@@ -254,7 +248,7 @@ class FriendLink implements \JsonSerializable
         if (!empty($user_id) && !preg_match('#^\d+$#i', $user_id)) {
             throw new PublicError("Invalid number format.", ErrorCode::INVALID_VARIABLE_FORMAT);
         }
-        $this->_user_id = $user_id;
+        $this->user_id = $user_id;
     }
 
     /**
@@ -262,7 +256,7 @@ class FriendLink implements \JsonSerializable
      */
     public function getFriendId()
     {
-        return $this->_friend_id;
+        return $this->friend_id;
     }
 
     /**
@@ -274,7 +268,7 @@ class FriendLink implements \JsonSerializable
         if (!empty($friend_id) && !preg_match('#^\d+$#i', $friend_id)) {
             throw new PublicError("Invalid number format.", ErrorCode::INVALID_VARIABLE_FORMAT);
         }
-        $this->_friend_id = $friend_id;
+        $this->friend_id = $friend_id;
     }
 
     /**
@@ -282,7 +276,7 @@ class FriendLink implements \JsonSerializable
      */
     public function getMutualFriends()
     {
-        return $this->_mutual_friends;
+        return $this->mutual_friends;
     }
 
     /**
@@ -294,7 +288,7 @@ class FriendLink implements \JsonSerializable
         if (!empty($mutual_friends) && !preg_match('#^\d+$#i', $mutual_friends)) {
             throw new PublicError("Invalid number format.", ErrorCode::INVALID_VARIABLE_FORMAT);
         }
-        $this->_mutual_friends = $mutual_friends;
+        $this->mutual_friends = $mutual_friends;
     }
 
     /**
@@ -302,7 +296,7 @@ class FriendLink implements \JsonSerializable
      */
     public function getMutualLikes()
     {
-        return $this->_mutual_likes;
+        return $this->mutual_likes;
     }
 
     /**
@@ -314,7 +308,7 @@ class FriendLink implements \JsonSerializable
         if (!empty($mutual_likes) && !preg_match('#^\d+$#i', $mutual_likes)) {
             throw new PublicError("Invalid number format.", ErrorCode::INVALID_VARIABLE_FORMAT);
         }
-        $this->_mutual_likes = $mutual_likes;
+        $this->mutual_likes = $mutual_likes;
     }
 
     /**
@@ -322,7 +316,7 @@ class FriendLink implements \JsonSerializable
      */
     public function getRelation()
     {
-        return $this->_relation;
+        return $this->relation;
     }
 
     /**
@@ -334,7 +328,7 @@ class FriendLink implements \JsonSerializable
         if (!empty($authorization) && !preg_match('#^[0-1]$#i', $authorization)) {
             throw new PublicError("Invalid authorization value format (must be 1 or 0).", ErrorCode::INVALID_AUTH_VARIABLE);
         }
-        $this->_relation = $authorization;
+        $this->relation = $authorization;
     }
 
 }

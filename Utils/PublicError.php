@@ -7,7 +7,7 @@ use Exception;
  * @SWG\Definition(
  *   definition="Error",
  *   type="object",
- *    required={"_code", "_message"}
+ *    required={"code", "message"}
  * )
  */
 class PublicError extends Exception implements \JsonSerializable {
@@ -19,14 +19,14 @@ class PublicError extends Exception implements \JsonSerializable {
      *     example=16
      * )
      */
-    private $_code;
+    private $code;
     /**
      * @var string
      * @SWG\Property(
      *     example="Invalid key_app"
      * )
      */
-    private $_message;
+    private $message;
 
     public function __construct($message, $code = 0, Exception $previous = null)
     {
@@ -45,7 +45,7 @@ class PublicError extends Exception implements \JsonSerializable {
      */
     public function setCode($code): void
     {
-        $this->_code = $code;
+        $this->code = $code;
     }
 
     /**
@@ -53,7 +53,7 @@ class PublicError extends Exception implements \JsonSerializable {
      */
     public function setMessage($message): void
     {
-        $this->_message = $message;
+        $this->message = $message;
     }
 
 }

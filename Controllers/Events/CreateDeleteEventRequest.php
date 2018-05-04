@@ -99,7 +99,7 @@ class CreateDeleteEventRequest
             }
         }
         else {
-            if($event->_is_authorized){
+            if($event->is_authorized){
                 throw new PublicError("This event does'nt seem to exist anymore.", ErrorCode::EVENT_DOESNT_EXIST_ANYMORE);
             }else {
                 throw new PublicError("The creator of this event isn't your friend or this event isn't public. You can't ask to come.", ErrorCode::EVENT_IMPOSSIBLE_OPERATION);
