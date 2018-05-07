@@ -93,7 +93,7 @@ CREATE TABLE public.chat_rooms (
     chat_room_id integer NOT NULL,
     event_id integer,
     name character varying(100) NOT NULL,
-    creation_datetime timestamp(0) without time zone NOT NULL
+    creation_datetime timestamp(0) with time zone NOT NULL
 );
 
 
@@ -130,7 +130,7 @@ CREATE TABLE public.errors (
     user_id integer,
     message text,
     code integer,
-    datetime timestamp(0) without time zone NOT NULL
+    datetime timestamp(0) with time zone NOT NULL
 );
 
 
@@ -171,11 +171,11 @@ CREATE TABLE public.events (
     public boolean DEFAULT false NOT NULL,
     latitude real,
     longitude real,
-    start_time timestamp(0) without time zone NOT NULL,
-    end_time timestamp(0) without time zone,
+    start_time timestamp(0) with time zone NOT NULL,
+    end_time timestamp(0) with time zone,
     information text,
     picture_url character varying(500),
-    creation_datetime timestamp(0) without time zone NOT NULL,
+    creation_datetime timestamp(0) with time zone NOT NULL,
     with_localisation boolean NOT NULL
 );
 
@@ -216,7 +216,7 @@ CREATE TABLE public.events_member_details (
     friend_longitude real,
     response integer,
     creator boolean,
-    datetime timestamp(0) without time zone NOT NULL
+    datetime timestamp(0) with time zone NOT NULL
 );
 
 
@@ -253,7 +253,7 @@ CREATE TABLE public.events_requests (
     event_id integer NOT NULL,
     friend_id integer NOT NULL,
     response integer DEFAULT 0 NOT NULL,
-    creation_datetime timestamp(0) without time zone NOT NULL
+    creation_datetime timestamp(0) with time zone NOT NULL
 );
 
 
@@ -352,7 +352,7 @@ CREATE TABLE public.google_places (
     day_6_open integer,
     day_6_close integer,
     day_6_invert integer DEFAULT 0 NOT NULL,
-    creation_datetime timestamp(0) without time zone NOT NULL,
+    creation_datetime timestamp(0) with time zone NOT NULL,
     json text,
     review double precision NOT NULL
 );
@@ -461,7 +461,7 @@ CREATE TABLE public.hack_attempts (
     ip character varying(20) NOT NULL,
     request character varying(250) NOT NULL,
     key_app_intented character varying(250),
-    creation_datetime timestamp(0) without time zone NOT NULL
+    creation_datetime timestamp(0) with time zone NOT NULL
 );
 
 
@@ -498,7 +498,7 @@ CREATE TABLE public.logs (
     user_id integer,
     operation character varying(100) NOT NULL,
     ip character varying(15),
-    datetime timestamp(0) without time zone NOT NULL
+    datetime timestamp(0) with time zone NOT NULL
 );
 
 
@@ -535,7 +535,7 @@ CREATE TABLE public.members (
     key_app character varying(100) NOT NULL,
     fb_access_token character varying(250) NOT NULL,
     fb_user_id character varying(250) NOT NULL,
-    expire timestamp(0) without time zone NOT NULL,
+    expire timestamp(0) with time zone NOT NULL,
     name character varying(200),
     first_name character varying(200),
     last_name character varying(200),
@@ -544,12 +544,12 @@ CREATE TABLE public.members (
     longitude real,
     last_latitude real,
     last_longitude real,
-    unavailable timestamp(0) without time zone,
+    unavailable timestamp(0) with time zone,
     gcm_registration_id text,
-    location_last_check_up timestamp(0) without time zone,
-    creation_datetime timestamp(0) without time zone NOT NULL,
-    last_add_events timestamp(0) without time zone,
-    last_add_events_google timestamp(0) without time zone
+    location_last_check_up timestamp(0) with time zone,
+    creation_datetime timestamp(0) with time zone NOT NULL,
+    last_add_events timestamp(0) with time zone,
+    last_add_events_google timestamp(0) with time zone
 );
 
 
@@ -586,7 +586,7 @@ CREATE TABLE public.messages (
     user_id integer NOT NULL,
     chat_room_id integer NOT NULL,
     message text NOT NULL,
-    creation_datetime timestamp(0) without time zone NOT NULL
+    creation_datetime timestamp(0) with time zone NOT NULL
 );
 
 
@@ -708,8 +708,8 @@ CREATE TABLE public.public_events (
     cover text,
     picture text,
     description text,
-    start_time timestamp(0) without time zone NOT NULL,
-    end_time timestamp(0) without time zone NOT NULL,
+    start_time timestamp(0) with time zone NOT NULL,
+    end_time timestamp(0) with time zone NOT NULL,
     attending_count integer,
     declined_count integer,
     maybe_count integer,
@@ -719,7 +719,7 @@ CREATE TABLE public.public_events (
     ticketing_terms_uri text,
     ticketing_privacy_uri text,
     is_draft boolean,
-    creation_datetime timestamp(0) without time zone NOT NULL
+    creation_datetime timestamp(0) with time zone NOT NULL
 );
 
 
@@ -766,7 +766,7 @@ CREATE TABLE public.researchable_events (
     end_time time without time zone NOT NULL,
     repeat boolean DEFAULT false NOT NULL,
     repeat_type character varying(20) DEFAULT 'false'::character varying,
-    creation_datetime timestamp(0) without time zone NOT NULL
+    creation_datetime timestamp(0) with time zone NOT NULL
 );
 
 
