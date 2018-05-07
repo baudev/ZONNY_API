@@ -256,7 +256,7 @@ class User implements \JsonSerializable
     public function needUpdateLocalisation():bool {
         // calcule la différence entre le datetime actuel et celui de la dernière localisation
         $current = new \DateTime();
-        $last_localisation = \DateTime::createFromFormat('Y-m-d H:i:s', $this->getLocationLastCheckUp());
+        $last_localisation = $this->getLocationLastCheckUp();
         $diff = $current->getTimestamp() - $last_localisation->getTimestamp();
         if($diff->s>NUMBER_SECONDS_MUST_RESEND_LOCATION){
             return true;
@@ -272,7 +272,7 @@ class User implements \JsonSerializable
     public function isUnavailable(){
         if(!empty($this->getUnavailable())) {
             $current = new \DateTime();
-            $unavailable = \DateTime::createFromFormat('Y-m-d H:i:s', $this->getUnavailable());
+            $unavailable = $this->getUnavailable();
             $diff = $unavailable->getTimestamp() - $current->getTimestamp();
             if($diff>0){
                 return true;
@@ -354,7 +354,7 @@ class User implements \JsonSerializable
             return true;
         }
         $current_date = new \DateTime();
-        $last_google_datetime = \DateTime::createFromFormat('Y-m-d H:i:s', $this->getLastAddEventsGoogle());
+        $last_google_datetime = $this->getLastAddEventsGoogle();
         if($current_date->getTimestamp() - $last_google_datetime->getTimestamp() > MIN_INTERVAL_GOOGLE_PLACES_RESEARCH){
             return true;
         }
@@ -453,7 +453,7 @@ class User implements \JsonSerializable
      */
     public function getExpire()
     {
-        return $this->expire;
+        return $this->expire!=null ? new DatetimeISO8601($this->expire): null;
     }
 
     /**
@@ -661,7 +661,7 @@ class User implements \JsonSerializable
      */
     public function getLocationLastCheckUp()
     {
-        return $this->location_last_check_up??null;
+        return $this->location_last_check_up!=null ? new DatetimeISO8601($this->location_last_check_up): null;
     }
 
     /**
@@ -701,7 +701,7 @@ class User implements \JsonSerializable
      */
     public function getCreationDatetime()
     {
-        return $this->creation_datetime??null;
+        return $this->creation_datetime!=null ? new DatetimeISO8601($this->creation_datetime): null;
     }
 
     /**
@@ -721,7 +721,7 @@ class User implements \JsonSerializable
      */
     public function getLastAddEvents()
     {
-        return $this->last_add_events??null;
+        return $this->last_add_events!=null ? new DatetimeISO8601($this->last_add_events): null;
     }
 
     /**
@@ -741,7 +741,7 @@ class User implements \JsonSerializable
      */
     public function getLastAddEventsGoogle()
     {
-        return $this->last_add_events_google??null;
+        return $this->last_add_events_google!=null ? new DatetimeISO8601($this->last_add_events_google): null;
     }
 
     /**

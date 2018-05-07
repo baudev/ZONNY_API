@@ -6,6 +6,7 @@ use ZONNY\Models\Accounts\FriendLink;
 use ZONNY\Models\Accounts\User;
 use ZONNY\Utils\Application;
 use ZONNY\Utils\Database;
+use ZONNY\Utils\DatetimeISO8601;
 use ZONNY\Utils\ErrorCode;
 use ZONNY\Utils\Functions;
 use ZONNY\Utils\PublicError;
@@ -461,7 +462,7 @@ class Event implements \JsonSerializable
 
     public function isOver():bool{
         $current_datetime = new \DateTime();
-        $end_time_datetime = \DateTime::createFromFormat('Y-m-d H:i:s', $this->getEndTime());
+        $end_time_datetime = $this->getEndTime();
         if(($end_time_datetime->getTimestamp() - $current_datetime->getTimestamp()) < 0){
             return true;
         }
@@ -635,7 +636,7 @@ class Event implements \JsonSerializable
      */
     public function getStartTime()
     {
-        return $this->start_time;
+        return $this->start_time!=null ? new DatetimeISO8601($this->start_time): null;
     }
 
     /**
@@ -655,7 +656,7 @@ class Event implements \JsonSerializable
      */
     public function getEndTime()
     {
-        return $this->end_time;
+        return $this->end_time!=null ? new DatetimeISO8601($this->end_time): null;
     }
 
     /**
@@ -712,8 +713,8 @@ class Event implements \JsonSerializable
     public function getPercentageRemaining()
     {
         $current_datetime = new \DateTime();
-        $start_datetime = \DateTime::createFromFormat('Y-m-d H:i:s', $this->getStartTime());
-        $end_datetime = \DateTime::createFromFormat('Y-m-d H:i:s', $this->getEndTime());
+        $start_datetime = $this->getStartTime();
+        $end_datetime = $this->getEndTime();
         if ($current_datetime <= $start_datetime) {
             $pourcentage = 100;
         } elseif ($current_datetime >= $end_datetime) {
@@ -750,7 +751,7 @@ class Event implements \JsonSerializable
      */
     public function getCreationDatetime()
     {
-        return $this->creation_datetime;
+        return $this->creation_datetime!=null ? new DatetimeISO8601($this->creation_datetime): null;
     }
 
     /**

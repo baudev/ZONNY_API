@@ -9,6 +9,7 @@ use SKAgarwal\GoogleApi\PlacesApi;
 use ZONNY\Models\Accounts\User;
 use ZONNY\Utils\Application;
 use ZONNY\Utils\Database;
+use ZONNY\Utils\DatetimeISO8601;
 use ZONNY\Utils\ErrorCode;
 use ZONNY\Utils\PrivateError;
 
@@ -318,8 +319,8 @@ class GooglePlaces implements \JsonSerializable
         }
         // on ajoute les horaires et le pourcentage restant
         $this->get_current_opening_hours();
-        $array['start_time'] = $this->start_time;
-        $array['end_time'] = $this->end_time;
+        $array['start_time'] = new DatetimeISO8601($this->start_time);
+        $array['end_time'] = new DatetimeISO8601($this->end_time);
         $array['pourcentage_remaining'] = $this->percentage_remaining;
         return $array;
     }
@@ -373,7 +374,7 @@ class GooglePlaces implements \JsonSerializable
         }
         if($this->end_time!=null) {
             $current_datetime = new \DateTime();
-            $end_time_datetime = \DateTime::createFromFormat('Y-m-d H:i:s', $this->end_time);
+            $end_time_datetime = new DatetimeISO8601($this->end_time);
             if (($end_time_datetime->getTimestamp() - $current_datetime->getTimestamp()) < 0) {
                 return true;
             } else {

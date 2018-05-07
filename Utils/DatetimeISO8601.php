@@ -2,18 +2,18 @@
 namespace ZONNY\Utils;
 
 
-class DatetimeISO8601 implements \JsonSerializable
+use DateTime;
+use DateTimeZone;
+
+class DatetimeISO8601 extends DateTime implements \JsonSerializable
 {
 
     private $datetime;
 
-    /**
-     * DatetimeISO8601 constructor.
-     * @param $datetime
-     */
-    public function __construct($datetime)
+    public function __construct(string $time = 'now', DateTimeZone $timezone = null)
     {
-        $this->datetime = $datetime;
+        parent::__construct($time, $timezone);
+        $this->datetime = $time;
     }
 
     /**
@@ -36,7 +36,6 @@ class DatetimeISO8601 implements \JsonSerializable
     {
         return $this->getDatetime();
     }
-
 
     /**
      * Specify data which should be serialized to JSON

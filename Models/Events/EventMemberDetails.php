@@ -2,6 +2,7 @@
 namespace ZONNY\Models\Events;
 
 use ZONNY\Utils\Database;
+use ZONNY\Utils\DatetimeISO8601;
 use ZONNY\Utils\ErrorCode;
 use ZONNY\Utils\PublicError;
 
@@ -372,7 +373,7 @@ class EventMemberDetails implements \JsonSerializable
      */
     public function getDatetime()
     {
-        return $this->datetime??null;
+        return $this->datetime!=null ? new DatetimeISO8601($this->datetime): null;
     }
 
     /**

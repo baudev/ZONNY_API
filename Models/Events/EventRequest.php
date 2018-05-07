@@ -3,6 +3,7 @@ namespace ZONNY\Models\Events;
 
 use ZONNY\Models\Accounts\Friend;
 use ZONNY\Utils\Database;
+use ZONNY\Utils\DatetimeISO8601;
 use ZONNY\Utils\ErrorCode;
 use ZONNY\Utils\PublicError;
 
@@ -333,7 +334,7 @@ class EventRequest implements \JsonSerializable
      */
     public function getCreationDatetime()
     {
-        return $this->creation_datetime;
+        return $this->creation_datetime!=null ? new DatetimeISO8601($this->creation_datetime): null;
     }
 
     /**
