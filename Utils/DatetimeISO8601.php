@@ -19,7 +19,7 @@ class DatetimeISO8601 implements \JsonSerializable
     /**
      * @return mixed
      */
-    public function getDatetime()
+    public function getDatetime(): String
     {
         return $this->datetime;
     }
@@ -30,6 +30,11 @@ class DatetimeISO8601 implements \JsonSerializable
     public function setDatetime($datetime): void
     {
         $this->datetime = $datetime;
+    }
+
+    public function __toString()
+    {
+        return $this->getDatetime();
     }
 
 
