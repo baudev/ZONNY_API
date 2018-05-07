@@ -50,7 +50,7 @@ class Unavailable
      */
     public function setUnavailable($datetime)
     {
-        Application::check_variables($datetime, true, true, "^^([2][01]|[1][6-9])\d{2}\-([0]\d|[1][0-2])\-([0-2]\d|[3][0-1])(\s([0-1]\d|[2][0-3])(\:[0-5]\d){1,2})?$$", "Dtetime invalid format.", ErrorCode::INVALID_DATETIME);
+        Application::check_variables($datetime, true, true, "^^([\+-]?\d{4}(?!\d{2}\b))((-?)((0[1-9]|1[0-2])(\3([12]\d|0[1-9]|3[01]))?|W([0-4]\d|5[0-2])(-?[1-7])?|(00[1-9]|0[1-9]\d|[12]\d{2}|3([0-5]\d|6[1-6])))([T\s]((([01]\d|2[0-3])((:?)[0-5]\d)?|24\:?00)([\.,]\d+(?!:))?)?(\17[0-5]\d([\.,]\d+)?)?([zZ]|([\+-])([01]\d|2[0-3]):?([0-5]\d)?)?)?)?$$", "Dtetime invalid format.", ErrorCode::INVALID_DATETIME);
         // on vérifie que la date est postérieure à la date actuelle
         $current_datetime = new \DateTime();
         $unavailable_datetime = \DateTime::createFromFormat('Y-m-d H:i:s', $datetime);

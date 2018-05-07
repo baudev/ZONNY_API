@@ -67,7 +67,7 @@ class UserTest extends TestCase
         $this->assertRegExp('#\w{100}#', $new_user->getKeyApp());
         $this->assertEquals("TEST", $new_user->getFbAccessToken());
         $this->assertEquals("UNIT", $new_user->getFbUserId());
-        $this->assertEquals("2020-02-01 00:00:00", $new_user->getExpire());
+        $this->assertEquals("2020-02-01 00:00:00+01", $new_user->getExpire());
         $this->assertEquals("PRENOM NOM", $new_user->getName());
         $this->assertEquals("PRENOM", $new_user->getFirstName());
         $this->assertEquals("NOM", $new_user->getLastName());
@@ -80,7 +80,7 @@ class UserTest extends TestCase
         $this->assertEquals("2040-03-01 12:12:12", $new_user->getUnavailable());
         $this->assertEquals("cG0vXW_JWZ8:APA91bFV58NILulQFs_mJLkQMKpdfS_hs5GhASDGqApyYi86KB4BZIUziXYcBJ_q1qcJeuBEoJzDfz5AmpZgDssp0D4kc-o5gbJe-tYhDHbT_fbBr1uHkFIM8-rxrkfzqXosQc0ox9lx", $new_user->getGcmRegistrationId());
         $this->assertEquals("2010-05-03 10:10:10", $new_user->getLocationLastCheckUp());
-        $this->assertRegExp('#^([2][01]|[1][6-9])\d{2}\-([0]\d|[1][0-2])\-([0-2]\d|[3][0-1])(\s([0-1]\d|[2][0-3])(\:[0-5]\d){1,2})?$#', $new_user->getCreationDatetime());
+        $this->assertRegExp('#^([\+-]?\d{4}(?!\d{2}\b))((-?)((0[1-9]|1[0-2])(\3([12]\d|0[1-9]|3[01]))?|W([0-4]\d|5[0-2])(-?[1-7])?|(00[1-9]|0[1-9]\d|[12]\d{2}|3([0-5]\d|6[1-6])))([T\s]((([01]\d|2[0-3])((:?)[0-5]\d)?|24\:?00)([\.,]\d+(?!:))?)?(\17[0-5]\d([\.,]\d+)?)?([zZ]|([\+-])([01]\d|2[0-3]):?([0-5]\d)?)?)?)?$#', $new_user->getCreationDatetime());
         $this->assertEquals("2011-03-05 06:00:00", $new_user->getLastAddEvents());
         $this->assertEquals("2013-05-01 06:05:00", $new_user->getLastAddEventsGoogle());
 
@@ -139,7 +139,7 @@ class UserTest extends TestCase
         $this->assertRegExp('#\w{100}#', $user->getKeyApp());
         $this->assertEquals("TEST2", $user->getFbAccessToken());
         $this->assertEquals("UNIT2", $user->getFbUserId());
-        $this->assertEquals("2020-02-01 00:00:02", $user->getExpire());
+        $this->assertEquals("2020-02-01 00:00:02+01", $user->getExpire());
         $this->assertEquals("PRENOM NOM2", $user->getName());
         $this->assertEquals("PRENOM2", $user->getFirstName());
         $this->assertEquals("NOM2", $user->getLastName());

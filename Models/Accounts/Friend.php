@@ -141,7 +141,7 @@ class Friend extends User implements \JsonSerializable
     public function is_location_valid():bool {
         // vérifie que la localisation de l'utilisateur est récente
         $current = new \DateTime();
-        $last_location_datetime = \DateTime::createFromFormat('Y-m-d H:i:s', $this->getLocationLastCheckUp());
+        $last_location_datetime = $this->getLocationLastCheckUp();
         $diff = $current->getTimestamp() - $last_location_datetime->getTimestamp();
         if($diff>NUMBER_SECONDS_LOCATION_IS_NO_MORE_VALID){
             return false;
