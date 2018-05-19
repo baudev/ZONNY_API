@@ -90,17 +90,14 @@ class Application
      * @param $response
      */
     public static function response(int $status_code, $response){
-        ob_end_clean();
-        ob_end_flush();
-        header("Connection: close");
-        new HttpStatusCode($status_code);
-        header('Content-type: application/json; charset=utf-8');
-        ignore_user_abort();
+        ignore_user_abort(true);
         ob_start();
+        header('Content-type: application/json; charset=utf-8');
+        new HttpStatusCode($status_code);
         echo json_encode($response);
-        $size = ob_get_length();
-        header("Content-Length: $size");
+        header('Connection: close');
         ob_end_flush();
+        ob_flush();
         flush();
         session_write_close();
     }
