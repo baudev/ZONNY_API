@@ -78,7 +78,7 @@ class UserTest extends TestCase
         $this->assertRegExp('#2\.2#', number_format($new_user->getLongitude(),2,'.',''));
         $this->assertEquals(48.859, $new_user->getLastLatitude());
         $this->assertEquals(2.28559, $new_user->getLastLongitude());
-        $this->assertEquals("2040-03-01 12:12:12", $new_user->getUnavailable());
+        $this->assertEquals(new DatetimeISO8601("2040-03-01 12:12:12"), $new_user->getUnavailable());
         $this->assertEquals("cG0vXW_JWZ8:APA91bFV58NILulQFs_mJLkQMKpdfS_hs5GhASDGqApyYi86KB4BZIUziXYcBJ_q1qcJeuBEoJzDfz5AmpZgDssp0D4kc-o5gbJe-tYhDHbT_fbBr1uHkFIM8-rxrkfzqXosQc0ox9lx", $new_user->getGcmRegistrationId());
         $this->assertEquals(new DatetimeISO8601("2010-05-03 10:10:10"), $new_user->getLocationLastCheckUp());
         $this->assertEquals(new DatetimeISO8601("2011-03-05 06:00:00"), $new_user->getLastAddEvents());
@@ -149,7 +149,8 @@ class UserTest extends TestCase
         $this->assertRegExp('#2\.22#', number_format($user->getLongitude(),2,'.',''));
         $this->assertEquals(48.852, $user->getLastLatitude());
         $this->assertEquals(2.28552, $user->getLastLongitude());
-        $this->assertEquals("2040-03-01 12:12:13", $user->getUnavailable());
+        echo $user->getUnavailable();
+        $this->assertEquals(new DatetimeISO8601("2040-03-01 12:12:13"), $user->getUnavailable());
         $this->assertEquals("cG0vXW_JWZ8:APA91bFV58NILulQFs_mJLkQMKpdfS_hs5GhASDGqApyYi86KB4BZIUziXYcBJ_q1qcJeuBEoJzDfz5AmpZgDssp0D4kc-o5gbJe-tYhDHbT_fbBr1uHkFIM8-rxrkfzqXosQc0ox9l2", $user->getGcmRegistrationId());
         $this->assertEquals(new DatetimeISO8601("2010-05-03 10:10:12"), $user->getLocationLastCheckUp());
         $this->assertEquals(new DatetimeISO8601("2011-03-05 06:00:02"), $user->getLastAddEvents());

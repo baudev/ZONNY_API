@@ -641,7 +641,7 @@ class User implements \JsonSerializable
      */
     public function getUnavailable()
     {
-        return $this->unavailable??null;
+        return $this->unavailable!=null ? new DatetimeISO8601($this->unavailable): null;
     }
 
     /**
