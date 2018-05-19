@@ -9,7 +9,7 @@ set -xe
 apt-get update && apt-get install -y \
         libmcrypt-dev \
     && docker-php-ext-install -j$(nproc) iconv mcrypt
-apt-get install curl
+//apt-get install curl
 apt-get install git -yqq
 
 # Install phpunit, the tool that we will use for testing
