@@ -8,33 +8,9 @@ use DateTimeZone;
 class DatetimeISO8601 extends DateTime implements \JsonSerializable
 {
 
-    private $datetime;
-
-    public function __construct(string $time = 'now', DateTimeZone $timezone = null)
-    {
-        parent::__construct($time, $timezone);
-        $this->datetime = $time;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getDatetime(): String
-    {
-        return $this->datetime;
-    }
-
-    /**
-     * @param mixed $datetime
-     */
-    public function setDatetime($datetime): void
-    {
-        $this->datetime = $datetime;
-    }
-
     public function __toString()
     {
-        return $this->getDatetime();
+        return $this->format("Y-m-d H:i:se");
     }
 
     /**
@@ -46,6 +22,6 @@ class DatetimeISO8601 extends DateTime implements \JsonSerializable
      */
     public function jsonSerialize()
     {
-        return \DateTime::createFromFormat("Y-m-d H:i:se", $this->getDatetime())->format(\DateTime::ISO8601);
+        return $this->format("Y-m-d H:i:se");
     }
 }
