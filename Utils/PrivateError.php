@@ -12,8 +12,8 @@ use ZONNY\Models\Accounts\User;
 class PrivateError extends Exception implements \JsonSerializable
 {
 
-    private $code;
-    private $message;
+    protected $code;
+    protected $message;
 
     public function __construct($message, $code = 0, Exception $previous = null)
     {

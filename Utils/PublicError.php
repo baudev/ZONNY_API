@@ -19,14 +19,14 @@ class PublicError extends Exception implements \JsonSerializable {
      *     example=16
      * )
      */
-    private $code;
+    protected $code;
     /**
      * @var string
      * @SWG\Property(
      *     example="Invalid key_app"
      * )
      */
-    private $message;
+    protected $message;
 
     public function __construct($message, $code = 0, Exception $previous = null)
     {
