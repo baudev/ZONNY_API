@@ -1,11 +1,11 @@
-<?php
+﻿<?php
 /**
  *  configuration de la base des donnée PostgreSQL
  *  configuration pour le CI de GitLab
  */
 define('DB_USERNAME_POSTGRE', 'postgres');
-define('DB_PASSWORD_POSTGRE', 'root');
-define('DB_HOST_POSTGRE', 'localhost');
+define('DB_PASSWORD_POSTGRE', '');
+define('DB_HOST_POSTGRE', 'mdillon__postgis');
 define('DB_NAME_POSTGRE', 'zonny');
 
 /**
