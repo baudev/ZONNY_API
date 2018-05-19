@@ -10,7 +10,7 @@ class DatetimeISO8601 extends DateTime implements \JsonSerializable
 
     public function __toString()
     {
-        return $this->format("Y-m-d H:i:se");
+        return $this->format(DateTime::ISO8601);
     }
 
     /**
@@ -22,6 +22,6 @@ class DatetimeISO8601 extends DateTime implements \JsonSerializable
      */
     public function jsonSerialize()
     {
-        return $this->format("Y-m-d H:i:se");
+        return $this->format(Datetime::ISO8601);
     }
 }
