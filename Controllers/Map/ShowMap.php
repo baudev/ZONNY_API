@@ -4,7 +4,6 @@ namespace ZONNY\Controllers\Map;
 use ZONNY\Models\Accounts\Friend;
 use ZONNY\Models\Accounts\FriendLink;
 use ZONNY\Models\Events\Event;
-use ZONNY\Models\GooglePlaces\GooglePlaces;
 use ZONNY\Utils\Application;
 
 class ShowMap implements \JsonSerializable
@@ -76,17 +75,8 @@ class ShowMap implements \JsonSerializable
         }
         // on recupère tous les évènements en cours
         $array_events = Event::getAllCurrentsEvents();
-        // on recupère tous les lieux publics à proximité
-        // TODO LA LIMITE N EST PAS CELLE QUI SERA AFFICHEE CAR ON FILTRE SI LE LIEU EST OUVERT OU NON
-        foreach (GooglePlaces::getNearPlaces(5) as $google_place){
-            // on vérifie que le lieu est ouvert
-            if(!$google_place->isOver()){
-                $array_public_places[] = $google_place;
-            }
-        }
         $response["friends"] = $array_friends;
         $response["events"] = $array_events;
-        $response["public_places"] = $array_public_places;
         return $response;
     }
 }
