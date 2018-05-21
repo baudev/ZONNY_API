@@ -3,7 +3,6 @@ image: php:7.1.16-fpm
 
 before_script:
 - bash docker_install.sh > /dev/null
-- apt-get install zip unzip
 - php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
 - php composer-setup.php
 - php -r "unlink('composer-setup.php');"
@@ -22,12 +21,11 @@ variables:
   POSTGRES_PASSWORD: ""
   DATABASE_URL: "postgres://postgres:@mdillon__postgis/zonny"
 
-# We test PHP7 with PostgreSQL, but we allow it to fail
+# We test PHP7 with PostgreSQL
 test:app:
   stage: test
   only:
     - tags
   script:
-  # official way to provide password to psql: http://www.postgresql.org/docs/9.3/static/libpq-envars.html
   - phpunit --no-configuration /builds/baudev/ZONNY_API/UnitTest --teamcity --testdox
   allow_failure: false
