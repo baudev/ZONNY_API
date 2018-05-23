@@ -2,7 +2,7 @@
 
 namespace ZONNY\Controllers\Events;
 
-use ZONNY\Models\Accounts\Friend;
+use ZONNY\Models\Account\Friend;
 use ZONNY\Models\Events\Event;
 use ZONNY\Models\Events\EventMemberDetails;
 use ZONNY\Models\Push\PushNotification;

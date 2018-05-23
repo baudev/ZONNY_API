@@ -2,7 +2,7 @@
 namespace ZONNY\Controllers\Events;
 
 use ZONNY\Models\Events\Event;
-use ZONNY\Models\Accounts\User;
+use ZONNY\Models\Account\User;
 use ZONNY\Utils\Application;
 use ZONNY\Utils\ErrorCode;
 

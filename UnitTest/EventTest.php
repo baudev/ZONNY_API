@@ -1,7 +1,7 @@
 <?php
 namespace ZONNY\UnitTest;
 
-use ZONNY\Models\Accounts\User;
+use ZONNY\Models\Account\User;
 use ZONNY\Models\Events\Event;
 use PHPUnit\Framework\TestCase;
 use ZONNY\Models\Events\EventMemberDetails;

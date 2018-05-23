@@ -5,7 +5,7 @@ namespace ZONNY\Controllers\Accounts;
 use Slim\Route;
 use Slim\Slim;
 use ZONNY\Utils\Application;
-use ZONNY\Models\Accounts\User;
+use ZONNY\Models\Account\User;
 use ZONNY\Utils\ErrorCode;
 use ZONNY\Utils\HackAttempts;
 use ZONNY\Utils\Log;

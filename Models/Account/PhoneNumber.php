@@ -3,40 +3,39 @@
  * Created by PhpStorm.
  * User: Baudev
  * Date: 23/05/2018
- * Time: 13:41
+ * Time: 13:40
  */
 
-namespace ZONNY\Models\Accounts;
-
+namespace ZONNY\Models\Account;
 
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Class Suscriptions
+ * Class PhoneNumber
  * @package ZONNY\Models\Accounts
  * @ORM\Entity
- * @ORM\Table(name="suscriptions")
+ * @ORM\Table(name="phone_numbers")
  */
-class Suscription
+class PhoneNumber
 {
 
     /**
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      * @ORM\Column(type="integer")
-     */private $id;
+     */
+    private $id;
     /**
      * @ORM\Column(type="integer")
      */
     private $userId;
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="string", length=30)
      */
-    private $followedId;
+    private $phoneNumbers;
     /**
      * @ORM\Column(type="datetimetz")
      */
     private $creationDatetime;
-
 
 }

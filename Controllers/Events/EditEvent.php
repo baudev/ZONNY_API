@@ -3,8 +3,8 @@ namespace ZONNY\Controllers\Events;
 
 use ZONNY\Models\Events\Event;
 use ZONNY\Models\Events\EventMemberDetails;
-use ZONNY\Models\Accounts\Friend;
-use ZONNY\Models\Accounts\FriendLink;
+use ZONNY\Models\Account\Friend;
+use ZONNY\Models\Account\FriendLink;
 use ZONNY\Models\Push\PushNotification;
 use ZONNY\Utils\Application;
 use ZONNY\Utils\ErrorCode;
@@ -165,43 +165,43 @@ class EditEvent implements \JsonSerializable
         if(!empty($start_time) && !empty($end_time)){
             $diff = $start_time_datetime->getTimestamp() - $current_datetime->getTimestamp();
             if ($diff > MAX_START_EVENT_INTERVAL) {
-                throw new PublicError("Events must start in the next 24h.", ErrorCode::EVENT_START_NEXT_24H);
+                throw new PublicError("Event must start in the next 24h.", ErrorCode::EVENT_START_NEXT_24H);
             }
             $diff = $end_time_datetime->getTimestamp() - $start_time_datetime->getTimestamp();
             if ($diff > MAX_EVENT_DURATION) {
-                throw new PublicError("Events duration can be only 24max.", ErrorCode::EVENT_DURATION_24H_MAX);
+                throw new PublicError("Event duration can be only 24max.", ErrorCode::EVENT_DURATION_24H_MAX);
             }
             if ($diff < MIN_EVENT_DURATION) {
-                throw new PublicError("Events duration can't be inferior to 1 minute.", ErrorCode::EVENT_DURATION_LESS_1MINUTE);
+                throw new PublicError("Event duration can't be inferior to 1 minute.", ErrorCode::EVENT_DURATION_LESS_1MINUTE);
             }
         }
         elseif (!empty($end_time) && empty($start_time)){
             $end_time_datetime = \DateTime::createFromFormat('Y-m-d H:i:s', $event->getEndTime());
             $diff = $end_time_datetime->getTimestamp() - $start_time_datetime->getTimestamp();
             if ($diff > MAX_EVENT_DURATION) {
-                throw new PublicError("Events duration can be only 24max.", ErrorCode::EVENT_DURATION_24H_MAX);
+                throw new PublicError("Event duration can be only 24max.", ErrorCode::EVENT_DURATION_24H_MAX);
             }
             if ($diff < MIN_EVENT_DURATION) {
-                throw new PublicError("Events duration can't be inferior to 1 minute.", ErrorCode::EVENT_DURATION_LESS_1MINUTE);
+                throw new PublicError("Event duration can't be inferior to 1 minute.", ErrorCode::EVENT_DURATION_LESS_1MINUTE);
             }
         }
         elseif (empty($end_time) && !empty($start_time)){
             $start_time_datetime = \DateTime::createFromFormat('Y-m-d H:i:s', $event->getStartTime());
             $diff = $end_time_datetime->getTimestamp() - $start_time_datetime->getTimestamp();
             if ($diff > MAX_START_EVENT_INTERVAL) {
-                throw new PublicError("Events must start in the next 24h.", ErrorCode::EVENT_START_NEXT_24H);
+                throw new PublicError("Event must start in the next 24h.", ErrorCode::EVENT_START_NEXT_24H);
             }
             if ($diff > MAX_EVENT_DURATION) {
-                throw new PublicError("Events duration can be only 24max.", ErrorCode::EVENT_DURATION_24H_MAX);
+                throw new PublicError("Event duration can be only 24max.", ErrorCode::EVENT_DURATION_24H_MAX);
             }
             if ($diff < MIN_EVENT_DURATION) {
-                throw new PublicError("Events duration can't be inferior to 1 minute.", ErrorCode::EVENT_DURATION_LESS_1MINUTE);
+                throw new PublicError("Event duration can't be inferior to 1 minute.", ErrorCode::EVENT_DURATION_LESS_1MINUTE);
             }
         }
 
         // on vérifie si l'évènement est terminé ou non
         if($event->isOver()){
-            throw new PublicError("Events has ended. You can't edit it.", ErrorCode::EVENT_HAS_ENDED);
+            throw new PublicError("Event has ended. You can't edit it.", ErrorCode::EVENT_HAS_ENDED);
         }
 
         $event->setName($name);

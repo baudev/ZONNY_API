@@ -2,7 +2,7 @@
 namespace ZONNY\Utils;
 
 
-use ZONNY\Models\Accounts\User;
+use ZONNY\Models\Account\User;
 
 class HackAttempts
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace ZONNY\Models\Accounts;
+namespace ZONNY\Models\Account;
 
 
 use Doctrine\ORM\Mapping as ORM;

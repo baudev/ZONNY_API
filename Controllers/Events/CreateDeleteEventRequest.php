@@ -3,7 +3,7 @@
 namespace ZONNY\Controllers\Events;
 
 
-use ZONNY\Models\Accounts\Friend;
+use ZONNY\Models\Account\Friend;
 use ZONNY\Models\Events\Event;
 use ZONNY\Models\Events\EventMemberDetails;
 use ZONNY\Models\Events\EventRequest;
@@ -90,7 +90,7 @@ class CreateDeleteEventRequest
                     }
                 }
                 else {
-                    throw new PublicError("Events has ended. You can't ask to come.", ErrorCode::EVENT_HAS_ENDED);
+                    throw new PublicError("Event has ended. You can't ask to come.", ErrorCode::EVENT_HAS_ENDED);
                 }
             }
             else {

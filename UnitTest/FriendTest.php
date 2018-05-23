@@ -1,10 +1,10 @@
 <?php
 namespace ZONNY\UnitTest;
 
-use ZONNY\Models\Accounts\Friend;
+use ZONNY\Models\Account\Friend;
 use PHPUnit\Framework\TestCase;
-use ZONNY\Models\Accounts\FriendLink;
-use ZONNY\Models\Accounts\User;
+use ZONNY\Models\Account\FriendLink;
+use ZONNY\Models\Account\User;
 use ZONNY\Utils\Application;
 
 require_once dirname(__FILE__) . '/../vendor/autoload.php';

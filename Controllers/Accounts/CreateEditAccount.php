@@ -3,8 +3,8 @@
 namespace ZONNY\Controllers\Accounts;
 
 
-use ZONNY\Models\Accounts\FacebookUser;
-use ZONNY\Models\Accounts\User;
+use ZONNY\Models\Account\FacebookUser;
+use ZONNY\Models\Account\User;
 use ZONNY\Utils\Application;
 use ZONNY\Utils\ErrorCode;
 use ZONNY\Utils\PrivateError;

@@ -3,42 +3,40 @@
  * Created by PhpStorm.
  * User: Baudev
  * Date: 23/05/2018
- * Time: 13:16
+ * Time: 13:41
  */
 
-namespace ZONNY\Models\Accounts;
+namespace ZONNY\Models\Account;
+
+
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Class InvitationLink
+ * Class Suscriptions
  * @package ZONNY\Models\Accounts
  * @ORM\Entity
- * @ORM\Table(name="invitation_links")
+ * @ORM\Table(name="suscriptions")
  */
-class InvitationLink
+class Suscription
 {
 
     /**
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      * @ORM\Column(type="integer")
-     */
-    private $id;
+     */private $id;
     /**
      * @ORM\Column(type="integer")
      */
     private $userId;
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="integer")
      */
-    private $tokenId;
-    /**
-     * @ORM\Column(type="boolean")
-     */
-    private $used = false;
+    private $followedId;
     /**
      * @ORM\Column(type="datetimetz")
      */
     private $creationDatetime;
+
 
 }

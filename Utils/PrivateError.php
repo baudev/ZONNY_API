@@ -2,7 +2,7 @@
 namespace ZONNY\Utils;
 
 use Exception;
-use ZONNY\Models\Accounts\User;
+use ZONNY\Models\Account\User;
 
 /**
  * Erreurs destinées à l'administrateur

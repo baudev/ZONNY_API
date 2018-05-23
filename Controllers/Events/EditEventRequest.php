@@ -5,7 +5,7 @@ namespace ZONNY\Controllers\Events;
 use ZONNY\Models\Events\Event;
 use ZONNY\Models\Events\EventMemberDetails;
 use ZONNY\Models\Events\EventRequest;
-use ZONNY\Models\Accounts\Friend;
+use ZONNY\Models\Account\Friend;
 use ZONNY\Utils\Application;
 use ZONNY\Utils\ErrorCode;
 use ZONNY\Utils\HackAttempts;

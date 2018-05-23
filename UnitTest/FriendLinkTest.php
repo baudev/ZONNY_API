@@ -2,9 +2,9 @@
 
 namespace ZONNY\UnitTest;
 
-use ZONNY\Models\Accounts\FriendLink;
+use ZONNY\Models\Account\FriendLink;
 use PHPUnit\Framework\TestCase;
-use ZONNY\Models\Accounts\User;
+use ZONNY\Models\Account\User;
 
 require_once dirname(__FILE__) . '/../vendor/autoload.php';
 require_once dirname(__FILE__) . '/../config.php';

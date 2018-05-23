@@ -1,8 +1,8 @@
 <?php
 namespace ZONNY\Controllers\Map;
 
-use ZONNY\Models\Accounts\Friend;
-use ZONNY\Models\Accounts\FriendLink;
+use ZONNY\Models\Account\Friend;
+use ZONNY\Models\Account\FriendLink;
 use ZONNY\Models\Events\Event;
 use ZONNY\Utils\Application;
 

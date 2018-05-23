@@ -3,20 +3,19 @@
  * Created by PhpStorm.
  * User: Baudev
  * Date: 23/05/2018
- * Time: 13:40
+ * Time: 13:16
  */
 
-namespace ZONNY\Models\Accounts;
-
+namespace ZONNY\Models\Account;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Class PhoneNumber
+ * Class InvitationLink
  * @package ZONNY\Models\Accounts
  * @ORM\Entity
- * @ORM\Table(name="phone_numbers")
+ * @ORM\Table(name="invitation_links")
  */
-class PhoneNumber
+class InvitationLink
 {
 
     /**
@@ -30,9 +29,13 @@ class PhoneNumber
      */
     private $userId;
     /**
-     * @ORM\Column(type="string", length=30)
+     * @ORM\Column(type="string", length=255)
      */
-    private $phoneNumbers;
+    private $tokenId;
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $used = false;
     /**
      * @ORM\Column(type="datetimetz")
      */

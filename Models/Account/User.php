@@ -1,5 +1,5 @@
 <?php
-namespace ZONNY\Models\Accounts;
+namespace ZONNY\Models\Account;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\DBAL\Schema\Column;

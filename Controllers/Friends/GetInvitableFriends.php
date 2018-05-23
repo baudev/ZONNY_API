@@ -2,9 +2,9 @@
 
 namespace ZONNY\Controllers\Friends;
 
-use ZONNY\Models\Accounts\Friend;
+use ZONNY\Models\Account\Friend;
 use ZONNY\Models\Events\Event;
-use ZONNY\Models\Accounts\FriendLink;
+use ZONNY\Models\Account\FriendLink;
 use ZONNY\Utils\Application;
 
 class GetInvitableFriends implements \JsonSerializable

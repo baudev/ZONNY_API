@@ -1,7 +1,7 @@
 <?php
 namespace ZONNY\Controllers\Friends;
 
-use ZONNY\Models\Accounts\FriendLink;
+use ZONNY\Models\Account\FriendLink;
 use ZONNY\Utils\Application;
 use ZONNY\Utils\ErrorCode;
 use ZONNY\Utils\PublicError;

@@ -1,6 +1,6 @@
 <?php
 use PHPUnit\Framework\TestCase;
-use ZONNY\Models\Accounts\User;
+use ZONNY\Models\Account\User;
 use ZONNY\Utils\DatetimeISO8601;
 
 require_once dirname(__FILE__) . '/../vendor/autoload.php';
