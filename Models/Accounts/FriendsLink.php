@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: bdelo
- * Date: 22/05/2018
- * Time: 23:14
- */
 
 namespace ZONNY\Models\Accounts;
 
@@ -12,10 +6,12 @@ namespace ZONNY\Models\Accounts;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
+ * Class FriendsLinks
+ * @package ZONNY\Models\Accounts
  * @ORM\Entity
  * @ORM\Table(name="friends_links")
  */
-class FriendsLinks
+class FriendsLink
 {
 
     /**
