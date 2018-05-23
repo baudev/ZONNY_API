@@ -13,7 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Class PendingOperation
  * @package ZONNY\Models\Chat
  * @ORM\Entity
- * @ORM\Table(name="pending_operation")
+ * @ORM\Table(name="pending_operations")
  */
 class PendingOperation
 {
