@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Class User
  * @package ZONNY\Models\Accounts
  * @ORM\Entity()
- * @ORM\Table(name="user")
+ * @ORM\Table(name="users")
  */
 class User implements \JsonSerializable
 {
@@ -132,7 +132,7 @@ class User implements \JsonSerializable
      */
 
     /**
-     * @ORM\OneToMany(targetEntity=FriendsLinks::class, cascade={"persist", "remove"}, mappedBy="user")
+     * @ORM\OneToMany(targetEntity=FriendsLink::class, cascade={"persist", "remove"}, mappedBy="user")
      */
     private $friends_links;
 
@@ -599,9 +599,9 @@ class User implements \JsonSerializable
     }
 
     /**
-     * @param FriendsLinks $friends_link
+     * @param FriendsLink $friends_link
      */
-    public function addFriendsLink(FriendsLinks $friends_link): void
+    public function addFriendsLink(FriendsLink $friends_link): void
     {
         $this->friends_links->add($friends_link);
         $friends_link->setUserId($this);
