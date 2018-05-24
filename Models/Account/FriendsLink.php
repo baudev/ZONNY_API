@@ -22,11 +22,11 @@ class FriendsLink
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="friends_links")
      */
-    private $user;
+    private $user1;
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="friends_links")
      */
-    private $friend;
+    private $user2;
     /**
      * @ORM\Column(type="integer", nullable=true, name="facebook_mutual_friends")
      */
@@ -36,9 +36,13 @@ class FriendsLink
      */
     private $facebookMutualLikes;
     /**
-     * @ORM\Column(type="boolean", name="authorization")
+     * @ORM\Column(type="boolean", name="authorization_user_1")
      */
-    private $authorization = false;
+    private $authorizationUser1 = false;
+    /**
+     * @ORM\Column(type="boolean", name="authorization_user_2")
+     */
+    private $authorizationUser2 = false;
     /**
      * @ORM\Column(type="datetimetz", name="creation_datetime")
      */
@@ -63,33 +67,33 @@ class FriendsLink
     /**
      * @return mixed
      */
-    public function getUser()
+    public function getUser1()
     {
-        return $this->user;
+        return $this->user1;
     }
 
     /**
-     * @param mixed $user
+     * @param mixed $user1
      */
-    public function setUser($user): void
+    public function setUser1($user1): void
     {
-        $this->user = $user;
+        $this->user1 = $user1;
     }
 
     /**
      * @return mixed
      */
-    public function getFriend()
+    public function getUser2()
     {
-        return $this->friend;
+        return $this->user2;
     }
 
     /**
-     * @param mixed $friend
+     * @param mixed $user2
      */
-    public function setFriend($friend): void
+    public function setUser2($user2): void
     {
-        $this->friend = $friend;
+        $this->user2 = $user2;
     }
 
     /**
@@ -127,17 +131,33 @@ class FriendsLink
     /**
      * @return mixed
      */
-    public function getAuthorization()
+    public function getAuthorizationUser1()
     {
-        return $this->authorization;
+        return $this->authorizationUser1;
     }
 
     /**
-     * @param mixed $authorization
+     * @param mixed $authorizationUser1
      */
-    public function setAuthorization($authorization): void
+    public function setAuthorizationUser1($authorizationUser1): void
     {
-        $this->authorization = $authorization;
+        $this->authorizationUser1 = $authorizationUser1;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAuthorizationUser2()
+    {
+        return $this->authorizationUser2;
+    }
+
+    /**
+     * @param mixed $authorizationUser2
+     */
+    public function setAuthorizationUser2($authorizationUser2): void
+    {
+        $this->authorizationUser2 = $authorizationUser2;
     }
 
     /**

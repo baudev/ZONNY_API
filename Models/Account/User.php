@@ -130,20 +130,10 @@ class User implements \JsonSerializable
     /**
      * Foreign keys
      */
-
     /**
-     * @ORM\OneToMany(targetEntity=FriendsLink::class, cascade={"persist", "remove"}, mappedBy="user")
+     * @ORM\OneToMany(targetEntity=FriendsLink::class, cascade={"persist", "remove"}, mappedBy="users")
      */
     private $friends_links;
-
-    /**
-     * User constructor.
-     * @param $friends_links
-     */
-    public function __construct($friends_links)
-    {
-        $this->friends_links = new ArrayCollection();
-    }
 
 
     /**
@@ -596,15 +586,6 @@ class User implements \JsonSerializable
     public function getFriendsLinks()
     {
         return $this->friends_links;
-    }
-
-    /**
-     * @param FriendsLink $friends_link
-     */
-    public function addFriendsLink(FriendsLink $friends_link): void
-    {
-        $this->friends_links->add($friends_link);
-        $friends_link->setUserId($this);
     }
 
 
