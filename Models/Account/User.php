@@ -135,11 +135,16 @@ class User implements \JsonSerializable
      * @ORM\OneToMany(targetEntity=FriendsLink::class, cascade={"persist", "remove"}, mappedBy="users")
      */
     private $friends_links;
+    /**
+     * @ORM\OneToMany(targetEntity=InvitationLink::class, cascade={"persist", "remove"}, mappedBy="users")
+     */
+    private $invitation_links;
 
 
     public function __construct()
     {
         $this->friends_links = new ArrayCollection();
+        $this->invitation_links = new ArrayCollection();
     }
 
     /**
@@ -589,31 +594,64 @@ class User implements \JsonSerializable
     /**
      * @return mixed
      */
-    public function getFriendsLinks(): ?PersistentCollection
+    public function getFriendsLinks(): ?array
     {
-        return $this->friends_links;
+        return $this->friends_links->toArray();
     }
 
     /**
      * @param FriendsLink $friendsLink
+     * @return User
      */
-    public function addFriendsLinks(FriendsLink $friendsLink)
+    public function addFriendsLink(FriendsLink $friendsLink)
     {
-        if($this->friends_links->contains($friendsLink)) {
+        if(!$this->friends_links->contains($friendsLink)) {
             $this->friends_links->add($friendsLink);
         }
+        return $this;
     }
 
     /**
      * @param FriendsLink $friendsLink
+     * @return User
      */
-    public function removeFriendsLinks(FriendsLink $friendsLink){
+    public function removeFriendsLink(FriendsLink $friendsLink){
         if($this->friends_links->contains($friendsLink)){
             $this->friends_links->removeElement($friendsLink);
         }
+        return $this;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getInvitationLinks(): ?array
+    {
+        return $this->invitation_links->toArray();
+    }
 
+    /**
+     * @param InvitationLink $invitation_link
+     * @return User
+     */
+    public function addInvitationLink(InvitationLink $invitation_link)
+    {
+        if(!$this->invitation_links->contains($invitation_link)) {
+            $this->invitation_links->add($invitation_link);
+        }
+        return $this;
+    }
+
+    /**
+     * @param InvitationLink $friendsLink
+     * @return User
+     */
+    public function removeInvitationLink(InvitationLink $friendsLink){
+        if($this->invitation_links->contains($friendsLink)) {
+            $this->invitation_links->removeElement($friendsLink);
+        }
+        return $this;
+    }
 
 
 

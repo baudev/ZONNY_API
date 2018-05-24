@@ -82,10 +82,10 @@ class FriendsLink
     public function setUser1(User $user1 = null)
     {
         if($this->user1 !== null){
-            $this->user1->removeFriendsLinks($this);
+            $this->user1->removeFriendsLink($this);
         }
         if($user1 !== null){
-            $user1->addFriendsLinks($this);
+            $user1->addFriendsLink($this);
         }
 
         $this->user1 = $user1;
@@ -107,7 +107,7 @@ class FriendsLink
     public function setUser2($user2)
     {
         if($this->user2 !== null){
-            $this->user2->removeFriendsLinks($this);
+            $this->user2->removeFriendsLink($this);
         }
         if($user2 !== null){
             $user2->addFriendsLinks($this);
