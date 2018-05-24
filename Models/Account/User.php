@@ -143,6 +143,10 @@ class User implements \JsonSerializable
      * @ORM\OneToMany(targetEntity=PhoneNumber::class, cascade={"persist", "remove"}, mappedBy="users")
      */
     private $phoneNumbers;
+    /**
+     * @ORM\OneToMany(targetEntity=Subscription::class, cascade={"persist", "remove"}, mappedBy="users")
+     */
+    private $subscriptions;
 
 
     public function __construct()
@@ -150,6 +154,7 @@ class User implements \JsonSerializable
         $this->friendsLinks = new ArrayCollection();
         $this->invitationLinks = new ArrayCollection();
         $this->phoneNumbers = new ArrayCollection();
+        $this->subscriptions = new ArrayCollection();
     }
 
     /**
@@ -689,6 +694,36 @@ class User implements \JsonSerializable
         return $this;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getSubscriptions(): ?array
+    {
+        return $this->subscriptions->toArray();
+    }
+
+    /**
+     * @param Subscription $subscription
+     * @return User
+     */
+    public function addSubscription(Subscription $subscription)
+    {
+        if(!$this->subscriptions->contains($subscription)) {
+            $this->subscriptions->add($subscription);
+        }
+        return $this;
+    }
+
+    /**
+     * @param Subscription $subscription
+     * @return User
+     */
+    public function removeSubscription(Subscription $subscription){
+        if($this->subscriptions->contains($subscription)) {
+            $this->subscriptions->removeElement($subscription);
+        }
+        return $this;
+    }
 
 
 }

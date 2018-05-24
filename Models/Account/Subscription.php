@@ -3,19 +3,22 @@
  * Created by PhpStorm.
  * User: Baudev
  * Date: 23/05/2018
- * Time: 13:16
+ * Time: 13:41
  */
 
 namespace ZONNY\Models\Account;
+
+
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\UniqueConstraint;
 
 /**
- * Class InvitationLink
+ * Class Subscriptions
  * @package ZONNY\Models\Accounts
  * @ORM\Entity
- * @ORM\Table(name="invitation_links")
+ * @ORM\Table(name="subscriptions", uniqueConstraints={@UniqueConstraint(name="subscription_unique", columns={"user_id", "followed_id"})})
  */
-class InvitationLink
+class Subscription
 {
 
     /**
@@ -26,17 +29,14 @@ class InvitationLink
     private $id;
     /**
      * @var User $user
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="invitation_links")
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="subscriptions")
      */
     private $user;
     /**
-     * @ORM\Column(type="string", length=255, unique=true)
+     * @var User $followed
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="subscriptions")
      */
-    private $tokenId;
-    /**
-     * @ORM\Column(type="boolean")
-     */
-    private $used = false;
+    private $followed;
     /**
      * @ORM\Column(type="datetimetz", name="creation_datetime")
      */
@@ -59,24 +59,24 @@ class InvitationLink
     }
 
     /**
-     * @return User
+     * @return mixed
      */
-    public function getUser(): User
+    public function getUser()
     {
         return $this->user;
     }
 
     /**
-     * @param User $user
-     * @return InvitationLink
+     * @param mixed $user
+     * @return Subscription
      */
     public function setUser(User $user)
     {
         if($this->user !== null){
-            $this->user->removeInvitationLink($this);
+            $this->user->removeSubscription($this);
         }
         if($user !== null){
-            $user->addInvitationLink($this);
+            $user->addSubscription($this);
         }
 
         $this->user = $user;
@@ -86,33 +86,26 @@ class InvitationLink
     /**
      * @return mixed
      */
-    public function getTokenId()
+    public function getFollowed()
     {
-        return $this->tokenId;
+        return $this->followed;
     }
 
     /**
-     * @param mixed $tokenId
+     * @param mixed $followed
+     * @return Subscription
      */
-    public function setTokenId($tokenId): void
+    public function setFollowed($followed)
     {
-        $this->tokenId = $tokenId;
-    }
+        if($this->followed !== null){
+            $this->followed->removeSubscription($this);
+        }
+        if($followed !== null){
+            $followed->addSubscription($this);
+        }
 
-    /**
-     * @return mixed
-     */
-    public function getUsed()
-    {
-        return $this->used;
-    }
-
-    /**
-     * @param mixed $used
-     */
-    public function setUsed($used): void
-    {
-        $this->used = $used;
+        $this->followed = $followed;
+        return $this;
     }
 
     /**

@@ -27,7 +27,7 @@ class PhoneNumber
     private $id;
     /**
      * @var User $user
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="invitation_links")
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="phone_numbers")
      */
     private $user;
     /**
@@ -35,7 +35,7 @@ class PhoneNumber
      */
     private $phoneNumbers;
     /**
-     * @ORM\Column(type="datetimetz")
+     * @ORM\Column(type="datetimetz", name="creation_datetime")
      */
     private $creationDatetime;
 
