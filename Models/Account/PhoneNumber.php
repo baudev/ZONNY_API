@@ -31,9 +31,9 @@ class PhoneNumber
      */
     private $user;
     /**
-     * @ORM\Column(type="string", length=30, unique=true)
+     * @ORM\Column(type="string", length=30, unique=true, name="phone_number")
      */
-    private $phoneNumbers;
+    private $phoneNumber;
     /**
      * @ORM\Column(type="datetimetz", name="creation_datetime")
      */
@@ -83,17 +83,17 @@ class PhoneNumber
     /**
      * @return mixed
      */
-    public function getPhoneNumbers()
+    public function getPhoneNumber()
     {
-        return $this->phoneNumbers;
+        return $this->phoneNumber;
     }
 
     /**
-     * @param mixed $phoneNumbers
+     * @param mixed $phoneNumber
      */
-    public function setPhoneNumbers($phoneNumbers): void
+    public function setPhoneNumber($phoneNumber): void
     {
-        $this->phoneNumbers = $phoneNumbers;
+        $this->phoneNumber = $phoneNumber;
     }
 
     /**

@@ -30,11 +30,11 @@ class InvitationLink
      */
     private $user;
     /**
-     * @ORM\Column(type="string", length=255, unique=true)
+     * @ORM\Column(type="string", length=255, unique=true, name="token_id")
      */
     private $tokenId;
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", name="used")
      */
     private $used = false;
     /**
