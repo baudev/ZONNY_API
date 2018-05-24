@@ -52,7 +52,7 @@ class User implements \JsonSerializable
      */
     private $gcmRegistrationId;
     /**
-     * @ORM\Column(type="string", length=150, name="key_app")
+     * @ORM\Column(type="string", length=150, name="key_app", unique=true)
      */
     private $keyApp;
     /**
@@ -96,7 +96,7 @@ class User implements \JsonSerializable
      */
     private $facebookAccessToken;
     /**
-     * @ORM\Column(type="bigint", nullable=true, name="facebook_user_id")
+     * @ORM\Column(type="bigint", nullable=true, name="facebook_user_id", unique=true)
      */
     private $facebookUserId;
     /**
@@ -104,7 +104,7 @@ class User implements \JsonSerializable
      */
     private $smsConnection = false;
     /**
-     * @ORM\Column(type="string", length=30, nullable=true, name="phone_number")
+     * @ORM\Column(type="string", length=30, nullable=true, name="phone_number", unique=true)
      */
     private $phoneNumber;
     /**
@@ -112,7 +112,7 @@ class User implements \JsonSerializable
      */
     private $emailConnection = false;
     /**
-     * @ORM\Column(type="string", length=255, nullable=true, name="email")
+     * @ORM\Column(type="string", length=255, nullable=true, name="email", unique=true)
      */
     private $email;
     /**
