@@ -4,12 +4,13 @@ namespace ZONNY\Models\Account;
 
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\UniqueConstraint;
 
 /**
  * Class FriendsLinks
  * @package ZONNY\Models\Accounts
  * @ORM\Entity
- * @ORM\Table(name="friends_links")
+ * @ORM\Table(name="friends_links", uniqueConstraints={@UniqueConstraint(name="friends_link_unique", columns={"user1_id", "user2_id"})})
  */
 class FriendsLink
 {
