@@ -134,17 +134,22 @@ class User implements \JsonSerializable
     /**
      * @ORM\OneToMany(targetEntity=FriendsLink::class, cascade={"persist", "remove"}, mappedBy="users")
      */
-    private $friends_links;
+    private $friendsLinks;
     /**
      * @ORM\OneToMany(targetEntity=InvitationLink::class, cascade={"persist", "remove"}, mappedBy="users")
      */
-    private $invitation_links;
+    private $invitationLinks;
+    /**
+     * @ORM\OneToMany(targetEntity=PhoneNumber::class, cascade={"persist", "remove"}, mappedBy="users")
+     */
+    private $phoneNumbers;
 
 
     public function __construct()
     {
-        $this->friends_links = new ArrayCollection();
-        $this->invitation_links = new ArrayCollection();
+        $this->friendsLinks = new ArrayCollection();
+        $this->invitationLinks = new ArrayCollection();
+        $this->phoneNumbers = new ArrayCollection();
     }
 
     /**
@@ -596,7 +601,7 @@ class User implements \JsonSerializable
      */
     public function getFriendsLinks(): ?array
     {
-        return $this->friends_links->toArray();
+        return $this->friendsLinks->toArray();
     }
 
     /**
@@ -605,8 +610,8 @@ class User implements \JsonSerializable
      */
     public function addFriendsLink(FriendsLink $friendsLink)
     {
-        if(!$this->friends_links->contains($friendsLink)) {
-            $this->friends_links->add($friendsLink);
+        if(!$this->friendsLinks->contains($friendsLink)) {
+            $this->friendsLinks->add($friendsLink);
         }
         return $this;
     }
@@ -616,8 +621,8 @@ class User implements \JsonSerializable
      * @return User
      */
     public function removeFriendsLink(FriendsLink $friendsLink){
-        if($this->friends_links->contains($friendsLink)){
-            $this->friends_links->removeElement($friendsLink);
+        if($this->friendsLinks->contains($friendsLink)){
+            $this->friendsLinks->removeElement($friendsLink);
         }
         return $this;
     }
@@ -627,28 +632,59 @@ class User implements \JsonSerializable
      */
     public function getInvitationLinks(): ?array
     {
-        return $this->invitation_links->toArray();
+        return $this->invitationLinks->toArray();
     }
 
     /**
-     * @param InvitationLink $invitation_link
+     * @param InvitationLink $invitationLink
      * @return User
      */
-    public function addInvitationLink(InvitationLink $invitation_link)
+    public function addInvitationLink(InvitationLink $invitationLink)
     {
-        if(!$this->invitation_links->contains($invitation_link)) {
-            $this->invitation_links->add($invitation_link);
+        if(!$this->invitationLinks->contains($invitationLink)) {
+            $this->invitationLinks->add($invitationLink);
         }
         return $this;
     }
 
     /**
-     * @param InvitationLink $friendsLink
+     * @param InvitationLink $invitationLink
      * @return User
      */
-    public function removeInvitationLink(InvitationLink $friendsLink){
-        if($this->invitation_links->contains($friendsLink)) {
-            $this->invitation_links->removeElement($friendsLink);
+    public function removeInvitationLink(InvitationLink $invitationLink){
+        if($this->invitationLinks->contains($invitationLink)) {
+            $this->invitationLinks->removeElement($invitationLink);
+        }
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPhoneNumbers(): ?array
+    {
+        return $this->phoneNumbers->toArray();
+    }
+
+    /**
+     * @param PhoneNumber $phoneNumber
+     * @return User
+     */
+    public function addPhoneNumber(PhoneNumber $phoneNumber)
+    {
+        if(!$this->phoneNumbers->contains($phoneNumber)) {
+            $this->phoneNumbers->add($phoneNumber);
+        }
+        return $this;
+    }
+
+    /**
+     * @param PhoneNumber $phoneNumber
+     * @return User
+     */
+    public function removePhoneNumber(PhoneNumber $phoneNumber){
+        if($this->phoneNumbers->contains($phoneNumber)) {
+            $this->phoneNumbers->removeElement($phoneNumber);
         }
         return $this;
     }
