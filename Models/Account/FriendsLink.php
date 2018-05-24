@@ -20,10 +20,12 @@ class FriendsLink
      * @ORM\Column(type="integer", name="id")
      */private $id;
     /**
+     * @var User $user1
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="friends_links")
      */
     private $user1;
     /**
+     * @var User $user2
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="friends_links")
      */
     private $user2;
@@ -67,17 +69,26 @@ class FriendsLink
     /**
      * @return mixed
      */
-    public function getUser1()
+    public function getUser1() : ?User
     {
         return $this->user1;
     }
 
     /**
      * @param mixed $user1
+     * @return FriendsLink
      */
-    public function setUser1($user1): void
+    public function setUser1(User $user1 = null)
     {
+        if($this->user1 !== null){
+            $this->user1->removeFriendsLinks($this);
+        }
+        if($user1 !== null){
+            $user1->addFriendsLinks($this);
+        }
+
         $this->user1 = $user1;
+        return $this;
     }
 
     /**
@@ -90,10 +101,19 @@ class FriendsLink
 
     /**
      * @param mixed $user2
+     * @return FriendsLink
      */
-    public function setUser2($user2): void
+    public function setUser2($user2)
     {
+        if($this->user2 !== null){
+            $this->user2->removeFriendsLinks($this);
+        }
+        if($user2 !== null){
+            $user2->addFriendsLinks($this);
+        }
+
         $this->user2 = $user2;
+        return $this;
     }
 
     /**

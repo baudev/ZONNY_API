@@ -4,6 +4,7 @@ namespace ZONNY\Models\Account;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\DBAL\Schema\Column;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\PersistentCollection;
 
 
 /**
@@ -135,6 +136,11 @@ class User implements \JsonSerializable
      */
     private $friends_links;
 
+
+    public function __construct()
+    {
+        $this->friends_links = new ArrayCollection();
+    }
 
     /**
      * Specify data which should be serialized to JSON
@@ -583,10 +589,31 @@ class User implements \JsonSerializable
     /**
      * @return mixed
      */
-    public function getFriendsLinks()
+    public function getFriendsLinks(): ?PersistentCollection
     {
         return $this->friends_links;
     }
+
+    /**
+     * @param FriendsLink $friendsLink
+     */
+    public function addFriendsLinks(FriendsLink $friendsLink)
+    {
+        if($this->friends_links->contains($friendsLink)) {
+            $this->friends_links->add($friendsLink);
+        }
+    }
+
+    /**
+     * @param FriendsLink $friendsLink
+     */
+    public function removeFriendsLinks(FriendsLink $friendsLink){
+        if($this->friends_links->contains($friendsLink)){
+            $this->friends_links->removeElement($friendsLink);
+        }
+    }
+
+
 
 
 

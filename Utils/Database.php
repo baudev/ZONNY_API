@@ -18,7 +18,7 @@ class Database
      * @return mixed
      * @throws \Doctrine\ORM\ORMException
      */
-    public static function getEntityManager()
+    public static function getEntityManager() : EntityManager
     {
         if(empty(self::$entity_manager)){
             self::setEntityManager();
