@@ -7,6 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\PersistentCollection;
 use ZONNY\Models\Chat\ChatParticipant;
 use ZONNY\Models\Chat\PendingOperation;
+use ZONNY\Models\Event\Event;
 use ZONNY\Models\Helpers\Error;
 use ZONNY\Models\Helpers\Log;
 
@@ -171,6 +172,10 @@ class User implements \JsonSerializable
      * @ORM\OneToMany(targetEntity=PendingOperation::class, cascade={"persist", "remove"}, mappedBy="users")
      */
     private $pendingOperations;
+    /**
+     * @ORM\OneToMany(targetEntity=Event::class, cascade={"persist", "remove"}, mappedBy="users")
+     */
+    private $events;
 
 
 
@@ -185,6 +190,7 @@ class User implements \JsonSerializable
         $this->reports = new ArrayCollection();
         $this->chatParticipants = new ArrayCollection();
         $this->pendingOperations = new ArrayCollection();
+        $this->events = new ArrayCollection();
     }
 
     /**
@@ -896,6 +902,35 @@ class User implements \JsonSerializable
     public function removePendingOperation(PendingOperation $pendingOperation){
         if($this->pendingOperations->contains($pendingOperation)){
             $this->pendingOperations->removeElement($pendingOperation);
+        }
+        return $this;
+    }
+
+    /**
+     * @return array|null
+     */
+    public function getEvents(): ?array {
+        return $this->events->toArray();
+    }
+
+    /**
+     * @param Event $event
+     * @return $this
+     */
+    public function addEvent(Event $event){
+        if(!$this->events->contains($event)){
+            $this->events->add($event);
+        }
+        return $this;
+    }
+
+    /**
+     * @param Event $event
+     * @return $this
+     */
+    public function removeEvent(Event $event){
+        if($this->events->contains($event)){
+            $this->events->removeElement($event);
         }
         return $this;
     }

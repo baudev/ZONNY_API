@@ -76,4 +76,223 @@ class Event
      */
     private $creationDatetime;
 
+    /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param mixed $id
+     */
+    public function setId($id): void
+    {
+        $this->id = $id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param mixed $name
+     */
+    public function setName($name): void
+    {
+        $this->name = $name;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPictureUrl()
+    {
+        return $this->pictureUrl;
+    }
+
+    /**
+     * @param mixed $pictureUrl
+     */
+    public function setPictureUrl($pictureUrl): void
+    {
+        $this->pictureUrl = $pictureUrl;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLatitude()
+    {
+        return $this->latitude;
+    }
+
+    /**
+     * @param mixed $latitude
+     */
+    public function setLatitude($latitude): void
+    {
+        $this->latitude = $latitude;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLongitude()
+    {
+        return $this->longitude;
+    }
+
+    /**
+     * @param mixed $longitude
+     */
+    public function setLongitude($longitude): void
+    {
+        $this->longitude = $longitude;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getStartDatetime()
+    {
+        return $this->startDatetime;
+    }
+
+    /**
+     * @param mixed $startDatetime
+     */
+    public function setStartDatetime($startDatetime): void
+    {
+        $this->startDatetime = $startDatetime;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getEndDatetime()
+    {
+        return $this->endDatetime;
+    }
+
+    /**
+     * @param mixed $endDatetime
+     */
+    public function setEndDatetime($endDatetime): void
+    {
+        $this->endDatetime = $endDatetime;
+    }
+
+    /**
+     * @return User
+     */
+    public function getCreator(): User
+    {
+        return $this->creator;
+    }
+
+    /**
+     * @param User $creator
+     * @return Event
+     */
+    public function setCreator(User $creator)
+    {
+        if($this->creator !== null){
+            $this->creator->removeEvent($this);
+        }
+        if($creator !== null){
+            $creator->addEvent($this);
+        }
+
+        $this->creator = $creator;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getInformation()
+    {
+        return $this->information;
+    }
+
+    /**
+     * @param mixed $information
+     */
+    public function setInformation($information): void
+    {
+        $this->information = $information;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getWithLocation()
+    {
+        return $this->withLocation;
+    }
+
+    /**
+     * @param mixed $withLocation
+     */
+    public function setWithLocation($withLocation): void
+    {
+        $this->withLocation = $withLocation;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getisPublic()
+    {
+        return $this->isPublic;
+    }
+
+    /**
+     * @param mixed $isPublic
+     */
+    public function setIsPublic($isPublic): void
+    {
+        $this->isPublic = $isPublic;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFromSuggestion()
+    {
+        return $this->fromSuggestion;
+    }
+
+    /**
+     * @param mixed $fromSuggestion
+     */
+    public function setFromSuggestion($fromSuggestion): void
+    {
+        $this->fromSuggestion = $fromSuggestion;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCreationDatetime()
+    {
+        return $this->creationDatetime;
+    }
+
+    /**
+     * @param mixed $creationDatetime
+     */
+    public function setCreationDatetime($creationDatetime): void
+    {
+        $this->creationDatetime = $creationDatetime;
+    }
+
+
+
 }
