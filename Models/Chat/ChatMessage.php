@@ -73,10 +73,19 @@ class ChatMessage
 
     /**
      * @param User $user
+     * @return ChatMessage
      */
-    public function setUser(User $user): void
+    public function setUser(User $user)
     {
+        if($this->user !== null){
+            $this->user->removeChatMessage($this);
+        }
+        if($user !== null){
+            $user->addChatMessage($this);
+        }
+
         $this->user = $user;
+        return $this;
     }
 
     /**

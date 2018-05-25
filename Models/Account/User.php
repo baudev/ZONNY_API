@@ -5,6 +5,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\DBAL\Schema\Column;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\PersistentCollection;
+use ZONNY\Models\Chat\ChatMessage;
 use ZONNY\Models\Chat\ChatParticipant;
 use ZONNY\Models\Chat\PendingOperation;
 use ZONNY\Models\Event\Event;
@@ -181,6 +182,10 @@ class User implements \JsonSerializable
      * @ORM\OneToMany(targetEntity=EventMemberDetails::class, cascade={"persist", "remove"}, mappedBy="users")
      */
     private $eventMemberDetails;
+    /**
+     * @ORM\OneToMany(targetEntity=ChatMessage::class, cascade={"persist", "remove"}, mappedBy="events")
+     */
+    private $chatMessages;
 
 
 
@@ -197,6 +202,7 @@ class User implements \JsonSerializable
         $this->pendingOperations = new ArrayCollection();
         $this->events = new ArrayCollection();
         $this->eventMemberDetails = new ArrayCollection();
+        $this->chatMessages = new ArrayCollection();
     }
 
     /**
@@ -970,4 +976,32 @@ class User implements \JsonSerializable
         return $this;
     }
 
+    /**
+     * @return array|null
+     */
+    public function getChatMessages(): ?array {
+        return $this->chatMessages->toArray();
+    }
+
+    /**
+     * @param ChatMessage $chatMessage
+     * @return $this
+     */
+    public function addChatMessage(ChatMessage $chatMessage){
+        if(!$this->chatMessages->contains($chatMessage)){
+            $this->chatMessages->add($chatMessage);
+        }
+        return $this;
+    }
+
+    /**
+     * @param ChatMessage $chatMessage
+     * @return $this
+     */
+    public function removeChatMessage(ChatMessage $chatMessage){
+        if($this->chatMessages->contains($chatMessage)){
+            $this->chatMessages->removeElement($chatMessage);
+        }
+        return $this;
+    }
 }

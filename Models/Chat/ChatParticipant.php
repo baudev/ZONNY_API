@@ -7,8 +7,10 @@
  */
 
 namespace ZONNY\Models\Chat;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use ZONNY\Models\Account\User;
+use ZONNY\Models\Event\Event;
 
 /**
  * Class ChatParticipant
@@ -26,7 +28,8 @@ class ChatParticipant
      */
     private $id;
     /**
-     * @ORM\Column(type="integer")
+     * @var Event $event
+     * @ORM\ManyToOne(targetEntity=Event::class, inversedBy="chat_participants")
      */
     private $event;
     /**
@@ -42,6 +45,7 @@ class ChatParticipant
      * @ORM\Column(type="datetimetz", name="creation_datetime")
      */
     private $creationDatetime;
+
 
     /**
      * @return mixed
@@ -69,10 +73,19 @@ class ChatParticipant
 
     /**
      * @param mixed $event
+     * @return ChatParticipant
      */
-    public function setEvent($event): void
+    public function setEvent($event)
     {
+        if($this->event !== null){
+            $this->event->removeChatParticipant($this);
+        }
+        if($event !== null){
+            $event->addChatParticipant($this);
+        }
+
         $this->event = $event;
+        return $this;
     }
 
     /**
@@ -131,6 +144,8 @@ class ChatParticipant
     {
         $this->creationDatetime = $creationDatetime;
     }
+
+
 
 
 }
