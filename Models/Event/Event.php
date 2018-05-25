@@ -10,6 +10,7 @@ namespace ZONNY\Models\Event;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use ZONNY\Models\Account\User;
+use ZONNY\Models\Chat\ChatMessage;
 use ZONNY\Models\Chat\ChatParticipant;
 
 /**
@@ -89,11 +90,16 @@ class Event
      * @ORM\OneToMany(targetEntity=ChatParticipant::class, cascade={"persist", "remove"}, mappedBy="events")
      */
     private $chatParticipants;
+    /**
+     * @ORM\OneToMany(targetEntity=ChatMessage::class, cascade={"persist", "remove"}, mappedBy="events")
+     */
+    private $chatMessages;
 
     public function __construct()
     {
         $this->eventMemberDetails = new ArrayCollection();
         $this->chatParticipants = new ArrayCollection();
+        $this->chatMessages = new ArrayCollection();
     }
 
     /**
@@ -367,6 +373,35 @@ class Event
     public function removeChatParticipant(ChatParticipant $chatParticipant){
         if($this->chatParticipants->contains($chatParticipant)){
             $this->chatParticipants->removeElement($chatParticipant);
+        }
+        return $this;
+    }
+
+    /**
+     * @return array|null
+     */
+    public function getChatMessages(): ?array {
+        return $this->chatMessages->toArray();
+    }
+
+    /**
+     * @param ChatMessage $chatMessage
+     * @return $this
+     */
+    public function addChatMessage(ChatMessage $chatMessage){
+        if(!$this->chatMessages->contains($chatMessage)){
+            $this->chatMessages->add($chatMessage);
+        }
+        return $this;
+    }
+
+    /**
+     * @param ChatMessage $chatMessage
+     * @return $this
+     */
+    public function removeChatMessage(ChatMessage $chatMessage){
+        if($this->chatMessages->contains($chatMessage)){
+            $this->chatMessages->removeElement($chatMessage);
         }
         return $this;
     }

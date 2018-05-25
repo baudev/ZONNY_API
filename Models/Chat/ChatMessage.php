@@ -9,6 +9,7 @@
 namespace ZONNY\Models\Chat;
 use Doctrine\ORM\Mapping as ORM;
 use ZONNY\Models\Account\User;
+use ZONNY\Models\Event\Event;
 
 /**
  * Class ChatMessage
@@ -31,7 +32,8 @@ class ChatMessage
      */
     private $user;
     /**
-     * @ORM\Column(type="integer")
+     * @var Event $event
+     * @ORM\ManyToOne(targetEntity=Event::class, inversedBy="chat_messages")
      */
     private $event;
     /**
@@ -98,10 +100,19 @@ class ChatMessage
 
     /**
      * @param mixed $event
+     * @return ChatMessage
      */
-    public function setEvent($event): void
+    public function setEvent(Event $event)
     {
+        if($this->event !== null){
+            $this->event->removeChatMessage($this);
+        }
+        if($event !== null){
+            $event->addChatMessage($this);
+        }
+
         $this->event = $event;
+        return $this;
     }
 
     /**
