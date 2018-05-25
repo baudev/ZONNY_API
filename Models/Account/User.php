@@ -8,6 +8,7 @@ use Doctrine\ORM\PersistentCollection;
 use ZONNY\Models\Chat\ChatParticipant;
 use ZONNY\Models\Chat\PendingOperation;
 use ZONNY\Models\Event\Event;
+use ZONNY\Models\Event\EventMemberDetails;
 use ZONNY\Models\Helpers\Error;
 use ZONNY\Models\Helpers\Log;
 
@@ -176,6 +177,10 @@ class User implements \JsonSerializable
      * @ORM\OneToMany(targetEntity=Event::class, cascade={"persist", "remove"}, mappedBy="users")
      */
     private $events;
+    /**
+     * @ORM\OneToMany(targetEntity=EventMemberDetails::class, cascade={"persist", "remove"}, mappedBy="users")
+     */
+    private $eventMemberDetails;
 
 
 
@@ -191,6 +196,7 @@ class User implements \JsonSerializable
         $this->chatParticipants = new ArrayCollection();
         $this->pendingOperations = new ArrayCollection();
         $this->events = new ArrayCollection();
+        $this->eventMemberDetails = new ArrayCollection();
     }
 
     /**
@@ -931,6 +937,35 @@ class User implements \JsonSerializable
     public function removeEvent(Event $event){
         if($this->events->contains($event)){
             $this->events->removeElement($event);
+        }
+        return $this;
+    }
+
+    /**
+     * @return array|null
+     */
+    public function getEventMemberDetails(): ?array {
+        return $this->eventMemberDetails->toArray();
+    }
+
+    /**
+     * @param EventMemberDetails $eventMemberDetails
+     * @return $this
+     */
+    public function addEventMemberDetails(EventMemberDetails $eventMemberDetails){
+        if(!$this->eventMemberDetails->contains($eventMemberDetails)){
+            $this->eventMemberDetails->add($eventMemberDetails);
+        }
+        return $this;
+    }
+
+    /**
+     * @param EventMemberDetails $eventMemberDetails
+     * @return $this
+     */
+    public function removeEventMemberDetails(EventMemberDetails $eventMemberDetails){
+        if($this->eventMemberDetails->contains($eventMemberDetails)){
+            $this->eventMemberDetails->removeElement($eventMemberDetails);
         }
         return $this;
     }

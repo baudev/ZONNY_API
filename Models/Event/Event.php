@@ -7,6 +7,7 @@
  */
 
 namespace ZONNY\Models\Event;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use ZONNY\Models\Account\User;
 
@@ -55,7 +56,7 @@ class Event
      */
     private $creator;
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="text", nullable=true)
      */
     private $information;
     /**
@@ -75,6 +76,19 @@ class Event
      * @ORM\Column(type="datetimetz", name="creation_datetime")
      */
     private $creationDatetime;
+
+    /**
+     * Foreign keys
+     */
+    /**
+     * @ORM\OneToMany(targetEntity=EventMemberDetails::class, cascade={"persist", "remove"}, mappedBy="events")
+     */
+    private $eventMemberDetails;
+
+    public function __construct()
+    {
+        $this->eventMemberDetails = new ArrayCollection();
+    }
 
     /**
      * @return mixed
@@ -293,6 +307,33 @@ class Event
         $this->creationDatetime = $creationDatetime;
     }
 
+    /**
+     * @return array|null
+     */
+    public function getEventMemberDetails(): ?array {
+        return $this->eventMemberDetails->toArray();
+    }
 
+    /**
+     * @param EventMemberDetails $eventMemberDetails
+     * @return $this
+     */
+    public function addEventMemberDetails(EventMemberDetails $eventMemberDetails){
+        if(!$this->eventMemberDetails->contains($eventMemberDetails)){
+            $this->eventMemberDetails->add($eventMemberDetails);
+        }
+        return $this;
+    }
+
+    /**
+     * @param EventMemberDetails $eventMemberDetails
+     * @return $this
+     */
+    public function removeEventMemberDetails(EventMemberDetails $eventMemberDetails){
+        if($this->eventMemberDetails->contains($eventMemberDetails)){
+            $this->eventMemberDetails->removeElement($eventMemberDetails);
+        }
+        return $this;
+    }
 
 }
