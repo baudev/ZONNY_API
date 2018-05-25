@@ -5,6 +5,8 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\DBAL\Schema\Column;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\PersistentCollection;
+use ZONNY\Models\Chat\ChatParticipant;
+use ZONNY\Models\Chat\PendingOperation;
 use ZONNY\Models\Helpers\Error;
 use ZONNY\Models\Helpers\Log;
 
@@ -161,6 +163,15 @@ class User implements \JsonSerializable
      * @ORM\OneToMany(targetEntity=Report::class, cascade={"persist", "remove"}, mappedBy="users")
      */
     private $reports;
+    /**
+     * @ORM\OneToMany(targetEntity=ChatParticipant::class, cascade={"persist", "remove"}, mappedBy="users")
+     */
+    private $chatParticipants;
+    /**
+     * @ORM\OneToMany(targetEntity=PendingOperation::class, cascade={"persist", "remove"}, mappedBy="users")
+     */
+    private $pendingOperations;
+
 
 
     public function __construct()
@@ -172,6 +183,8 @@ class User implements \JsonSerializable
         $this->errors = new ArrayCollection();
         $this->logs = new ArrayCollection();
         $this->reports = new ArrayCollection();
+        $this->chatParticipants = new ArrayCollection();
+        $this->pendingOperations = new ArrayCollection();
     }
 
     /**
@@ -825,6 +838,64 @@ class User implements \JsonSerializable
     public function removeReport(Report $report){
         if($this->reports->contains($report)){
             $this->reports->removeElement($report);
+        }
+        return $this;
+    }
+
+    /**
+     * @return array|null
+     */
+    public function getChatParticipants(): ?array {
+        return $this->chatParticipants->toArray();
+    }
+
+    /**
+     * @param ChatParticipant $chatParticipant
+     * @return $this
+     */
+    public function addChatParticipant(ChatParticipant $chatParticipant){
+        if(!$this->chatParticipants->contains($chatParticipant)){
+            $this->chatParticipants->add($chatParticipant);
+        }
+        return $this;
+    }
+
+    /**
+     * @param ChatParticipant $chatParticipant
+     * @return $this
+     */
+    public function removeChatParticipant(ChatParticipant $chatParticipant){
+        if($this->chatParticipants->contains($chatParticipant)){
+            $this->chatParticipants->removeElement($chatParticipant);
+        }
+        return $this;
+    }
+
+    /**
+     * @return array|null
+     */
+    public function getPendingOperations(): ?array {
+        return $this->pendingOperations->toArray();
+    }
+
+    /**
+     * @param PendingOperation $pendingOperation
+     * @return $this
+     */
+    public function addPendingOperation(PendingOperation $pendingOperation){
+        if(!$this->pendingOperations->contains($pendingOperation)){
+            $this->pendingOperations->add($pendingOperation);
+        }
+        return $this;
+    }
+
+    /**
+     * @param PendingOperation $pendingOperation
+     * @return $this
+     */
+    public function removePendingOperation(PendingOperation $pendingOperation){
+        if($this->pendingOperations->contains($pendingOperation)){
+            $this->pendingOperations->removeElement($pendingOperation);
         }
         return $this;
     }

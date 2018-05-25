@@ -27,11 +27,13 @@ class Report
     /**
      * @var User $concernedUser
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="reports")
+     * @ORM\JoinColumn(name="concerned_user_id")
      */
     private $concernedUser;
     /**
      * @var User $byUser
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="reports")
+     * @ORM\JoinColumn(name="by_user_id")
      */
     private $byUser;
     /**

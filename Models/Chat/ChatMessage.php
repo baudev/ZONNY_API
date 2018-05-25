@@ -8,6 +8,7 @@
 
 namespace ZONNY\Models\Chat;
 use Doctrine\ORM\Mapping as ORM;
+use ZONNY\Models\Account\User;
 
 /**
  * Class ChatMessage
@@ -25,13 +26,14 @@ class ChatMessage
      */
     private $id;
     /**
-     * @ORM\Column(type="integer")
+     * @var User $user
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="chat_messages")
      */
-    private $userId;
+    private $user;
     /**
      * @ORM\Column(type="integer")
      */
-    private $eventId;
+    private $event;
     /**
      * @ORM\Column(type="string", length=50)
      */
@@ -41,8 +43,106 @@ class ChatMessage
      */
     private $content;
     /**
-     * @ORM\Column(type="datetimetz")
+     * @ORM\Column(type="datetimetz", name="creation_datetime")
      */
     private $creationDatetime;
+
+    /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param mixed $id
+     */
+    public function setId($id): void
+    {
+        $this->id = $id;
+    }
+
+    /**
+     * @return User
+     */
+    public function getUser(): User
+    {
+        return $this->user;
+    }
+
+    /**
+     * @param User $user
+     */
+    public function setUser(User $user): void
+    {
+        $this->user = $user;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getEvent()
+    {
+        return $this->event;
+    }
+
+    /**
+     * @param mixed $event
+     */
+    public function setEvent($event): void
+    {
+        $this->event = $event;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * @param mixed $type
+     */
+    public function setType($type): void
+    {
+        $this->type = $type;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getContent()
+    {
+        return $this->content;
+    }
+
+    /**
+     * @param mixed $content
+     */
+    public function setContent($content): void
+    {
+        $this->content = $content;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCreationDatetime()
+    {
+        return $this->creationDatetime;
+    }
+
+    /**
+     * @param mixed $creationDatetime
+     */
+    public function setCreationDatetime($creationDatetime): void
+    {
+        $this->creationDatetime = $creationDatetime;
+    }
+
+
 
 }

@@ -27,14 +27,80 @@ class State
     /**
      * @ORM\Column(type="integer")
      */
-    private $messageId;
+    private $message;
     /**
      * @ORM\Column(type="integer", length=1, nullable=true)
      */
     private $state;
     /**
-     * @ORM\Column(type="datetimetz")
+     * @ORM\Column(type="datetimetz", name="creation_datetime")
      */
     private $creationDatetime;
+
+    /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param mixed $id
+     */
+    public function setId($id): void
+    {
+        $this->id = $id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMessage()
+    {
+        return $this->message;
+    }
+
+    /**
+     * @param mixed $message
+     */
+    public function setMessage($message): void
+    {
+        $this->message = $message;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getState()
+    {
+        return $this->state;
+    }
+
+    /**
+     * @param mixed $state
+     */
+    public function setState($state): void
+    {
+        $this->state = $state;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCreationDatetime()
+    {
+        return $this->creationDatetime;
+    }
+
+    /**
+     * @param mixed $creationDatetime
+     */
+    public function setCreationDatetime($creationDatetime): void
+    {
+        $this->creationDatetime = $creationDatetime;
+    }
+
+
 
 }

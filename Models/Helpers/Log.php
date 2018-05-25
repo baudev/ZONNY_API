@@ -134,11 +134,11 @@ class Log
     public function setUser(User $user)
     {
         if($this->user !== null){
-            $this->user->removeError($this);
+            $this->user->removeLog($this);
         }
 
         if($user !== null){
-            $user->addError($this);
+            $user->addLog($this);
         }
 
         $this->user = $user;
