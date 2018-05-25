@@ -5,7 +5,7 @@
  * Date: 24/05/2018
  * Time: 12:45
  */
-
+/*
 require_once '../../config.php';
 require_once '../../vendor/autoload.php';
 
@@ -35,10 +35,5 @@ $entityManager->persist($link);
 
 
 $entityManager->flush();
-echo $link->getId();
-/**
- * @var \ZONNY\Models\Account\FriendsLink $test
- */
-$test = $entityManager->find(\ZONNY\Models\Account\FriendsLink::class, 13);
-print_r($test->getId());
-
+print_r($user->getFriendsLinks()[0]->getId());
+*/

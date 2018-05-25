@@ -5,6 +5,8 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\DBAL\Schema\Column;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\PersistentCollection;
+use ZONNY\Models\Helpers\Error;
+use ZONNY\Models\Helpers\Log;
 
 
 /**
@@ -147,6 +149,18 @@ class User implements \JsonSerializable
      * @ORM\OneToMany(targetEntity=Subscription::class, cascade={"persist", "remove"}, mappedBy="users")
      */
     private $subscriptions;
+    /**
+     * @ORM\OneToMany(targetEntity=Error::class, cascade={"persist", "remove"}, mappedBy="users")
+     */
+    private $errors;
+    /**
+     * @ORM\OneToMany(targetEntity=Log::class, cascade={"persist", "remove"}, mappedBy="users")
+     */
+    private $logs;
+    /**
+     * @ORM\OneToMany(targetEntity=Report::class, cascade={"persist", "remove"}, mappedBy="users")
+     */
+    private $reports;
 
 
     public function __construct()
@@ -155,6 +169,9 @@ class User implements \JsonSerializable
         $this->invitationLinks = new ArrayCollection();
         $this->phoneNumbers = new ArrayCollection();
         $this->subscriptions = new ArrayCollection();
+        $this->errors = new ArrayCollection();
+        $this->logs = new ArrayCollection();
+        $this->reports = new ArrayCollection();
     }
 
     /**
@@ -725,5 +742,91 @@ class User implements \JsonSerializable
         return $this;
     }
 
+    /**
+     * @return array|null
+     */
+    public function getErrors(): ?array {
+        return $this->errors->toArray();
+    }
+
+    /**
+     * @param Error $error
+     * @return $this
+     */
+    public function addError(Error $error){
+        if(!$this->errors->contains($error)){
+            $this->errors->add($error);
+        }
+        return $this;
+    }
+
+    /**
+     * @param Error $error
+     * @return $this
+     */
+    public function removeError(Error $error){
+        if($this->errors->contains($error)){
+            $this->errors->removeElement($error);
+        }
+        return $this;
+    }
+
+    /**
+     * @return array|null
+     */
+    public function getLogs(): ?array {
+        return $this->logs->toArray();
+    }
+
+    /**
+     * @param Log $log
+     * @return $this
+     */
+    public function addLog(Log $log){
+        if(!$this->logs->contains($log)){
+            $this->logs->add($log);
+        }
+        return $this;
+    }
+
+    /**
+     * @param Log $log
+     * @return $this
+     */
+    public function removeLog(Log $log){
+        if($this->logs->contains($log)){
+            $this->logs->removeElement($log);
+        }
+        return $this;
+    }
+
+    /**
+     * @return array|null
+     */
+    public function getReports(): ?array {
+        return $this->reports->toArray();
+    }
+
+    /**
+     * @param Report $report
+     * @return $this
+     */
+    public function addReport(Report $report){
+        if(!$this->reports->contains($report)){
+            $this->reports->add($report);
+        }
+        return $this;
+    }
+
+    /**
+     * @param Report $report
+     * @return $this
+     */
+    public function removeReport(Report $report){
+        if($this->reports->contains($report)){
+            $this->reports->removeElement($report);
+        }
+        return $this;
+    }
 
 }
