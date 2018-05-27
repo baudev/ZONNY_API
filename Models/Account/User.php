@@ -10,6 +10,7 @@ use ZONNY\Models\Chat\ChatParticipant;
 use ZONNY\Models\Chat\PendingOperation;
 use ZONNY\Models\Event\Event;
 use ZONNY\Models\Event\EventMemberDetails;
+use ZONNY\Models\Event\EventRequest;
 use ZONNY\Models\Helpers\Error;
 use ZONNY\Models\Helpers\Log;
 
@@ -183,9 +184,13 @@ class User implements \JsonSerializable
      */
     private $eventMemberDetails;
     /**
-     * @ORM\OneToMany(targetEntity=ChatMessage::class, cascade={"persist", "remove"}, mappedBy="events")
+     * @ORM\OneToMany(targetEntity=ChatMessage::class, cascade={"persist", "remove"}, mappedBy="users")
      */
     private $chatMessages;
+    /**
+     * @ORM\OneToMany(targetEntity=EventRequest::class, cascade={"persist", "remove"}, mappedBy="users")
+     */
+    private $eventRequests;
 
 
 
@@ -203,6 +208,7 @@ class User implements \JsonSerializable
         $this->events = new ArrayCollection();
         $this->eventMemberDetails = new ArrayCollection();
         $this->chatMessages = new ArrayCollection();
+        $this->eventRequests = new ArrayCollection();
     }
 
     /**
@@ -1001,6 +1007,35 @@ class User implements \JsonSerializable
     public function removeChatMessage(ChatMessage $chatMessage){
         if($this->chatMessages->contains($chatMessage)){
             $this->chatMessages->removeElement($chatMessage);
+        }
+        return $this;
+    }
+
+    /**
+     * @return array|null
+     */
+    public function getEventRequests(): ?array {
+        return $this->eventRequests->toArray();
+    }
+
+    /**
+     * @param EventRequest $eventRequest
+     * @return $this
+     */
+    public function addEventRequest(EventRequest $eventRequest){
+        if(!$this->eventRequests->contains($eventRequest)){
+            $this->eventRequests->add($eventRequest);
+        }
+        return $this;
+    }
+
+    /**
+     * @param EventRequest $eventRequest
+     * @return $this
+     */
+    public function removeEventRequest(EventRequest $eventRequest){
+        if($this->eventRequests->contains($eventRequest)){
+            $this->eventRequests->removeElement($eventRequest);
         }
         return $this;
     }

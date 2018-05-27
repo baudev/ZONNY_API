@@ -94,12 +94,17 @@ class Event
      * @ORM\OneToMany(targetEntity=ChatMessage::class, cascade={"persist", "remove"}, mappedBy="events")
      */
     private $chatMessages;
+    /**
+     * @ORM\OneToMany(targetEntity=EventRequest::class, cascade={"persist", "remove"}, mappedBy="events")
+     */
+    private $eventRequests;
 
     public function __construct()
     {
         $this->eventMemberDetails = new ArrayCollection();
         $this->chatParticipants = new ArrayCollection();
         $this->chatMessages = new ArrayCollection();
+        $this->eventRequests = new ArrayCollection();
     }
 
     /**
@@ -402,6 +407,36 @@ class Event
     public function removeChatMessage(ChatMessage $chatMessage){
         if($this->chatMessages->contains($chatMessage)){
             $this->chatMessages->removeElement($chatMessage);
+        }
+        return $this;
+    }
+
+
+    /**
+     * @return array|null
+     */
+    public function getEventRequests(): ?array {
+        return $this->eventRequests->toArray();
+    }
+
+    /**
+     * @param EventRequest $eventRequest
+     * @return $this
+     */
+    public function addEventRequest(EventRequest $eventRequest){
+        if(!$this->eventRequests->contains($eventRequest)){
+            $this->eventRequests->add($eventRequest);
+        }
+        return $this;
+    }
+
+    /**
+     * @param EventRequest $eventRequest
+     * @return $this
+     */
+    public function removeEventRequest(EventRequest $eventRequest){
+        if($this->eventRequests->contains($eventRequest)){
+            $this->eventRequests->removeElement($eventRequest);
         }
         return $this;
     }

@@ -14,7 +14,7 @@ use ZONNY\Models\Account\User;
  * Class EventMemberDetails
  * @package ZONNY\Models\Event
  * @ORM\Entity
- * @ORM\Table(name="event_member_details")
+ * @ORM\Table(name="events_member_details")
  */
 class EventMemberDetails
 {
@@ -27,12 +27,12 @@ class EventMemberDetails
     private $id;
     /**
      * @var Event $event
-     * @ORM\ManyToOne(targetEntity=Event::class, inversedBy="event_member_details")
+     * @ORM\ManyToOne(targetEntity=Event::class, inversedBy="events_member_details")
      */
     private $event;
     /**
      * @var User $invitedFriend
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="event_member_details")
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="events_member_details")
      * @ORM\JoinColumn(name="invited_friend_id")
      */
     private $invitedFriend;

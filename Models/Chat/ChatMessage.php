@@ -7,6 +7,7 @@
  */
 
 namespace ZONNY\Models\Chat;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use ZONNY\Models\Account\User;
 use ZONNY\Models\Event\Event;
@@ -48,6 +49,19 @@ class ChatMessage
      * @ORM\Column(type="datetimetz", name="creation_datetime")
      */
     private $creationDatetime;
+
+    /**
+     * Foreign keys
+     */
+    /**
+     * @ORM\OneToMany(targetEntity=State::class, cascade={"persist", "remove"}, mappedBy="chat_messages")
+     */
+    private $states;
+
+    public function __construct()
+    {
+        $this->states = new ArrayCollection();
+    }
 
     /**
      * @return mixed
@@ -164,5 +178,33 @@ class ChatMessage
     }
 
 
+    /**
+     * @return array|null
+     */
+    public function getStates(): ?array {
+        return $this->states->toArray();
+    }
+
+    /**
+     * @param State $state
+     * @return $this
+     */
+    public function addChatMessage(State $state){
+        if(!$this->states->contains($state)){
+            $this->states->add($state);
+        }
+        return $this;
+    }
+
+    /**
+     * @param State $state
+     * @return $this
+     */
+    public function removeChatMessage(State $state){
+        if($this->states->contains($state)){
+            $this->states->removeElement($state);
+        }
+        return $this;
+    }
 
 }
