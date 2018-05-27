@@ -1,4 +1,5 @@
 <?php
+namespace ZONNY\Repositories\Account;
 
 use ZONNY\Models\Account\FriendsLink;
 use ZONNY\Utils\Database;

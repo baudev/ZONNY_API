@@ -1,4 +1,5 @@
 <?php
+namespace ZONNY\Repositories\Helpers;
 
 use ZONNY\Models\Helpers\Log;
 use ZONNY\Utils\Database;

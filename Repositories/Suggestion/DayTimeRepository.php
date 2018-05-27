@@ -1,4 +1,5 @@
 <?php
+namespace ZONNY\Repositories\Suggestion;
 
 use ZONNY\Models\Suggestion\DayTime;
 use ZONNY\Utils\Database;

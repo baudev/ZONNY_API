@@ -1,4 +1,5 @@
 <?php
+namespace ZONNY\Repositories\Event;
 
 use ZONNY\Models\Event\EventMemberDetails;
 use ZONNY\Utils\Database;

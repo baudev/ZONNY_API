@@ -1,4 +1,5 @@
 <?php
+namespace ZONNY\Repositories\Chat;
 
 use ZONNY\Models\Chat\ChatMessage;
 use ZONNY\Utils\Database;

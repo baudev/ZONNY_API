@@ -28,6 +28,7 @@
       "ZONNY\\Controllers\\": "Controllers/",
       "ZONNY\\Models\\": "Models/",
       "ZONNY\\UnitTest\\": "UnitTest/",
+      "ZONNY\\Repositories\\": "Repositories/",
       "ZONNY\\Utils\\": "Utils/"
     }
   }

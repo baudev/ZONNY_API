@@ -1,4 +1,5 @@
 <?php
+namespace ZONNY\Repositories\Helpers;
 
 use ZONNY\Utils\Database;
 use \ZONNY\Models\Helpers\Error;

@@ -1,4 +1,5 @@
 <?php
+namespace ZONNY\Repositories\Suggestion;
 
 use ZONNY\Models\Suggestion\Category;
 use ZONNY\Utils\Database;
