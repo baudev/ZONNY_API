@@ -13,7 +13,7 @@ use ZONNY\Models\Event\EventMemberDetails;
 use ZONNY\Models\Event\EventRequest;
 use ZONNY\Models\Helpers\Error;
 use ZONNY\Models\Helpers\Log;
-use ZONNY\Models\Suggestion;
+use ZONNY\Models\Suggestion\Suggestion;
 
 
 /**

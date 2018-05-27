@@ -12,7 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
 use ZONNY\Models\Account\User;
 use ZONNY\Models\Chat\ChatMessage;
 use ZONNY\Models\Chat\ChatParticipant;
-use ZONNY\Models\Suggestion;
+use ZONNY\Models\Suggestion\Suggestion;
 
 /**
  * Class Event

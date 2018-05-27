@@ -6,7 +6,7 @@
  * Time: 17:24
  */
 
-namespace ZONNY\Models;
+namespace ZONNY\Models\Suggestion;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use ZONNY\Models\Account\User;
