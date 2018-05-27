@@ -25,6 +25,7 @@ class State
      */
     private $id;
     /**
+     * @var ChatMessage $message
      * @ORM\ManyToOne(targetEntity=ChatMessage::class, inversedBy="states")
      */
     private $message;
@@ -65,13 +66,13 @@ class State
      * @param mixed $message
      * @return State
      */
-    public function setMessage($message)
+    public function setMessage(ChatMessage $message)
     {
         if($this->message !== null){
-            $this->message->removeEventMemberDetails($this);
+            $this->message->removeChatMessage($this);
         }
         if($message !== null){
-            $message->addEventMemberDetails($this);
+            $message->addChatMessage($this);
         }
 
         $this->message = $message;
