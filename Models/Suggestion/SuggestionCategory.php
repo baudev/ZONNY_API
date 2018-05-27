@@ -8,7 +8,7 @@
 
 namespace ZONNY\Models\Suggestion;
 use Doctrine\ORM\Mapping as ORM;
-use ZONNY\Models\Suggestion;
+use ZONNY\Models\Suggestion\Suggestion;
 
 /**
  * Class SuggestionCategory
