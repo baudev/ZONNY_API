@@ -10,6 +10,7 @@ namespace ZONNY\Models;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use ZONNY\Models\Account\User;
+use ZONNY\Models\Suggestion\DayTime;
 use ZONNY\Models\Suggestion\SuggestionCategory;
 
 /**
@@ -84,10 +85,15 @@ class Suggestion
      * @ORM\OneToMany(targetEntity=SuggestionCategory::class, cascade={"persist", "remove"}, mappedBy="suggestions")
      */
     private $suggestionCategories;
+    /**
+     * @ORM\OneToMany(targetEntity=DayTime::class, cascade={"persist", "remove"}, mappedBy="suggestions")
+     */
+    private $dayTimes;
 
     public function __construct()
     {
         $this->suggestionCategories = new ArrayCollection();
+        $this->dayTimes = new ArrayCollection();
     }
 
     /**
@@ -332,6 +338,35 @@ class Suggestion
     public function removeSuggestionCategory(SuggestionCategory $suggestionCategory){
         if($this->suggestionCategories->contains($suggestionCategory)){
             $this->suggestionCategories->removeElement($suggestionCategory);
+        }
+        return $this;
+    }
+
+    /**
+     * @return array|null
+     */
+    public function getDayTimes(): ?array {
+        return $this->dayTimes->toArray();
+    }
+
+    /**
+     * @param DayTime $dayTime
+     * @return $this
+     */
+    public function addDayTime(DayTime $dayTime){
+        if(!$this->dayTimes->contains($dayTime)){
+            $this->dayTimes->add($dayTime);
+        }
+        return $this;
+    }
+
+    /**
+     * @param DayTime $dayTime
+     * @return $this
+     */
+    public function removeDayTime(DayTime $dayTime){
+        if($this->dayTimes->contains($dayTime)){
+            $this->dayTimes->removeElement($dayTime);
         }
         return $this;
     }
