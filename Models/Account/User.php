@@ -13,6 +13,7 @@ use ZONNY\Models\Event\EventMemberDetails;
 use ZONNY\Models\Event\EventRequest;
 use ZONNY\Models\Helpers\Error;
 use ZONNY\Models\Helpers\Log;
+use ZONNY\Models\Suggestion;
 
 
 /**
@@ -191,6 +192,10 @@ class User implements \JsonSerializable
      * @ORM\OneToMany(targetEntity=EventRequest::class, cascade={"persist", "remove"}, mappedBy="users")
      */
     private $eventRequests;
+    /**
+     * @ORM\OneToMany(targetEntity=Suggestion::class, cascade={"persist", "remove"}, mappedBy="users")
+     */
+    private $suggestions;
 
 
 
@@ -209,6 +214,7 @@ class User implements \JsonSerializable
         $this->eventMemberDetails = new ArrayCollection();
         $this->chatMessages = new ArrayCollection();
         $this->eventRequests = new ArrayCollection();
+        $this->suggestions = new ArrayCollection();
     }
 
     /**
@@ -1036,6 +1042,35 @@ class User implements \JsonSerializable
     public function removeEventRequest(EventRequest $eventRequest){
         if($this->eventRequests->contains($eventRequest)){
             $this->eventRequests->removeElement($eventRequest);
+        }
+        return $this;
+    }
+
+    /**
+     * @return array|null
+     */
+    public function getSuggestions(): ?array {
+        return $this->suggestions->toArray();
+    }
+
+    /**
+     * @param Suggestion $suggestion
+     * @return $this
+     */
+    public function addSuggestion(Suggestion $suggestion){
+        if(!$this->suggestions->contains($suggestion)){
+            $this->suggestions->add($suggestion);
+        }
+        return $this;
+    }
+
+    /**
+     * @param Suggestion $suggestion
+     * @return $this
+     */
+    public function removeSuggestion(Suggestion $suggestion){
+        if($this->suggestions->contains($suggestion)){
+            $this->suggestions->removeElement($suggestion);
         }
         return $this;
     }

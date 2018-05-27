@@ -234,7 +234,7 @@ class Suggestion
     public function setCreator(User $creator)
     {
         if($this->creator !== null){
-            $this->creator->removeEvent($this);
+            $this->creator->removeS($this);
         }
         if($creator !== null){
             $creator->addEvent($this);
