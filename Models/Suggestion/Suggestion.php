@@ -7,8 +7,10 @@
  */
 
 namespace ZONNY\Models;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use ZONNY\Models\Account\User;
+use ZONNY\Models\Suggestion\SuggestionCategory;
 
 /**
  * Class Suggestion
@@ -74,6 +76,19 @@ class Suggestion
      * @ORM\Column(type="datetimetz", name="creation_datetime")
      */
     private $creationDatetime;
+
+    /**
+     * Foreign keys
+     */
+    /**
+     * @ORM\OneToMany(targetEntity=SuggestionCategory::class, cascade={"persist", "remove"}, mappedBy="suggestions")
+     */
+    private $suggestionCategories;
+
+    public function __construct()
+    {
+        $this->suggestionCategories = new ArrayCollection();
+    }
 
     /**
      * @return mixed
@@ -292,6 +307,33 @@ class Suggestion
         $this->creationDatetime = $creationDatetime;
     }
 
+    /**
+     * @return array|null
+     */
+    public function getSuggestionCategories(): ?array {
+        return $this->suggestionCategories->toArray();
+    }
 
+    /**
+     * @param SuggestionCategory $suggestionCategory
+     * @return $this
+     */
+    public function addSuggestionCategory(SuggestionCategory $suggestionCategory){
+        if(!$this->suggestionCategories->contains($suggestionCategory)){
+            $this->suggestionCategories->add($suggestionCategory);
+        }
+        return $this;
+    }
+
+    /**
+     * @param SuggestionCategory $suggestionCategory
+     * @return $this
+     */
+    public function removeSuggestionCategory(SuggestionCategory $suggestionCategory){
+        if($this->suggestionCategories->contains($suggestionCategory)){
+            $this->suggestionCategories->removeElement($suggestionCategory);
+        }
+        return $this;
+    }
 
 }
