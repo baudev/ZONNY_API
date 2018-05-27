@@ -12,6 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
 use ZONNY\Models\Account\User;
 use ZONNY\Models\Chat\ChatMessage;
 use ZONNY\Models\Chat\ChatParticipant;
+use ZONNY\Models\Suggestion;
 
 /**
  * Class Event
@@ -70,7 +71,8 @@ class Event
      */
     private $isPublic = false;
     /**
-     * @ORM\Column(type="string", nullable=true)
+     * @var Suggestion $fromSuggestion
+     * @ORM\ManyToOne(targetEntity=Suggestion::class, inversedBy="events")
      * @ORM\JoinColumn(name="from_suggestion_id")
      */
     private $fromSuggestion;
@@ -302,10 +304,19 @@ class Event
 
     /**
      * @param mixed $fromSuggestion
+     * @return Event
      */
-    public function setFromSuggestion($fromSuggestion): void
+    public function setFromSuggestion($fromSuggestion)
     {
+        if($this->fromSuggestion !== null){
+            $this->fromSuggestion->removeEvent($this);
+        }
+        if($fromSuggestion !== null){
+            $fromSuggestion->addEvent($this);
+        }
+
         $this->fromSuggestion = $fromSuggestion;
+        return $this;
     }
 
     /**
