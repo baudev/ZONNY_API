@@ -104,13 +104,13 @@ class FriendsLink
      * @param mixed $user2
      * @return FriendsLink
      */
-    public function setUser2($user2)
+    public function setUser2(User $user2 = null)
     {
         if($this->user2 !== null){
             $this->user2->removeFriendsLink($this);
         }
         if($user2 !== null){
-            $user2->addFriendsLinks($this);
+            $user2->addFriendsLink($this);
         }
 
         $this->user2 = $user2;
