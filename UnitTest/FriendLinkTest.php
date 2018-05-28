@@ -57,7 +57,6 @@ class FriendLinkTest extends TestCase
 
     public function testInsertion(){
         $entityManager = Database::getEntityManager();
-        $friendslinkRepository = FriendsLinkRepository::getRepository();
 
         $user = new User();
         $user->setName("user1");
@@ -93,7 +92,6 @@ class FriendLinkTest extends TestCase
 
     public function testDeletion(){
         $entityManager = Database::getEntityManager();
-        $friendslinkRepository = FriendsLinkRepository::getRepository();
 
         $user = new User();
         $user->setName("user1");
@@ -158,7 +156,7 @@ class FriendLinkTest extends TestCase
         /**
          * @var FriendsLink $friendslink_copy
          */
-        $friendslink_copy = FriendsLinkRepository::getRepository()->find($friendslink->getId());
+        $friendslink_copy = $friendslinkRepository->find($friendslink->getId());
         $this->assertFalse($friendslink_copy->getAuthorizationUser2());
 
         $entityManager->remove($friendslink);
