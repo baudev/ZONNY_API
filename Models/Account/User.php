@@ -167,7 +167,11 @@ class User implements \JsonSerializable
     /**
      * @ORM\OneToMany(targetEntity=Report::class, cascade={"persist", "remove"}, mappedBy="users")
      */
-    private $reports;
+    private $reportsConcerned;
+    /**
+     * @ORM\OneToMany(targetEntity=Report::class, cascade={"persist", "remove"}, mappedBy="users")
+     */
+    private $reportsByUser;
     /**
      * @ORM\OneToMany(targetEntity=ChatParticipant::class, cascade={"persist", "remove"}, mappedBy="users")
      */
@@ -207,7 +211,8 @@ class User implements \JsonSerializable
         $this->subscriptions = new ArrayCollection();
         $this->errors = new ArrayCollection();
         $this->logs = new ArrayCollection();
-        $this->reports = new ArrayCollection();
+        $this->reportsConcerned = new ArrayCollection();
+        $this->reportsByUser = new ArrayCollection();
         $this->chatParticipants = new ArrayCollection();
         $this->pendingOperations = new ArrayCollection();
         $this->events = new ArrayCollection();
@@ -846,17 +851,17 @@ class User implements \JsonSerializable
     /**
      * @return array|null
      */
-    public function getReports(): ?array {
-        return $this->reports->toArray();
+    public function getReportsConcerned(): ?array {
+        return $this->reportsConcerned->toArray();
     }
 
     /**
      * @param Report $report
      * @return $this
      */
-    public function addReport(Report $report){
-        if(!$this->reports->contains($report)){
-            $this->reports->add($report);
+    public function addReportConcerned(Report $report){
+        if(!$this->reportsConcerned->contains($report)){
+            $this->reportsConcerned->add($report);
         }
         return $this;
     }
@@ -865,9 +870,38 @@ class User implements \JsonSerializable
      * @param Report $report
      * @return $this
      */
-    public function removeReport(Report $report){
-        if($this->reports->contains($report)){
-            $this->reports->removeElement($report);
+    public function removeReportConcerned(Report $report){
+        if($this->reportsConcerned->contains($report)){
+            $this->reportsConcerned->removeElement($report);
+        }
+        return $this;
+    }
+
+    /**
+     * @return array|null
+     */
+    public function getReportsByUser(): ?array {
+        return $this->reportsByUser->toArray();
+    }
+
+    /**
+     * @param Report $report
+     * @return $this
+     */
+    public function addReportByUser(Report $report){
+        if(!$this->reportsByUser->contains($report)){
+            $this->reportsByUser->add($report);
+        }
+        return $this;
+    }
+
+    /**
+     * @param Report $report
+     * @return $this
+     */
+    public function removeReportByUser(Report $report){
+        if($this->reportsByUser->contains($report)){
+            $this->reportsByUser->removeElement($report);
         }
         return $this;
     }

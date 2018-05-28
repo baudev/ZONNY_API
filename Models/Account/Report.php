@@ -80,11 +80,11 @@ class Report
     public function setConcernedUser(User $concernedUser)
     {
         if($this->concernedUser !== null){
-            $this->concernedUser->removeError($this);
+            $this->concernedUser->removeReportConcerned($this);
         }
 
         if($concernedUser !== null){
-            $concernedUser->addError($this);
+            $concernedUser->addReportConcerned($this);
         }
 
         $this->concernedUser = $concernedUser;
@@ -106,11 +106,11 @@ class Report
     public function setByUser(User $byUser)
     {
         if($this->byUser !== null){
-            $this->byUser->removeError($this);
+            $this->byUser->removeReportByUser($this);
         }
 
         if($byUser !== null){
-            $byUser->addError($this);
+            $byUser->addReportByUser($this);
         }
 
         $this->byUser = $byUser;
