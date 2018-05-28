@@ -27,5 +27,8 @@ test:app:
   only:
     - tags
   script:
+  # Design the database
+  - /builds/baudev/ZONNY_API/vendor/bin/doctrine orm:schema-tool:update --force
+  # Launch Unit tests
   - phpunit --no-configuration /builds/baudev/ZONNY_API/UnitTest --teamcity --testdox
   allow_failure: false
