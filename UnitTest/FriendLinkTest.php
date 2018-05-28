@@ -119,8 +119,6 @@ class FriendLinkTest extends TestCase
         $entityManager->persist($friendslink);
         $entityManager->flush();
 
-        $this->assertNotNull($friendslink->getId());
-
         $entityManager->remove($friendslink);
         $entityManager->remove($user);
         $entityManager->remove($user2);
