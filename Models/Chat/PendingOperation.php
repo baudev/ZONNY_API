@@ -32,7 +32,7 @@ class PendingOperation
      */
     private $user;
     /**
-     * @ORM\Column(type="string", name="operation_id_for_user")
+     * @ORM\Column(type="bigint", name="operation_id_for_user")
      */
     private $operationIdForUser;
     /**
