@@ -149,6 +149,10 @@ class User implements \JsonSerializable
      */
     private $invitationLinks;
     /**
+     * @ORM\OneToMany(targetEntity=InvitationLink::class, cascade={"persist", "remove"}, mappedBy="users")
+     */
+    private $invitationLinksUsed;
+    /**
      * @ORM\OneToMany(targetEntity=PhoneNumber::class, cascade={"persist", "remove"}, mappedBy="users")
      */
     private $phoneNumbers;
@@ -207,6 +211,7 @@ class User implements \JsonSerializable
     {
         $this->friendsLinks = new ArrayCollection();
         $this->invitationLinks = new ArrayCollection();
+        $this->invitationLinksUsed = new ArrayCollection();
         $this->phoneNumbers = new ArrayCollection();
         $this->subscriptions = new ArrayCollection();
         $this->errors = new ArrayCollection();
@@ -724,6 +729,37 @@ class User implements \JsonSerializable
     public function removeInvitationLink(InvitationLink $invitationLink){
         if($this->invitationLinks->contains($invitationLink)) {
             $this->invitationLinks->removeElement($invitationLink);
+        }
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getInvitationLinksUsed(): ?array
+    {
+        return $this->invitationLinksUsed->toArray();
+    }
+
+    /**
+     * @param InvitationLink $invitationLink
+     * @return User
+     */
+    public function addInvitationLinkUsed(InvitationLink $invitationLink)
+    {
+        if(!$this->invitationLinksUsed->contains($invitationLink)) {
+            $this->invitationLinksUsed->add($invitationLink);
+        }
+        return $this;
+    }
+
+    /**
+     * @param InvitationLink $invitationLink
+     * @return User
+     */
+    public function removeInvitationLinkUsed(InvitationLink $invitationLink){
+        if($this->invitationLinksUsed->contains($invitationLink)) {
+            $this->invitationLinksUsed->removeElement($invitationLink);
         }
         return $this;
     }

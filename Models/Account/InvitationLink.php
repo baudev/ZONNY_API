@@ -31,6 +31,12 @@ class InvitationLink
      */
     private $user;
     /**
+     * @var User $user
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="invitation_links")
+     * @ORM\JoinColumn(name="used_by_user_id")
+     */
+    private $usedByUser;
+    /**
      * @ORM\Column(type="string", length=255, unique=true, name="token_id")
      */
     private $tokenId;
@@ -83,6 +89,33 @@ class InvitationLink
         $this->user = $user;
         return $this;
     }
+
+    /**
+     * @return User
+     */
+    public function getUsedByUser(): User
+    {
+        return $this->usedByUser;
+    }
+
+    /**
+     * @param User $usedByUser
+     * @return InvitationLink
+     */
+    public function setUsedByUser(User $usedByUser)
+    {
+        if($this->usedByUser !== null){
+            $this->usedByUser->removeInvitationLink($this);
+        }
+        if($usedByUser !== null){
+            $usedByUser->addInvitationLink($this);
+        }
+
+        $this->usedByUser = $usedByUser;
+        return $this;
+    }
+
+
 
     /**
      * @return mixed
