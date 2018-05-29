@@ -8,12 +8,13 @@
 
 namespace ZONNY\Models\Account;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\UniqueConstraint;
 
 /**
  * Class InvitationLink
  * @package ZONNY\Models\Accounts
  * @ORM\Entity
- * @ORM\Table(name="invitation_links")
+ * @ORM\Table(name="invitation_links", uniqueConstraints={@UniqueConstraint(name="invitation_links_unique", columns={"user_id", "used_by_user_id"})})
  */
 class InvitationLink
 {

@@ -9,6 +9,7 @@
 namespace ZONNY\Models\Chat;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\UniqueConstraint;
 use ZONNY\Models\Account\User;
 use ZONNY\Models\Event\Event;
 
@@ -16,7 +17,7 @@ use ZONNY\Models\Event\Event;
  * Class ChatParticipant
  * @package ZONNY\Models\Chat
  * @ORM\Entity
- * @ORM\Table(name="chat_participants")
+ * @ORM\Table(name="chat_participants", uniqueConstraints={@UniqueConstraint(name="chat_participants_unique", columns={"event_id", "user_id"})})
  */
 class ChatParticipant
 {

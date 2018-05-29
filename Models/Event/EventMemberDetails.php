@@ -8,13 +8,14 @@
 
 namespace ZONNY\Models\Event;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\UniqueConstraint;
 use ZONNY\Models\Account\User;
 
 /**
  * Class EventMemberDetails
  * @package ZONNY\Models\Event
  * @ORM\Entity
- * @ORM\Table(name="events_member_details")
+ * @ORM\Table(name="events_member_details", uniqueConstraints={@UniqueConstraint(name="events_member_details_unique", columns={"event_id", "invited_friend_id"})})
  */
 class EventMemberDetails
 {

@@ -8,13 +8,14 @@
 
 namespace ZONNY\Models\Suggestion;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\UniqueConstraint;
 use ZONNY\Models\Suggestion\Suggestion;
 
 /**
  * Class DayTime
  * @package ZONNY\Models\Suggestion
  * @ORM\Entity
- * @ORM\Table(name="day_times")
+ * @ORM\Table(name="day_times", uniqueConstraints={@UniqueConstraint(name="day_times_unique", columns={"suggestion_id", "day"})})
  */
 class DayTime
 {

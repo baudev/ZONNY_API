@@ -8,12 +8,13 @@
 
 namespace ZONNY\Models\Chat;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\UniqueConstraint;
 
 /**
  * Class State
  * @package ZONNY\Models\Chat
  * @ORM\Entity
- * @ORM\Table(name="states")
+ * @ORM\Table(name="states", uniqueConstraints={@UniqueConstraint(name="states_unique", columns={"message_id", "state"})})
  */
 class State
 {

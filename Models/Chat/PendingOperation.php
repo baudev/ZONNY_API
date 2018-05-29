@@ -8,13 +8,14 @@
 
 namespace ZONNY\Models\Chat;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\UniqueConstraint;
 use ZONNY\Models\Account\User;
 
 /**
  * Class PendingOperation
  * @package ZONNY\Models\Chat
  * @ORM\Entity
- * @ORM\Table(name="pending_operations")
+ * @ORM\Table(name="pending_operations", uniqueConstraints={@UniqueConstraint(name="pending_operations_unique", columns={"user_id", "operation_id_for_user"})})
  */
 class PendingOperation
 {
