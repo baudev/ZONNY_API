@@ -56,6 +56,7 @@ class Event
     /**
      * @var User $user
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="events")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $creator;
     /**
@@ -73,7 +74,7 @@ class Event
     /**
      * @var Suggestion $fromSuggestion
      * @ORM\ManyToOne(targetEntity=Suggestion::class, inversedBy="events")
-     * @ORM\JoinColumn(name="from_suggestion_id")
+     * @ORM\JoinColumn(name="from_suggestion_id", nullable=true)
      */
     private $fromSuggestion;
     /**

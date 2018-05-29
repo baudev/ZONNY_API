@@ -28,6 +28,7 @@ class PhoneNumber
     /**
      * @var User $user
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="phone_numbers")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $user;
     /**

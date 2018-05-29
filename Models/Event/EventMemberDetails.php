@@ -28,12 +28,13 @@ class EventMemberDetails
     /**
      * @var Event $event
      * @ORM\ManyToOne(targetEntity=Event::class, inversedBy="events_member_details")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $event;
     /**
      * @var User $invitedFriend
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="events_member_details")
-     * @ORM\JoinColumn(name="invited_friend_id")
+     * @ORM\JoinColumn(name="invited_friend_id", nullable=false)
      */
     private $invitedFriend;
     /**

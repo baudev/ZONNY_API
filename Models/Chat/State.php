@@ -27,6 +27,7 @@ class State
     /**
      * @var ChatMessage $message
      * @ORM\ManyToOne(targetEntity=ChatMessage::class, inversedBy="states")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $message;
     /**

@@ -27,6 +27,7 @@ class InvitationLink
     /**
      * @var User $user
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="invitation_links")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $user;
     /**

@@ -35,6 +35,7 @@ class ChatMessage
     /**
      * @var Event $event
      * @ORM\ManyToOne(targetEntity=Event::class, inversedBy="chat_messages")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $event;
     /**

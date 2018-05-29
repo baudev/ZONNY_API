@@ -30,11 +30,13 @@ class Subscription
     /**
      * @var User $user
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="subscriptions")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $user;
     /**
      * @var User $followed
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="subscriptions")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $followed;
     /**

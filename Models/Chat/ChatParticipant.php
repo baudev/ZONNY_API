@@ -30,11 +30,13 @@ class ChatParticipant
     /**
      * @var Event $event
      * @ORM\ManyToOne(targetEntity=Event::class, inversedBy="chat_participants")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $event;
     /**
      * @var User $user
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="chat_participants")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $user;
     /**

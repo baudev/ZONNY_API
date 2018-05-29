@@ -63,6 +63,7 @@ class Suggestion
     /**
      * @var User $user
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="suggestions")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $creator;
     /**

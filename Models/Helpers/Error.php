@@ -43,6 +43,7 @@ class Error
     /**
      * @var User $user
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="errors")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $user;
     /**

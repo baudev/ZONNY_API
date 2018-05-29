@@ -28,11 +28,13 @@ class EventRequest
     /**
      * @var Event $event
      * @ORM\ManyToOne(targetEntity=Event::class, inversedBy="events_requests")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $event;
     /**
      * @var User $user
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="events_requests")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $user;
     /**

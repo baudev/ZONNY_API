@@ -23,11 +23,13 @@ class FriendsLink
     /**
      * @var User $user1
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="friends_links")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $user1;
     /**
      * @var User $user2
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="friends_links")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $user2;
     /**
