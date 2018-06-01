@@ -29,6 +29,8 @@ test:app:
   script:
   # Design the database
   - /builds/baudev/ZONNY_API/vendor/bin/doctrine orm:schema-tool:update --force
+  # Update documentation
+  - curl https://zonny.me/api/v0.2/doc/swagger_auto_generate_json.php
   # Launch Unit tests
   - phpunit --no-configuration /builds/baudev/ZONNY_API/UnitTest --teamcity --testdox
   allow_failure: false
