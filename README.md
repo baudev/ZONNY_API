@@ -10,10 +10,11 @@ ZONNY est une application mobile permettant la création d'évènements spontan�
 
 ## FONCTIONNALITÉS
 
- - Comptes utilisateurs. Connexion seulement par Facebook© Login
+ - Comptes utilisateurs. Connexion avec Facebook, SMS, Email et anonymement !
  - Évènements
  - Requêtes pour s'inviter aux évènements publics de ses amis
- - Google© Places suggestions
+ - Suggestions d'évènements
+ - Chat (via XMPP et Firebase Cloud Messaging)
 
 ## INSTALLATION
 
