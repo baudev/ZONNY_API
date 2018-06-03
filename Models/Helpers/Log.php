@@ -39,7 +39,7 @@ class Log
     /**
      * @var User $user
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="logs")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $user;
     /**
