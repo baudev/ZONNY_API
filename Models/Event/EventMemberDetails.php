@@ -49,7 +49,7 @@ class EventMemberDetails
     /**
      * @ORM\Column(type="integer", length=1, nullable=true)
      */
-    private $response;
+    private $response = 0;
     /**
      * @ORM\Column(type="boolean", name="is_creator")
      */
