@@ -23,7 +23,6 @@ use ZONNY\Controllers\Friends\GetAllFriends;
 use ZONNY\Controllers\Friends\GetFriend;
 use ZONNY\Controllers\Friends\GetInvitableFriends;
 use ZONNY\Controllers\Friends\PutFriendLink;
-use ZONNY\Controllers\GooglePlaces\GetGooglePlace;
 use ZONNY\Controllers\Map\ShowMap;
 use ZONNY\Utils\Application;
 
@@ -198,14 +197,6 @@ $app->get('/events_public/search/:category/:page',  array(new Authentificate(), 
 // Permet une suggestion d'évènement Facebook aléatoirement
 $app->get('/events_public/random/',  array(new Authentificate(), 'AuthUser'), function () use ($app) {
     // TODO CONTROLLER
-});
-
-/**
- * Routes concernant les lieux suggérés
- */
-// Permet de récupérer les informations concernant un lieu Google
-$app->get('/place_public/:id',  array(new Authentificate(), 'AuthUser'), function ($place_id) use ($app) {
-    Application::response(200, new GetGooglePlace($place_id));
 });
 
 /**
