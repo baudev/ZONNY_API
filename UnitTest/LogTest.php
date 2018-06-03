@@ -35,7 +35,6 @@ class LogTest extends TestCase
         $log = new Log();
         $log->setUser($user);
         $log->setType("test");
-        $log->setRequest("/account");
         $log->setUrlRequest('/account/3018');
         $log->setIp('192.138.0.0');
         $log->setHackAttempt(false);
@@ -66,7 +65,6 @@ class LogTest extends TestCase
         $log = new Log();
         $log->setUser($user);
         $log->setType("test");
-        $log->setRequest("/account");
         $log->setUrlRequest('/account/3018');
         $log->setIp('192.138.0.0');
         $log->setHackAttempt(false);
@@ -94,7 +92,6 @@ class LogTest extends TestCase
         $log = new Log();
         $log->setUser($user);
         $log->setType("test");
-        $log->setRequest("/account");
         $log->setUrlRequest('/account/3018');
         $log->setIp('192.138.0.0');
         $log->setHackAttempt(false);
@@ -122,7 +119,6 @@ class LogTest extends TestCase
         $log = new Log();
         $log->setUser($user);
         $log->setType("test");
-        $log->setRequest("/account");
         $log->setUrlRequest('/account/3018');
         $log->setIp('192.138.0.0');
         $log->setHackAttempt(false);
