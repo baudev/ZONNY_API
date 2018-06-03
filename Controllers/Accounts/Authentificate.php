@@ -24,11 +24,11 @@ class Authentificate
         // Vérification de l'en-tête d'autorisation
         if (isset($headers['Authorization']) && !empty($headers['Authorization'])) {
             // on cherche un utilisateur ayant cette clé
-            $user = UserRepository::getRepository()->findBy(["keyApp" => $headers['authorization']]);
+            $user = UserRepository::getRepository()->findOneBy(["keyApp" => $headers['authorization']]);
             // si la variable n'est pas nulle c'est qu'un utilisateur a été trouvé
-            if($user[0] != null){
+            if($user != null){
                 // l'utilisateur est authentifié
-                Application::setUser($user[0]);
+                Application::setUser($user);
                 // on log l'utilisation de route
                 $log = new Log();
                 $log->setHackAttempt(false);
