@@ -7,9 +7,10 @@
  */
 
 namespace ZONNY\Models\Helpers;
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use ZONNY\Models\Account\User;
-use ZONNY\Repositories\Helpers\LogRepository;
+use ZONNY\Utils\Application;
 use ZONNY\Utils\Database;
 
 /**
@@ -31,10 +32,6 @@ class Log
      * @ORM\Column(type="string", length=100)
      */
     private $type;
-    /**
-     * @ORM\Column(type="string", length=100)
-     */
-    private $request;
     /**
      * @ORM\Column(type="string", length=255, name="url_request")
      */
@@ -88,22 +85,6 @@ class Log
     public function setType($type): void
     {
         $this->type = $type;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getRequest()
-    {
-        return $this->request;
-    }
-
-    /**
-     * @param mixed $request
-     */
-    public function setRequest($request): void
-    {
-        $this->request = $request;
     }
 
     /**
@@ -201,6 +182,11 @@ class Log
      * @throws \Doctrine\ORM\ORMException
      */
     public function addToDatabase(){
+        $this->setType(Application::getApp()->request->getMethod());
+        $this->setUrlRequest(Application::getApp()->request->getResourceUri());
+        $this->setUser(Application::getUser());
+        $this->setIp(Application::getApp()->request->getIp());
+        $this->setCreationDatetime(new Datetime());
         $entityManager = Database::getEntityManager();
         $entityManager->persist($this);
         $entityManager->flush();
