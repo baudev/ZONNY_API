@@ -45,7 +45,7 @@ class PublicError extends Exception implements \JsonSerializable {
     public function addToDatabase(){
         $error = new Error();
         $error->setType("PrivateError");
-        $error->setUrlRequest(Application::getApp()->request->getPath());
+        $error->setUrlRequest(Application::getApp()->request->getResourceUri());
         $error->setMessage($this->getMessage());
         $error->setCode($this->getCode());
         $error->setVariables(Application::getApp()->request->params());
