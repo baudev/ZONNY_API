@@ -111,11 +111,12 @@ class Log
         return $this->user;
     }
 
+
     /**
-     * @param mixed $user
-     * @return Log
+     * @param null|User $user
+     * @return $this
      */
-    public function setUser(User $user)
+    public function setUser(?User $user)
     {
         if($this->user !== null){
             $this->user->removeLog($this);
