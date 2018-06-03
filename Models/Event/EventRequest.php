@@ -41,7 +41,7 @@ class EventRequest
     /**
      * @ORM\Column(type="integer", length=1, nullable=true)
      */
-    private $response;
+    private $response = 0;
     /**
      * @ORM\Column(type="datetimetz", name="creation_datetime")
      */
