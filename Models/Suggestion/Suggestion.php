@@ -256,10 +256,10 @@ class Suggestion
     public function setCreator(User $creator)
     {
         if($this->creator !== null){
-            $this->creator->removeS($this);
+            $this->creator->removeSuggestion($this);
         }
         if($creator !== null){
-            $creator->addEvent($this);
+            $creator->addSuggestion($this);
         }
 
         $this->creator = $creator;
