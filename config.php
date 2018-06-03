@@ -32,6 +32,8 @@ define('GOOGLE_KEY', 'xxxx');
  */
 // active le mode debug pour l'affichage des erreurs
 define('DEBUG', true);
+// nombre de caractères de la clé de l'API
+define('API_KEY_CHARAC_NUMBER', 100);
 // au bout de combien de temps l'utilisateur doit renvoyer sa localisation
 define('NUMBER_SECONDS_MUST_RESEND_LOCATION', 3600);
 // au bout de combien de temps on considère que la position de l'ami n'est plus valide (on considère alors que la position de l'ami est nulle)

@@ -1,6 +1,7 @@
 <?php
 
 namespace ZONNY\Utils;
+use ZONNY\Repositories\Account\UserRepository;
 
 /**
  * @SWG\SecurityScheme(
@@ -18,16 +19,19 @@ class ApiKey {
      * Si la clé API est là dans db, elle est une clé valide
      * @param String $api_key
      * @return boolean
+     * @throws \Doctrine\ORM\ORMException
      */
     private static function isValidApiKey($api_key): bool
     {
-        $stmt = Database::getDb()->prepare("SELECT id from members WHERE key_app = ?");
-        $stmt->execute(array($api_key));
-        return $boolean = $stmt->rowCount() == 1 ? true : false;
+        $results = UserRepository::getRepository()->findBy(["keyApp" => $api_key]);
+        return $boolean = count($results) == 1 ? true : false;
     }
 
     /**
      * Génération aléatoire unique string pour utilisateur clé Api
+     * @param $min
+     * @param $max
+     * @return int
      */
     private static function crypto_rand_secure($min, $max)
     {
@@ -47,6 +51,11 @@ class ApiKey {
         return $min + $rnd;
     }
 
+    /**
+     * Retourne une clé valide et non utilisée
+     * @return string
+     * @throws \Doctrine\ORM\ORMException
+     */
     public static function generateApiKey(): string
     {
         do {
@@ -56,7 +65,7 @@ class ApiKey {
             $codeAlphabet .= "0123456789";
             $max = strlen($codeAlphabet); // edited
 
-            for ($i = 0; $i < 100; $i++) {
+            for ($i = 0; $i < API_KEY_CHARAC_NUMBER; $i++) {
                 $token .= $codeAlphabet[self::crypto_rand_secure(0, $max - 1)];
             }
         } while (self::isValidApiKey($token));
