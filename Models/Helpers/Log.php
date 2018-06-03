@@ -9,6 +9,8 @@
 namespace ZONNY\Models\Helpers;
 use Doctrine\ORM\Mapping as ORM;
 use ZONNY\Models\Account\User;
+use ZONNY\Repositories\Helpers\LogRepository;
+use ZONNY\Utils\Database;
 
 /**
  * Class Log
@@ -194,6 +196,14 @@ class Log
         $this->creationDatetime = $creationDatetime;
     }
 
-
+    /**
+     * Ajoute le log à la base de données
+     * @throws \Doctrine\ORM\ORMException
+     */
+    public function addToDatabase(){
+        $entityManager = Database::getEntityManager();
+        $entityManager->persist($this);
+        $entityManager->flush();
+    }
 
 }
