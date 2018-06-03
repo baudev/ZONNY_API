@@ -1,7 +1,9 @@
 <?php
 namespace ZONNY\Utils;
 
+use DateTime;
 use Exception;
+use ZONNY\Models\Helpers\Error;
 
 /**
  * @SWG\Definition(
@@ -33,6 +35,25 @@ class PublicError extends Exception implements \JsonSerializable {
         parent::__construct($message, $code, $previous);
         $this->setCode($code);
         $this->setMessage($message);
+    }
+
+    /**
+     * Ajoute l'erreur à la base de données
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
+    public function addToDatabase(){
+        $error = new Error();
+        $error->setType("PrivateError");
+        $error->setUrlRequest(Application::getApp()->request->getPath());
+        $error->setMessage($this->getMessage());
+        $error->setCode($this->getCode());
+        $error->setVariables(Application::getApp()->request->params());
+        $error->setUser(Application::getUser());
+        $error->setCreationDatetime(new DateTime());
+        $entityManager = Database::getEntityManager();
+        $entityManager->persist($error);
+        $entityManager->flush();
     }
 
     public function jsonSerialize()

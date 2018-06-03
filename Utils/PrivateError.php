@@ -1,8 +1,10 @@
 <?php
 namespace ZONNY\Utils;
 
+use DateTime;
 use Exception;
 use ZONNY\Models\Account\User;
+use ZONNY\Models\Helpers\Error;
 
 /**
  * Erreurs destinées à l'administrateur
@@ -22,14 +24,23 @@ class PrivateError extends Exception implements \JsonSerializable
         $this->setMessage($message);
     }
 
-    public function log_error(?User $user=null){
-        $req = Database::getDb()->prepare("INSERT INTO errors (user_id, message, code, datetime) VALUES (:user_id, :message, :code, NOW())");
-
-        $req->execute(array(
-            'user_id'   => $user!=null?$user->getId():null,
-            'message'     => $this->getMessage(),
-            'code' => $this->getCode()
-        ));
+    /**
+     * Ajoute l'erreur à la base de données
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
+    public function addToDatabase(){
+        $error = new Error();
+        $error->setType("PrivateError");
+        $error->setUrlRequest(Application::getApp()->request->getPath());
+        $error->setMessage($this->getMessage());
+        $error->setCode($this->getCode());
+        $error->setVariables(Application::getApp()->request->params());
+        $error->setUser(Application::getUser());
+        $error->setCreationDatetime(new DateTime());
+        $entityManager = Database::getEntityManager();
+        $entityManager->persist($error);
+        $entityManager->flush();
     }
 
     public function jsonSerialize()

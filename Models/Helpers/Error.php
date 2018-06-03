@@ -29,6 +29,10 @@ class Error
      */
     private $type;
     /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $urlRequest;
+    /**
      * @ORM\Column(type="text")
      */
     private $message;
@@ -81,6 +85,22 @@ class Error
     public function setType($type): void
     {
         $this->type = $type;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUrlRequest()
+    {
+        return $this->urlRequest;
+    }
+
+    /**
+     * @param mixed $urlRequest
+     */
+    public function setUrlRequest($urlRequest): void
+    {
+        $this->urlRequest = $urlRequest;
     }
 
     /**

@@ -1,6 +1,7 @@
 <?php
 namespace ZONNY\Utils;
 
+use Slim\Slim;
 use ZONNY\Models\Account\User;
 
 class Application
@@ -123,7 +124,7 @@ class Application
     /**
      * @return mixed
      */
-    public static function getApp()
+    public static function getApp() : Slim
     {
         return self::$app;
     }
