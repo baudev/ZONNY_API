@@ -10,12 +10,11 @@ namespace ZONNY\Models\Suggestion;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use ZONNY\Models\Account\User;
-use ZONNY\Models\Suggestion\DayTime;
-use ZONNY\Models\Suggestion\SuggestionCategory;
+use ZONNY\Models\Event\Event;
 
 /**
  * Class Suggestion
- * @package ZONNY\Models
+ * @package ZONNY\Models\Suggestion
  * @ORM\Entity
  * @ORM\Table(name="suggestions")
  */
@@ -90,11 +89,16 @@ class Suggestion
      * @ORM\OneToMany(targetEntity=DayTime::class, cascade={"persist", "remove"}, mappedBy="suggestions")
      */
     private $dayTimes;
+    /**
+     * @ORM\OneToMany(targetEntity=Event::class, cascade={"persist", "remove"}, mappedBy="suggestions")
+     */
+    private $events;
 
     public function __construct()
     {
         $this->suggestionCategories = new ArrayCollection();
         $this->dayTimes = new ArrayCollection();
+        $this->events = new ArrayCollection();
     }
 
     /**
@@ -368,6 +372,35 @@ class Suggestion
     public function removeDayTime(DayTime $dayTime){
         if($this->dayTimes->contains($dayTime)){
             $this->dayTimes->removeElement($dayTime);
+        }
+        return $this;
+    }
+
+    /**
+     * @return array|null
+     */
+    public function getEvents(): ?array {
+        return $this->events->toArray();
+    }
+
+    /**
+     * @param Event $event
+     * @return $this
+     */
+    public function addEvent(Event $event){
+        if(!$this->events->contains($event)){
+            $this->events->add($event);
+        }
+        return $this;
+    }
+
+    /**
+     * @param Event $event
+     * @return $this
+     */
+    public function removeEvent(Event $event){
+        if($this->events->contains($event)){
+            $this->events->removeElement($event);
         }
         return $this;
     }

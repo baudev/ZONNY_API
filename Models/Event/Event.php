@@ -307,7 +307,7 @@ class Event
      * @param mixed $fromSuggestion
      * @return Event
      */
-    public function setFromSuggestion($fromSuggestion)
+    public function setFromSuggestion(Suggestion $fromSuggestion)
     {
         if($this->fromSuggestion !== null){
             $this->fromSuggestion->removeEvent($this);
