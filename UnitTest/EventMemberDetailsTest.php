@@ -90,8 +90,6 @@ class EventMemberDetailsTest extends TestCase
         $eventMemberDetails->setCreationDatetime(new DateTime());
         $entityManager->persist($eventMemberDetails);
         $entityManager->flush();
-        $eventMemberDetails->setIsCreator(false);
-        $entityManager->flush();
 
         $this->assertNotNull($eventMemberDetails->getId());
 
@@ -127,8 +125,6 @@ class EventMemberDetailsTest extends TestCase
         $eventMemberDetails->setIsCreator(true);
         $eventMemberDetails->setCreationDatetime(new DateTime());
         $entityManager->persist($eventMemberDetails);
-        $entityManager->flush();
-        $eventMemberDetails->setIsCreator(false);
         $entityManager->flush();
 
         $entityManager->remove($user);
