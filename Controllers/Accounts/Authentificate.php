@@ -2,43 +2,44 @@
 namespace ZONNY\Controllers\Accounts;
 
 
-use Slim\Route;
 use Slim\Slim;
+use ZONNY\Models\Helpers\Log;
+use ZONNY\Repositories\Account\UserRepository;
 use ZONNY\Utils\Application;
-use ZONNY\Models\Account\User;
 use ZONNY\Utils\ErrorCode;
-use ZONNY\Utils\HackAttempts;
-use ZONNY\Utils\Log;
 use ZONNY\Utils\PublicError;
 
 class Authentificate
 {
 
     /**
-     * @param null|Route $route
+     * Authentifie l'utilisateur
      * @throws PublicError
+     * @throws \Doctrine\ORM\ORMException
      */
-    public function AuthUser(?Route $route=null){
+    public function AuthUser(){
         $app = Slim::getInstance();
         // on recupère le header
         $headers = $app->request()->headers;
         // Vérification de l'en-tête d'autorisation
         if (isset($headers['Authorization']) && !empty($headers['Authorization'])) {
-            // on défini la clé entrée
-            $user = new User();
-            $user->setKeyApp($headers['authorization']);
-            // on recupère l'utilisateur depuis la base de données
-            // si true c'est qu'un utilisateur a été trouvé
-            if($user->getFromDatabase()){
+            // on cherche un utilisateur ayant cette clé
+            $user = UserRepository::getRepository()->findBy(["keyApp" => $headers['authorization']]);
+            // si la variable n'est pas nulle c'est qu'un utilisateur a été trouvé
+            if($user[0] != null){
                 // l'utilisateur est authentifié
-                Application::setUser($user);
+                Application::setUser($user[0]);
                 // on log l'utilisation de route
-                new Log($user, $app->request()->getResourceUri());
+                $log = new Log();
+                $log->setHackAttempt(false);
+                $log->addToDatabase();
             }
             else {
                 // l'utilisateur n'est pas authentifié
                 // on ajoute la tentative d'accès au compte
-                new HackAttempts($app->request()->getResourceUri(), $user);
+                $log = new Log();
+                $log->setHackAttempt(false);
+                $log->addToDatabase();
                 throw new PublicError("Invalid key_app. Unauthorized access.", ErrorCode::INVALID_KEY_APP);
             }
 
