@@ -9,9 +9,12 @@ class Application
     private static $user;
     private static $app;
 
+    /**
+     * Initialise l'Application pour le bon fonctionnement de ZONNY
+     * @param null $app Référence de la variable $app qui est l'instance de Slim
+     */
     public static function init(&$app=null){
-        // Pour les tests unitaires
-        if($app!=null) {
+        if($app != null) {
             self::setApp($app);
             // on gère le comportement des erreurs
             self::handle_errors();
@@ -65,10 +68,10 @@ class Application
         // en fonction du mode debug ou non on affiche les erreurs
         if(!DEBUG) {
             $app->config('debug', false);
-            $app->error(function (\ZONNY\Utils\PublicError $e) use ($app) {
+            $app->error(function (PublicError $e) use ($app) {
                 echo json_encode($e);
             });
-            $app->error(function (\ZONNY\Utils\PrivateError $e) use ($app) {
+            $app->error(function (PrivateError $e) use ($app) {
                 // on log l'erreur
                 $e->log_error(Application::getUser());
                 echo json_encode($e);
