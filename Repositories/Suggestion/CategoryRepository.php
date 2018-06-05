@@ -1,6 +1,7 @@
 <?php
 namespace ZONNY\Repositories\Suggestion;
 
+use Doctrine\ORM\EntityRepository;
 use ZONNY\Models\Suggestion\Category;
 use ZONNY\Utils\Database;
 
@@ -11,7 +12,7 @@ use ZONNY\Utils\Database;
  * Time: 21:09
  */
 
-class CategoryRepository
+class CategoryRepository extends EntityRepository
 {
     /**
      * @return \Doctrine\Common\Persistence\ObjectRepository|\Doctrine\ORM\EntityRepository

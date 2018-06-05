@@ -1,6 +1,7 @@
 <?php
 namespace ZONNY\Repositories\Account;
 
+use Doctrine\ORM\EntityRepository;
 use ZONNY\Models\Account\InvitationLink;
 use ZONNY\Utils\Database;
 
@@ -11,7 +12,7 @@ use ZONNY\Utils\Database;
  * Time: 20:57
  */
 
-class InvitationLinkRepository
+class InvitationLinkRepository extends EntityRepository
 {
 
     /**

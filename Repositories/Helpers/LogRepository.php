@@ -1,6 +1,7 @@
 <?php
 namespace ZONNY\Repositories\Helpers;
 
+use Doctrine\ORM\EntityRepository;
 use ZONNY\Models\Helpers\Log;
 use ZONNY\Utils\Database;
 
@@ -11,7 +12,7 @@ use ZONNY\Utils\Database;
  * Time: 21:08
  */
 
-class LogRepository
+class LogRepository extends EntityRepository
 {
 
     /**

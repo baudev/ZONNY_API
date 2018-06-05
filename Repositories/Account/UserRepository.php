@@ -1,6 +1,7 @@
 <?php
 namespace ZONNY\Repositories\Account;
 
+use Doctrine\ORM\EntityRepository;
 use ZONNY\Models\Account\User;
 use ZONNY\Utils\Database;
 
@@ -11,7 +12,7 @@ use ZONNY\Utils\Database;
  * Time: 20:53
  */
 
-class UserRepository
+class UserRepository extends EntityRepository
 {
 
     /**

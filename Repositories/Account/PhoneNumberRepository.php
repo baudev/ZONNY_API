@@ -1,6 +1,7 @@
 <?php
 namespace ZONNY\Repositories\Account;
 
+use Doctrine\ORM\EntityRepository;
 use ZONNY\Models\Account\PhoneNumber;
 use ZONNY\Utils\Database;
 
@@ -11,7 +12,7 @@ use ZONNY\Utils\Database;
  * Time: 20:58
  */
 
-class PhoneNumberRepository
+class PhoneNumberRepository extends EntityRepository
 {
 
     /**

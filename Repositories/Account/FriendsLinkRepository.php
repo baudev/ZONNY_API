@@ -1,6 +1,7 @@
 <?php
 namespace ZONNY\Repositories\Account;
 
+use Doctrine\ORM\EntityRepository;
 use ZONNY\Models\Account\FriendsLink;
 use ZONNY\Utils\Database;
 
@@ -11,7 +12,7 @@ use ZONNY\Utils\Database;
  * Time: 20:55
  */
 
-class FriendsLinkRepository
+class FriendsLinkRepository extends EntityRepository
 {
     /**
      * @return \Doctrine\Common\Persistence\ObjectRepository|\Doctrine\ORM\EntityRepository

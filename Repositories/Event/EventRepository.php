@@ -1,6 +1,7 @@
 <?php
 namespace ZONNY\Repositories\Event;
 
+use Doctrine\ORM\EntityRepository;
 use ZONNY\Models\Event\Event;
 use ZONNY\Utils\Database;
 
@@ -11,7 +12,7 @@ use ZONNY\Utils\Database;
  * Time: 21:05
  */
 
-class EventRepository
+class EventRepository extends EntityRepository
 {
 
     /**

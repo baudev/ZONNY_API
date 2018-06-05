@@ -1,6 +1,7 @@
 <?php
 namespace ZONNY\Repositories\Chat;
 
+use Doctrine\ORM\EntityRepository;
 use ZONNY\Models\Chat\ChatMessage;
 use ZONNY\Utils\Database;
 
@@ -11,7 +12,7 @@ use ZONNY\Utils\Database;
  * Time: 21:01
  */
 
-class ChatMessageRepository
+class ChatMessageRepository extends EntityRepository
 {
     /**
      * @return \Doctrine\Common\Persistence\ObjectRepository|\Doctrine\ORM\EntityRepository

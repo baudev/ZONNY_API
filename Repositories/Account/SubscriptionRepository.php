@@ -1,6 +1,7 @@
 <?php
 namespace ZONNY\Repositories\Account;
 
+use Doctrine\ORM\EntityRepository;
 use ZONNY\Models\Account\Subscription;
 use ZONNY\Utils\Database;
 
@@ -11,7 +12,7 @@ use ZONNY\Utils\Database;
  * Time: 21:00
  */
 
-class SubscriptionRepository
+class SubscriptionRepository extends EntityRepository
 {
 
     /**

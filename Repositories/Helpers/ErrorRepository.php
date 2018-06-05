@@ -1,6 +1,7 @@
 <?php
 namespace ZONNY\Repositories\Helpers;
 
+use Doctrine\ORM\EntityRepository;
 use ZONNY\Utils\Database;
 use \ZONNY\Models\Helpers\Error;
 
@@ -11,7 +12,7 @@ use \ZONNY\Models\Helpers\Error;
  * Time: 21:07
  */
 
-class ErrorRepository
+class ErrorRepository extends EntityRepository
 {
 
     /**
