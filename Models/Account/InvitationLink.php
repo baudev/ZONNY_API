@@ -27,13 +27,13 @@ class InvitationLink
     private $id;
     /**
      * @var User $user
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="invitation_links")
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="invitationLinks")
      * @ORM\JoinColumn(nullable=false)
      */
     private $user;
     /**
      * @var User $user
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="invitation_links")
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="invitationLinks")
      * @ORM\JoinColumn(name="used_by_user_id")
      */
     private $usedByUser;

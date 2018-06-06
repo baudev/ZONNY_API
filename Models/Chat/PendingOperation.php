@@ -28,7 +28,7 @@ class PendingOperation
     private $id;
     /**
      * @var User $user
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="pending_operations")
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="pendingOperations")
      * @ORM\JoinColumn(nullable=false)
      */
     private $user;

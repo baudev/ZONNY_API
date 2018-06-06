@@ -27,12 +27,12 @@ class PhoneNumber
     private $id;
     /**
      * @var User $user
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="phone_numbers")
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="phoneNumbers")
      * @ORM\JoinColumn(nullable=false)
      */
     private $user;
     /**
-     * @ORM\Column(type="string", length=30, unique=true, name="phone_number")
+     * @ORM\Column(type="string", length=30, unique=true, name="phoneNumbers")
      */
     private $phoneNumber;
     /**

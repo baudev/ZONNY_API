@@ -29,12 +29,12 @@ class ChatMessage
     private $id;
     /**
      * @var User $user
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="chat_messages")
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="chatMessages")
      */
     private $user;
     /**
      * @var Event $event
-     * @ORM\ManyToOne(targetEntity=Event::class, inversedBy="chat_messages")
+     * @ORM\ManyToOne(targetEntity=Event::class, inversedBy="chatMessages")
      * @ORM\JoinColumn(nullable=false)
      */
     private $event;
@@ -55,7 +55,7 @@ class ChatMessage
      * Foreign keys
      */
     /**
-     * @ORM\OneToMany(targetEntity=State::class, cascade={"persist", "remove"}, mappedBy="chat_messages")
+     * @ORM\OneToMany(targetEntity=State::class, cascade={"persist", "remove"}, mappedBy="chatMessages")
      */
     private $states;
 

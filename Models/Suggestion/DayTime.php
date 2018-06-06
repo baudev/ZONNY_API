@@ -28,7 +28,7 @@ class DayTime
     private $id;
     /**
      * @var Suggestion $suggestion
-     * @ORM\ManyToOne(targetEntity=Suggestion::class, inversedBy="suggestion_categories")
+     * @ORM\ManyToOne(targetEntity=Suggestion::class, inversedBy="dayTimes")
      * @ORM\JoinColumn(nullable=false)
      */
     private $suggestion;

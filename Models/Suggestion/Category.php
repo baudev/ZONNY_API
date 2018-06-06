@@ -86,7 +86,7 @@ class Category
      * Foreign keys
      */
     /**
-     * @ORM\OneToMany(targetEntity=SuggestionCategory::class, cascade={"persist", "remove"}, mappedBy="suggestions")
+     * @ORM\OneToMany(targetEntity=SuggestionCategory::class, cascade={"persist", "remove"}, mappedBy="categorys")
      */
     private $suggestionCategories;
 

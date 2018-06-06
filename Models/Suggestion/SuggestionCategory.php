@@ -27,13 +27,13 @@ class SuggestionCategory
     private $id;
     /**
      * @var Suggestion $suggestion
-     * @ORM\ManyToOne(targetEntity=Suggestion::class, inversedBy="suggestion_categories")
+     * @ORM\ManyToOne(targetEntity=Suggestion::class, inversedBy="suggestionCategorys")
      * @ORM\JoinColumn(nullable=false)
      */
     private $suggestion;
     /**
      * @var Category $category
-     * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="suggestion_categories")
+     * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="suggestionCategorys")
      * @ORM\JoinColumn(nullable=false)
      */
     private $category;
