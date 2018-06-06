@@ -281,6 +281,27 @@ class User implements \JsonSerializable
     }
 
     /**
+     * Return if the user is considered has unavailable or not (ghost mode).
+     * @return bool
+     */
+    public function isUnavailable() : bool {
+        if(!empty($this->getUnavailable())) {
+            $current = new \DateTime();
+            $unavailable = $this->getUnavailable();
+            $diff = $unavailable->getTimestamp() - $current->getTimestamp();
+            if($diff>0){
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+        else {
+            return false;
+        }
+    }
+
+    /**
      * Specify data which should be serialized to JSON
      * @link http://php.net/manual/en/jsonserializable.jsonserialize.php
      * @return mixed data which can be serialized by <b>json_encode</b>,
