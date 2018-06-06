@@ -260,6 +260,27 @@ class User implements \JsonSerializable
     }
 
     /**
+     * Return if the user has to update his location
+     * @return bool
+     */
+    public function needToUpdateHisLocation() : bool {
+        $current = new \DateTime();
+        $lastLocalisation = $this->getLastLocationCheckUp();
+        if (isset($lastLocalisation)) {
+            $diff = $current->getTimestamp() - $lastLocalisation->getTimestamp();
+            if($diff->s>NUMBER_SECONDS_MUST_RESEND_LOCATION){
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+        else {
+            return true;
+        }
+    }
+
+    /**
      * Specify data which should be serialized to JSON
      * @link http://php.net/manual/en/jsonserializable.jsonserialize.php
      * @return mixed data which can be serialized by <b>json_encode</b>,
