@@ -14,12 +14,14 @@ use ZONNY\Models\Event\EventRequest;
 use ZONNY\Models\Helpers\Error;
 use ZONNY\Models\Helpers\Log;
 use ZONNY\Models\Suggestion\Suggestion;
+use ZONNY\Repositories\Account\UserRepository;
+use ZONNY\Repositories\Event\EventMemberDetailsRepository;
 
 
 /**
  * Class User
  * @package ZONNY\Models\Accounts
- * @ORM\Entity()
+ * @ORM\Entity(repositoryClass="ZONNY\Repositories\Account\UserRepository")
  * @ORM\Table(name="users")
  */
 class User implements \JsonSerializable
@@ -141,67 +143,67 @@ class User implements \JsonSerializable
      * Foreign keys
      */
     /**
-     * @ORM\OneToMany(targetEntity=FriendsLink::class, cascade={"persist", "remove"}, mappedBy="users")
+     * @ORM\OneToMany(targetEntity=FriendsLink::class, cascade={"persist", "remove"}, mappedBy="user")
      */
     private $friendsLinks;
     /**
-     * @ORM\OneToMany(targetEntity=InvitationLink::class, cascade={"persist", "remove"}, mappedBy="users")
+     * @ORM\OneToMany(targetEntity=InvitationLink::class, cascade={"persist", "remove"}, mappedBy="user")
      */
     private $invitationLinks;
     /**
-     * @ORM\OneToMany(targetEntity=InvitationLink::class, cascade={"persist", "remove"}, mappedBy="users")
+     * @ORM\OneToMany(targetEntity=InvitationLink::class, cascade={"persist", "remove"}, mappedBy="user")
      */
     private $invitationLinksUsed;
     /**
-     * @ORM\OneToMany(targetEntity=PhoneNumber::class, cascade={"persist", "remove"}, mappedBy="users")
+     * @ORM\OneToMany(targetEntity=PhoneNumber::class, cascade={"persist", "remove"}, mappedBy="user")
      */
     private $phoneNumbers;
     /**
-     * @ORM\OneToMany(targetEntity=Subscription::class, cascade={"persist", "remove"}, mappedBy="users")
+     * @ORM\OneToMany(targetEntity=Subscription::class, cascade={"persist", "remove"}, mappedBy="user")
      */
     private $subscriptions;
     /**
-     * @ORM\OneToMany(targetEntity=Error::class, cascade={"persist", "remove"}, mappedBy="users")
+     * @ORM\OneToMany(targetEntity=Error::class, cascade={"persist", "remove"}, mappedBy="user")
      */
     private $errors;
     /**
-     * @ORM\OneToMany(targetEntity=Log::class, cascade={"persist", "remove"}, mappedBy="users")
+     * @ORM\OneToMany(targetEntity=Log::class, cascade={"persist", "remove"}, mappedBy="user")
      */
     private $logs;
     /**
-     * @ORM\OneToMany(targetEntity=Report::class, cascade={"persist", "remove"}, mappedBy="users")
+     * @ORM\OneToMany(targetEntity=Report::class, cascade={"persist", "remove"}, mappedBy="user")
      */
     private $reportsConcerned;
     /**
-     * @ORM\OneToMany(targetEntity=Report::class, cascade={"persist", "remove"}, mappedBy="users")
+     * @ORM\OneToMany(targetEntity=Report::class, cascade={"persist", "remove"}, mappedBy="user")
      */
     private $reportsByUser;
     /**
-     * @ORM\OneToMany(targetEntity=ChatParticipant::class, cascade={"persist", "remove"}, mappedBy="users")
+     * @ORM\OneToMany(targetEntity=ChatParticipant::class, cascade={"persist", "remove"}, mappedBy="user")
      */
     private $chatParticipants;
     /**
-     * @ORM\OneToMany(targetEntity=PendingOperation::class, cascade={"persist", "remove"}, mappedBy="users")
+     * @ORM\OneToMany(targetEntity=PendingOperation::class, cascade={"persist", "remove"}, mappedBy="user")
      */
     private $pendingOperations;
     /**
-     * @ORM\OneToMany(targetEntity=Event::class, cascade={"persist", "remove"}, mappedBy="users")
+     * @ORM\OneToMany(targetEntity=Event::class, cascade={"persist", "remove"}, mappedBy="user")
      */
     private $events;
     /**
-     * @ORM\OneToMany(targetEntity=EventMemberDetails::class, cascade={"persist", "remove"}, mappedBy="users")
+     * @ORM\OneToMany(targetEntity=EventMemberDetails::class, cascade={"persist", "remove"}, mappedBy="user")
      */
     private $eventMemberDetails;
     /**
-     * @ORM\OneToMany(targetEntity=ChatMessage::class, cascade={"persist", "remove"}, mappedBy="users")
+     * @ORM\OneToMany(targetEntity=ChatMessage::class, cascade={"persist", "remove"}, mappedBy="user")
      */
     private $chatMessages;
     /**
-     * @ORM\OneToMany(targetEntity=EventRequest::class, cascade={"persist", "remove"}, mappedBy="users")
+     * @ORM\OneToMany(targetEntity=EventRequest::class, cascade={"persist", "remove"}, mappedBy="user")
      */
     private $eventRequests;
     /**
-     * @ORM\OneToMany(targetEntity=Suggestion::class, cascade={"persist", "remove"}, mappedBy="users")
+     * @ORM\OneToMany(targetEntity=Suggestion::class, cascade={"persist", "remove"}, mappedBy="user")
      */
     private $suggestions;
 
@@ -225,6 +227,78 @@ class User implements \JsonSerializable
         $this->chatMessages = new ArrayCollection();
         $this->eventRequests = new ArrayCollection();
         $this->suggestions = new ArrayCollection();
+    }
+
+    /**
+     * Return the user level
+     * @return int
+     * @throws \Doctrine\ORM\ORMException
+     */
+    public function getLevel() : int {
+        $invitationsInfos = EventMemberDetailsRepository::getRepository()->getUserInvitationsNewerThanOneWeek($this);
+        $level = 0;
+        /** @var EventMemberDetails $invitationsInfo */
+        foreach ($invitationsInfos as $key => $invitationsInfo){
+            if($invitationsInfo->getisCreator()){
+                $level += 6;
+            }
+            else if($invitationsInfo->getResponse() == 1){
+                $level += 4;
+            }
+            else {
+                $level += 2;
+            }
+        }
+
+        // if the counter is lower than 10 over 100, we check if the user is newer than one week
+        if($level <= 10){
+            if($this->getCreationDatetime() > (new \DateTime())->modify('-7 days')){
+                $level = 10;
+            }
+        }
+        return $level;
+    }
+
+    /**
+     * Return if the user has to update his location
+     * @return bool
+     */
+    public function needToUpdateHisLocation() : bool {
+        $current = new \DateTime();
+        $lastLocalisation = $this->getLastLocationCheckUp();
+        if (isset($lastLocalisation)) {
+            $diff = $current->getTimestamp() - $lastLocalisation->getTimestamp();
+            if($diff->s>NUMBER_SECONDS_MUST_RESEND_LOCATION){
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+        else {
+            return true;
+        }
+    }
+
+    /**
+     * Return if the user is considered has unavailable or not (ghost mode).
+     * @return bool
+     */
+    public function isUnavailable() : bool {
+        if(!empty($this->getUnavailable())) {
+            $current = new \DateTime();
+            $unavailable = $this->getUnavailable();
+            $diff = $unavailable->getTimestamp() - $current->getTimestamp();
+            if($diff>0){
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+        else {
+            return false;
+        }
     }
 
     /**
