@@ -2,7 +2,7 @@
 
 ZONNY is a mobile application allowing the creation of spontaneous and ephemeral events with user's friends. More about on [https://zonny.me](https://zonny.me)
 
-| [Try it out](#TRY IT OUT) | [Features](#FEATURES) | [Installation](#INSTALLATION) | [Contribute](#CONTRIBUTE) | [Remarks](#REMARKS) | [License](#LICENSE) |
+| [Try it out](#try-it-out) | [Features](#features) | [Installation](#installation) | [Contribute](#contribute) | [Remarks](#remarks) | [License](#license) |
 | :----------- | :------: | ------------: | :----------- | :------: | ------------: |
 
 ## TRY IT OUT
