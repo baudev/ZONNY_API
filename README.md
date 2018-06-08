@@ -2,7 +2,8 @@
 
 ZONNY is a mobile application allowing the creation of spontaneous and ephemeral events with user's friends. More about on [https://zonny.me](https://zonny.me)
 
-#####v0.2.1-beta 
+##### v0.2.1-beta 
+
 [![pipeline status](https://gitlab.com/baudev/ZONNY_API/badges/v0.2.1-beta/pipeline.svg)](https://gitlab.com/baudev/ZONNY_API/commits/v0.2.1-beta)
 [![coverage report](https://gitlab.com/baudev/ZONNY_API/badges/v0.2.1-beta/coverage.svg)](https://gitlab.com/baudev/ZONNY_API/commits/v0.2.1-beta)
 
