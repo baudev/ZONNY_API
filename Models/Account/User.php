@@ -302,6 +302,16 @@ class User implements \JsonSerializable
     }
 
     /**
+     * @return bool
+     * @throws \Doctrine\ORM\ORMException
+     */
+    public function isCurrentlyToAnEvent() : bool {
+        // we count
+        $number_results = count(EventMemberDetailsRepository::getRepository()->getCurrentEventsWhereUserIsComing($this));
+        return $number_results == 0 ? false : true;
+    }
+
+    /**
      * Specify data which should be serialized to JSON
      * @link http://php.net/manual/en/jsonserializable.jsonserialize.php
      * @return mixed data which can be serialized by <b>json_encode</b>,

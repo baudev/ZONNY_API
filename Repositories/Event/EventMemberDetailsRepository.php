@@ -1,6 +1,7 @@
 <?php
 namespace ZONNY\Repositories\Event;
 
+use DateTime;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
 use ZONNY\Models\Account\User;
@@ -50,13 +51,73 @@ class EventMemberDetailsRepository extends EntityRepository
     }
 
     /**
+     * @param User $user
+     * @return mixed
+     */
+    public function getCurrentEventsWhereUserIsComing(User $user){
+        $qb = $this->getQueryBuilder();
+
+        $this->joinEventMemberDetailsAndEvents($qb);
+        $this->whereResponseIs($qb, EventMemberDetails::IS_COMING);
+        $this->joinWhereEventsHaveStarted($qb);
+        $this->joinWhereEventsHaveNotEnded($qb);
+        $this->getUserInvitations($qb, $user);
+
+        return $qb
+            ->getQuery()
+            ->getResult();
+    }
+
+    /**
+     * Join the two objects EventMemberDetails and Events
+     * @param QueryBuilder $qb
+     * @return mixed
+     */
+    public function joinEventMemberDetailsAndEvents(QueryBuilder $qb){
+        $qb
+            ->addSelect('e, events')
+            ->join('e.event', 'events');
+    }
+
+    /**
+     * Get events which have already started
+     * @param QueryBuilder $qb
+     */
+    public function joinWhereEventsHaveStarted(QueryBuilder $qb){
+        $qb
+            ->andWhere('events.startDatetime <= :start_datetime')
+            ->setParameter(':start_datetime', new DateTime());
+    }
+
+    /**
+     * Get events which have not ended
+     * @param QueryBuilder $qb
+     */
+    public function joinWhereEventsHaveNotEnded(QueryBuilder $qb){
+        $qb
+            ->andWhere('events.endDatetime >= :end_datetime')
+            ->setParameter(':end_datetime', new DateTime());
+    }
+
+    /**
+     * Get the details of the invitations with the corresponding response
+     * @param QueryBuilder $qb
+     * @param int $response
+     */
+    public function whereResponseIs(QueryBuilder $qb, int $response){
+        $qb
+            ->andWhere('e.response = :response')
+            ->setParameter(':response', $response);
+    }
+
+    /**
      * Return the details of the user invitations
      * @param QueryBuilder $qb
      * @param User $user
      */
     public function getUserInvitations(QueryBuilder $qb, User $user){
         $qb
-            ->where('e.invitedFriend = :userId')
+            ->andwhere('e.invitedFriend = :userId')
             ->setParameter(':userId', $user->getId());
     }
 
