@@ -1,9 +1,10 @@
 ![](https://cdn.pbrd.co/images/Hp02HzE.png)
 
-[![pipeline status](https://gitlab.com/baudev/ZONNY_API/badges/v0.2-beta/pipeline.svg)](https://gitlab.com/baudev/ZONNY_API/commits/v0.2-beta)
-[![coverage report](https://gitlab.com/baudev/ZONNY_API/badges/v0.2-beta/coverage.svg)](https://gitlab.com/baudev/ZONNY_API/commits/v0.2-beta)
-
 ZONNY is a mobile application allowing the creation of spontaneous and ephemeral events with user's friends. More about on [https://zonny.me](https://zonny.me)
+
+#####v0.2.1-beta 
+[![pipeline status](https://gitlab.com/baudev/ZONNY_API/badges/v0.2.1-beta/pipeline.svg)](https://gitlab.com/baudev/ZONNY_API/commits/v0.2.1-beta)
+[![coverage report](https://gitlab.com/baudev/ZONNY_API/badges/v0.2.1-beta/coverage.svg)](https://gitlab.com/baudev/ZONNY_API/commits/v0.2.1-beta)
 
 | [Try it out](#try-it-out) | [Features](#features) | [Installation](#installation) | [Contribute](#contribute) | [Remarks](#remarks) | [License](#license) |
 | :----------- | :------: | ------------: | :----------- | :------: | ------------: |
