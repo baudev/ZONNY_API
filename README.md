@@ -1,51 +1,56 @@
-# API ZONNY
+![](https://cdn.pbrd.co/images/Hp02HzE.png)
 
-ZONNY est une application mobile permettant la création d'évènements spontanés et éphémères avec ses amis. Découvrez en plus sur [https://zonny.me](https://zonny.me)
-## ESSAYER
+ZONNY is a mobile application allowing the creation of spontaneous and ephemeral events with user's friends. More about on [https://zonny.me](https://zonny.me)
 
- 1. Accédez à la documentation [https://zonny.me/docs](https://zonny.me/docs)
- 2. Obtenez votre `key_app` en s'enregistrant avec la requête POST `/account`
- 3. Vous pouvez maintenant utiliser l'API !
+| [Try it out](#TRY IT OUT) | [Features](#FEATURES) | [Installation](#INSTALLATION) | [Contribute](#CONTRIBUTE) | [Remarks](#REMARKS) | [License](#LICENSE) |
+| :----------- | :------: | ------------: | :----------- | :------: | ------------: |
+
+## TRY IT OUT
+ 1. Access to the documentation at [https://zonny.me/docs](https://zonny.me/docs)
+ 2. Get your `key_app` while registering with the POST request: `/account`
+ 3. You can start trying it!
 
 
-## FONCTIONNALITÉS
+## FEATURES
 
- - Comptes utilisateurs. Connexion avec Facebook, SMS, Email et anonymement !
- - Évènements
- - Requêtes pour s'inviter aux évènements publics de ses amis
- - Suggestions d'évènements
- - Chat (via XMPP et Firebase Cloud Messaging)
+- User accounts. Connection with Facebook, Messages, Emails and anonymously!
+- Events
+- Requests to become a guest at public friends' events.
+- Events' suggestions
+- Chat (with XMPP and Firebase Cloud Messaging)
 
 ## INSTALLATION
 
- 1. Configurez le fichier `config.php` 
- 2. Installez [PostGIS](https://postgis.net/).
+ 1. Configure the `config.php` file. 
+ 2. Install [PostGIS](https://postgis.net/).
  3. ```composer install```
 
 
-## CONTRIBUER
+## CONTRIBUTE
 
-Vous voulez contribuer ? Nous acceptons les `Merges Requests` avec plaisir !
-Envoyez votre `Merge Request` sur la branche [dev](https://gitlab.com/baudev/ZONNY_API/tree/master/dev).
+You want to contribute? We accept all `Merges Requests` with pleasure!
+Send your `Merge Request` on the [dev](https://gitlab.com/baudev/ZONNY_API/tree/master/dev) branch.
 
-## COMMENTAIRES
+## REMARKS
 
-S'il vous plaît reportez les bugs et autres problèmes en [créant une nouvelle `issue`Gitlab](https://gitlab.com/baudev/ZONNY_API/issues/new).
+If there is any bug or other problem, please report it by [creating a new GitLab `issue`](https://gitlab.com/baudev/ZONNY_API/issues/new).
 
-Essayez de respecter la structure suivante le plus possible :
+Try respecting the following structure as possible:
 
 ```
-## Comportement attendu ##
+## Expected behavior ##
+...
 
-## Comportement obtenu ##
+## Obtained behavior ##
+...
 
-Configuration (optionnel)
+Configuration (optional)
 - PHP version:
 - Composer version: 
 - PostGreSQL version:
 ```
 
-## LICENCE
+## LICENSE
 
 Copyright (c) 2018, ZONNY
 All rights reserved. 
