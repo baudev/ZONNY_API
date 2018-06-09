@@ -4,8 +4,8 @@ ZONNY is a mobile application allowing the creation of spontaneous and ephemeral
 
 ##### v0.2.1-beta 
 
-[![pipeline status](https://gitlab.com/baudev/ZONNY_API/badges/v0.2.1-beta/pipeline.svg)](https://gitlab.com/baudev/ZONNY_API/commits/v0.2.1-beta)
-[![coverage report](https://gitlab.com/baudev/ZONNY_API/badges/v0.2.1-beta/coverage.svg)](https://gitlab.com/baudev/ZONNY_API/commits/v0.2.1-beta)
+[![pipeline status](https://gitlab.com/baudev/ZONNY_API/badges/dev/pipeline.svg)](https://gitlab.com/baudev/ZONNY_API/commits/dev)
+[![coverage report](https://gitlab.com/baudev/ZONNY_API/badges/dev/coverage.svg)](https://gitlab.com/baudev/ZONNY_API/commits/dev)
 
 | [Try it out](#try-it-out) | [Features](#features) | [Installation](#installation) | [Contribute](#contribute) | [Remarks](#remarks) | [License](#license) |
 | :----------- | :------: | ------------: | :----------- | :------: | ------------: |
