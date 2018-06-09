@@ -20,3 +20,7 @@ chmod +x /usr/local/bin/phpunit
 apt-get install -y libpq-dev \
     && docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql \
     && docker-php-ext-install pdo pdo_pgsql pgsql
+
+# Install coverage driver
+pecl install xdebug
+docker-php-ext-enable xdebug
