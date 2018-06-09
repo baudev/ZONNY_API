@@ -24,8 +24,6 @@ variables:
 # We test PHP7 with PostgreSQL
 test:app:
   stage: test
-  only:
-    - tags
   script:
   # Design the database
   - /builds/baudev/ZONNY_API/vendor/bin/doctrine orm:schema-tool:update --force
