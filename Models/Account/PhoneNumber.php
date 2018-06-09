@@ -32,7 +32,7 @@ class PhoneNumber
      */
     private $user;
     /**
-     * @ORM\Column(type="string", length=30, unique=true, name="phoneNumbers")
+     * @ORM\Column(type="string", length=30, unique=true, name="phone_number")
      */
     private $phoneNumber;
     /**
