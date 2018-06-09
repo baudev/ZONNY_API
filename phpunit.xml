@@ -6,7 +6,10 @@
     </testsuites>
     <filter>
         <whitelist processUncoveredFilesFromWhitelist="true">
-            <directory suffix=".php">./</directory>
+            <directory suffix='.php'>./Models/</directory>
+            <directory suffix='.php'>./Controllers/</directory>
+            <directory suffix='.php'>./Repositories/</directory>
+            <directory suffix='.php'>./Utils/</directory>
         </whitelist>
     </filter>
 </phpunit>

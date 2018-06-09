@@ -18,8 +18,6 @@ class Application
             // on active les Cors
             self::activateCors();
         }
-        // On connecte l'application à la base de donnée
-        Database::connectPostgreSQL();
         // on défini le fuseau horaire de Paris
         date_default_timezone_set('Europe/Paris');
     }
