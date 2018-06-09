@@ -12,14 +12,14 @@ stages:
   - test
 
 services:
-- mdillon/postgis:latest
+- postgres:latest
 
 variables:
   # Configure pgsql service (https://hub.docker.com/_/pgsql/)
   POSTGRES_DB: zonny
   POSTGRES_USER: postgres
-  POSTGRES_PASSWORD: ""
-  DATABASE_URL: "postgres://postgres:@mdillon__postgis/zonny"
+  POSTGRES_PASSWORD: root
+  DATABASE_URL: "postgres://postgres:root@postgres/zonny"
 
 # We test PHP7 with PostgreSQL
 test:app:
