@@ -30,5 +30,5 @@ test:app:
   # Update documentation
   - curl https://zonny.me/api/v0.2/doc/swagger_auto_generate_json.php
   # Launch Unit tests
-  - phpunit --no-configuration /builds/baudev/ZONNY_API/UnitTest --coverage-text --colors=never --teamcity --testdox
+  - phpunit --configuration /builds/baudev/ZONNY_API/phpunit.xml --testsuite All --coverage-text --colors=never --teamcity --testdox
   allow_failure: false
