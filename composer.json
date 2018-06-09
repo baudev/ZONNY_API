@@ -1,7 +1,7 @@
 {
   "name": "ZONNY API",
   "description": "API PHP officielle de ZONNY",
-  "version": "0.2",
+  "version": "0.2.1",
   "license": "proprietary",
   "authors": [
     {
