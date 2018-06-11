@@ -31,18 +31,18 @@ ZONNY is a mobile application allowing the creation of spontaneous and ephemeral
 ## INSTALLATION
 
  1. Configure the `config.php` file. 
- 2. Install [PostGIS](https://postgis.net/).
- 3. ```composer install```
+ 2. Install database `/vendor/bin/doctrine orm:schema-tool:update --force`
+ 3. Install dependencies ```composer install```
 
 
 ## CONTRIBUTE
 
-You want to contribute? We accept all `Merges Requests` with pleasure!
-Send your `Merge Request` on the [dev](https://gitlab.com/baudev/ZONNY_API/tree/master/dev) branch.
+You want to contribute? We accept all `Pull Requests` with pleasure!
+Send your `Pull Request` on the [dev](https://github.com/baudev/ZONNY_API/tree/dev) branch.
 
 ## REMARKS
 
-If there is any bug or other problem, please report it by [creating a new GitLab `issue`](https://gitlab.com/baudev/ZONNY_API/issues/new).
+If there is any bug or other problem, please report it by [creating a new GitLab `issue`](https://github.com/baudev/ZONNY_API/issues/new).
 
 Try respecting the following structure as possible:
 
