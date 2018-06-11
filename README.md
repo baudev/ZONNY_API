@@ -5,8 +5,8 @@
 ZONNY is a mobile application allowing the creation of spontaneous and ephemeral events with user's friends. More about on [https://zonny.me](https://zonny.me)
 
 [![ZONNY VERSION](https://img.shields.io/badge/dynamic/json.svg?url=https://raw.githubusercontent.com/baudev/ZONNY_API/dev/composer.json&label=v&query=$.version&colorB=1976d2)]()
-[![pipeline status](https://gitlab.com/baudev/ZONNY_API_CI/badges/dev/pipeline.svg)](https://gitlab.com/baudev/ZONNY_API/pipelines)
-[![coverage report](https://gitlab.com/baudev/ZONNY_API_CI/badges/dev/coverage.svg)](https://gitlab.com/baudev/ZONNY_API/tree/dev/UnitTest)
+[![pipeline status](https://gitlab.com/baudev/ZONNY_API/badges/dev/pipeline.svg)](https://gitlab.com/baudev/ZONNY_API/pipelines)
+[![coverage report](https://gitlab.com/baudev/ZONNY_API/badges/dev/coverage.svg)](https://gitlab.com/baudev/ZONNY_API/tree/dev/UnitTest)
 [![swagger validator](https://img.shields.io/swagger/valid/2.0/https/raw.githubusercontent.com/baudev/ZONNY_API/dev/doc/swagger.json.svg)](https://zonny.me/docs)
 
 | [Try it out](#try-it-out) | [Features](#features) | [Installation](#installation) | [Contribute](#contribute) | [Remarks](#remarks) | [License](#license) |
