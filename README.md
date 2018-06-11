@@ -1,16 +1,19 @@
-![](https://cdn.pbrd.co/images/Hp02HzE.png)
+<p align="center">
+	<img src="https://cdn.pbrd.co/images/Hp02HzE.png" />
+</p>
 
 ZONNY is a mobile application allowing the creation of spontaneous and ephemeral events with user's friends. More about on [https://zonny.me](https://zonny.me)
 
-[![ZONNY VERSION](https://img.shields.io/badge/dynamic/json.svg?url=https://gitlab.com/baudev/ZONNY_API/raw/dev/composer.json&label=v&query=$.version&colorB=1976d2)]()
+[![ZONNY VERSION](https://img.shields.io/badge/dynamic/json.svg?url=https://raw.githubusercontent.com/baudev/ZONNY_API/master/composer.json&label=stable&query=$.version&colorB=1976d2)]()
+[![ZONNY VERSION](https://img.shields.io/badge/dynamic/json.svg?url=https://raw.githubusercontent.com/baudev/ZONNY_API/dev/composer.json&label=unstable&query=$.version&colorB=#dc8623)]()
 [![pipeline status](https://gitlab.com/baudev/ZONNY_API/badges/dev/pipeline.svg)](https://gitlab.com/baudev/ZONNY_API/pipelines)
 [![coverage report](https://gitlab.com/baudev/ZONNY_API/badges/dev/coverage.svg)](https://gitlab.com/baudev/ZONNY_API/tree/dev/UnitTest)
-[![swagger validator](https://img.shields.io/swagger/valid/2.0/https/gitlab.com/baudev/ZONNY_API/raw/dev/doc/swagger.json.svg)](https://zonny.me/docs)
-
-
+[![swagger validator](https://img.shields.io/swagger/valid/2.0/https/raw.githubusercontent.com/baudev/ZONNY_API/dev/doc/swagger.json.svg)](https://zonny.me/docs)
 
 | [Try it out](#try-it-out) | [Features](#features) | [Installation](#installation) | [Contribute](#contribute) | [Remarks](#remarks) | [License](#license) |
 | :----------- | :------: | ------------: | :----------- | :------: | ------------: |
+
+**[ :speech_balloon: Questions / Comments? Join us on Discord!](https://discord.gg/P3szxKG)**
 
 ## TRY IT OUT
  1. Access to the documentation at [https://zonny.me/docs](https://zonny.me/docs)
@@ -29,18 +32,18 @@ ZONNY is a mobile application allowing the creation of spontaneous and ephemeral
 ## INSTALLATION
 
  1. Configure the `config.php` file. 
- 2. Install [PostGIS](https://postgis.net/).
- 3. ```composer install```
+ 2. Install database `/vendor/bin/doctrine orm:schema-tool:update --force`
+ 3. Install dependencies ```composer install```
 
 
 ## CONTRIBUTE
 
-You want to contribute? We accept all `Merges Requests` with pleasure!
-Send your `Merge Request` on the [dev](https://gitlab.com/baudev/ZONNY_API/tree/master/dev) branch.
+You want to contribute? We accept all `Pull Requests` with pleasure!
+Send your `Pull Request` on the [dev](https://github.com/baudev/ZONNY_API/tree/dev) branch.
 
 ## REMARKS
 
-If there is any bug or other problem, please report it by [creating a new GitLab `issue`](https://gitlab.com/baudev/ZONNY_API/issues/new).
+If there is any bug or other problem, please report it by [creating a new GitLab `issue`](https://github.com/baudev/ZONNY_API/issues/new).
 
 Try respecting the following structure as possible:
 
