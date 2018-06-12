@@ -1,6 +1,7 @@
 language: php
 php:
   - 7.1
+  - 7.2
 
 services:
   - postgresql
@@ -13,12 +14,13 @@ cache:
 
 before_script:
   - composer install
+  - composer require php-coveralls/php-coveralls
   - psql -c 'create database zonny;' -U postgres
   - mkdir -p build/logs
 
 script:
   - ./vendor/bin/doctrine orm:schema-tool:update --force
-  - phpunit --configuration ./phpunit.xml --testsuite All --teamcity --testdox --coverage-clover build/logs/clover.xml
+  - phpunit --configuration ./phpunit.xml --testsuite All --teamcity --testdox
 
 after_success:
-  - travis_retry php ./vendor/bin/php-coveralls
+  - travis_retry php vendor/bin/php-coveralls
