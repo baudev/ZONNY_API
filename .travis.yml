@@ -1,0 +1,20 @@
+language: php
+php:
+  - 7.1
+
+services:
+  - postgresql
+
+# Cache composer packages so "composer install" is faster
+cache:
+  directories:
+    - $HOME/.composer/cache/files
+
+
+before_script:
+  - composer install
+  - psql -c 'create database zonny;' -U postgres
+
+script:
+  - ./vendor/bin/doctrine orm:schema-tool:update --force
+  - phpunit --configuration ./phpunit.xml --testsuite All --coverage-text --colors=never --teamcity --testdox

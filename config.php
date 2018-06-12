@@ -4,8 +4,8 @@
  *  configuration pour le CI de GitLab
  */
 define('DB_USERNAME_POSTGRE', 'postgres');
-define('DB_PASSWORD_POSTGRE', 'root');
-define('DB_HOST_POSTGRE', 'postgres');
+define('DB_PASSWORD_POSTGRE', '');
+define('DB_HOST_POSTGRE', '127.0.0.1');
 define('DB_NAME_POSTGRE', 'zonny');
 
 /**
