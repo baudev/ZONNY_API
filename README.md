@@ -6,8 +6,8 @@ ZONNY is a mobile application allowing the creation of spontaneous and ephemeral
 
 [![ZONNY VERSION](https://img.shields.io/badge/dynamic/json.svg?url=https://raw.githubusercontent.com/baudev/ZONNY_API/master/composer.json&label=stable&query=$.version&colorB=1976d2)]()
 [![ZONNY VERSION](https://img.shields.io/badge/dynamic/json.svg?url=https://raw.githubusercontent.com/baudev/ZONNY_API/dev/composer.json&label=unstable&query=$.version&colorB=dc8623)]()
-[![pipeline status](https://gitlab.com/baudev/ZONNY_API/badges/dev/pipeline.svg)](https://gitlab.com/baudev/ZONNY_API/pipelines)
-[![coverage report](https://gitlab.com/baudev/ZONNY_API/badges/dev/coverage.svg)](https://github.com/baudev/ZONNY_API/tree/dev/UnitTest)
+[![Build Status](https://travis-ci.org/baudev/ZONNY_API.svg?branch=dev)](https://travis-ci.org/baudev/ZONNY_API)
+[![Coverage Status](https://coveralls.io/repos/github/baudev/ZONNY_API/badge.svg?branch=travis_ci)](https://coveralls.io/github/baudev/ZONNY_API?branch=travis_ci)
 [![swagger validator](https://img.shields.io/swagger/valid/2.0/https/raw.githubusercontent.com/baudev/ZONNY_API/dev/doc/swagger.json.svg)](https://zonny.me/docs)
 ![Discord](https://img.shields.io/discord/440222477562413056.svg) 
 
