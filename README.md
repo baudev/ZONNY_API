@@ -45,7 +45,7 @@ Send your `Pull Request` on the [dev](https://github.com/baudev/ZONNY_API/tree/d
 
 ## REMARKS
 
-If there is any bug or other problem, please report it by [creating a new GitLab `issue`](https://github.com/baudev/ZONNY_API/issues/new).
+If there is any bug or other problem, please report it by [creating a new Github `issue`](https://github.com/baudev/ZONNY_API/issues/new).
 
 Try respecting the following structure as possible:
 
