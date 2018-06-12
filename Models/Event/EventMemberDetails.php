@@ -21,6 +21,19 @@ class EventMemberDetails
 {
 
     /**
+     * The user has still not answered to the invitation
+     */
+    public const HAS_NOT_ANSWERED = 0;
+    /**
+     * The user has answered he is coming to the event
+     */
+    public const IS_COMING = 1;
+    /**
+     * The user has answered he can't come to the event
+     */
+    public const IS_NOT_COMING = 2;
+
+    /**
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      * @ORM\Column(type="integer")
