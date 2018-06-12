@@ -12,11 +12,13 @@ cache:
 
 
 before_script:
-  - composer install
+  - composer install --dev
   - psql -c 'create database zonny;' -U postgres
   - mkdir -p build/logs
 
 script:
   - ./vendor/bin/doctrine orm:schema-tool:update --force
   - phpunit --configuration ./phpunit.xml --testsuite All --teamcity --testdox --coverage-clover build/logs/clover.xml
-  - travis_retry php vendor/bin/php-coveralls -v
+
+after_success:
+  - travis_retry php vendor/bin/php-coveralls
