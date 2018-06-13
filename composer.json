@@ -18,7 +18,8 @@
     "slim/slim": "2.3.5",
     "phpunit/phpunit": "7.0.3",
     "zircote/swagger-php": "*",
-    "doctrine/orm": "^2.5"
+    "doctrine/orm": "^2.5",
+    "jsor/doctrine-postgis": "1.5.*"
   },
   "config": {
     "optimize-autoloader": true
