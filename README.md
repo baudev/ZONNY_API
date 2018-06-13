@@ -34,8 +34,9 @@ ZONNY is a mobile application allowing the creation of spontaneous and ephemeral
 ## INSTALLATION
 
  1. Configure the `config.php` file. 
- 2. Install database `/vendor/bin/doctrine orm:schema-tool:update --force`
- 3. Install dependencies ```composer install```
+ 2. Install [PostGIS](https://postgis.net/)
+ 3. Install database `/vendor/bin/doctrine orm:schema-tool:update --force`
+ 4. Install dependencies ```composer install```
 
 
 ## CONTRIBUTE

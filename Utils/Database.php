@@ -3,7 +3,7 @@ namespace ZONNY\Utils;
 
 use Doctrine\ORM\Tools\Setup;
 use Doctrine\ORM\EntityManager;
-
+use Jsor\Doctrine\PostGIS\Event\ORMSchemaEventSubscriber;
 
 /**
  * Gère la connexion à la base
@@ -58,8 +58,15 @@ class Database
             'dbname'   => DB_NAME_POSTGRE,
         );
 
+        // add PostGIS needed functions
+        PostGIS::addSupportFunctions($config);
+
         // obtaining the entity manager
         $entityManager = EntityManager::create($conn, $config);
+
+        // add Postgis Subscriber
+        $entityManager->getEventManager()->addEventSubscriber(new ORMSchemaEventSubscriber());
+
         self::$entity_manager = $entityManager;
     }
 
