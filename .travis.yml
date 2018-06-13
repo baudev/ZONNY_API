@@ -5,6 +5,11 @@ php:
 services:
   - postgresql
 
+addons:
+  postgresql: "9.6"
+
+sudo: true
+
 # Cache composer packages so "composer install" is faster
 cache:
   directories:
@@ -12,10 +17,11 @@ cache:
 
 
 before_script:
+  - sudo apt-get install postgresql-9.6-postgis-2.3 postgis -y -q
   - composer install
   - composer require php-coveralls/php-coveralls
   - psql -c 'create database zonny;' -U postgres
-  - psql -U postgres -c "create extension postgis"
+  - psql -U postgres -c "create extension postgis" -d zonny
   - mkdir -p build/logs
 
 script:
