@@ -1,14 +1,9 @@
 <?php
 namespace ZONNY\Utils;
 
-use Doctrine\Common\EventManager;
 use Doctrine\ORM\Tools\Setup;
 use Doctrine\ORM\EntityManager;
-use Doctrine\ORM\Configuration;
-use Jsor\Doctrine\PostGIS\Event\DBALSchemaEventSubscriber;
 use Jsor\Doctrine\PostGIS\Event\ORMSchemaEventSubscriber;
-use Jsor\Doctrine\PostGIS\Functions\Configurator;
-
 
 /**
  * Gère la connexion à la base
@@ -63,7 +58,8 @@ class Database
             'dbname'   => DB_NAME_POSTGRE,
         );
 
-
+        // add PostGIS needed functions
+        PostGIS::addSupportFunctions($config);
 
         // obtaining the entity manager
         $entityManager = EntityManager::create($conn, $config);
