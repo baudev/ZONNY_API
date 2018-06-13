@@ -1,9 +1,13 @@
 <?php
 namespace ZONNY\Utils;
 
+use Doctrine\Common\EventManager;
 use Doctrine\ORM\Tools\Setup;
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\Configuration;
+use Jsor\Doctrine\PostGIS\Event\DBALSchemaEventSubscriber;
 use Jsor\Doctrine\PostGIS\Event\ORMSchemaEventSubscriber;
+use Jsor\Doctrine\PostGIS\Functions\Configurator;
 
 
 /**
@@ -59,18 +63,12 @@ class Database
             'dbname'   => DB_NAME_POSTGRE,
         );
 
-        /**
-         * Add ST_DISTANCE postgis function
-         */
-        $config->addCustomStringFunction(
-            'ST_Distance',
-            'Jsor\Doctrine\PostGIS\Functions\ST_Distance'
-        );
+
 
         // obtaining the entity manager
         $entityManager = EntityManager::create($conn, $config);
 
-        // add Postgis subscriber
+        // add Postgis Subscriber
         $entityManager->getEventManager()->addEventSubscriber(new ORMSchemaEventSubscriber());
 
         self::$entity_manager = $entityManager;
