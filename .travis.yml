@@ -15,7 +15,7 @@ before_script:
   - composer install
   - composer require php-coveralls/php-coveralls
   - psql -c 'create database zonny;' -U postgres
-  - psql -c 'CREATE EXTENSION postgis;' -U postgres -d zonny
+  - psql -U postgres -c "create extension postgis"
   - mkdir -p build/logs
 
 script:
