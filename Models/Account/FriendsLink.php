@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping\UniqueConstraint;
 /**
  * Class FriendsLinks
  * @package ZONNY\Models\Accounts
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="ZONNY\Repositories\Account\FriendsLinkRepository")
  * @ORM\Table(name="friends_links", uniqueConstraints={@UniqueConstraint(name="friends_link_unique", columns={"user1_id", "user2_id"})})
  */
 class FriendsLink
@@ -43,11 +43,7 @@ class FriendsLink
     /**
      * @ORM\Column(type="boolean", name="authorization_user_1")
      */
-    private $authorizationUser1 = false;
-    /**
-     * @ORM\Column(type="boolean", name="authorization_user_2")
-     */
-    private $authorizationUser2 = false;
+    private $authorization = false;
     /**
      * @ORM\Column(type="datetimetz", name="creation_datetime")
      */
@@ -154,33 +150,17 @@ class FriendsLink
     /**
      * @return mixed
      */
-    public function getAuthorizationUser1()
+    public function getAuthorization()
     {
-        return $this->authorizationUser1;
+        return $this->authorization;
     }
 
     /**
-     * @param mixed $authorizationUser1
+     * @param mixed $authorization
      */
-    public function setAuthorizationUser1($authorizationUser1): void
+    public function setAuthorization($authorization): void
     {
-        $this->authorizationUser1 = $authorizationUser1;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getAuthorizationUser2()
-    {
-        return $this->authorizationUser2;
-    }
-
-    /**
-     * @param mixed $authorizationUser2
-     */
-    public function setAuthorizationUser2($authorizationUser2): void
-    {
-        $this->authorizationUser2 = $authorizationUser2;
+        $this->authorization = $authorization;
     }
 
     /**
