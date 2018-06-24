@@ -37,8 +37,7 @@ class FriendLinkTest extends TestCase
         $friendslink = new FriendsLink();
         $friendslink->setUser1($user);
         $friendslink->setUser2($user2);
-        $friendslink->setAuthorizationUser1(true);
-        $friendslink->setAuthorizationUser2(true);
+        $friendslink->setAuthorization(true);
         $friendslink->setCreationDatetime(new DateTime());
 
         $entityManager->persist($friendslink);
@@ -75,8 +74,7 @@ class FriendLinkTest extends TestCase
         $friendslink = new FriendsLink();
         $friendslink->setUser1($user);
         $friendslink->setUser2($user2);
-        $friendslink->setAuthorizationUser1(true);
-        $friendslink->setAuthorizationUser2(true);
+        $friendslink->setAuthorization(true);
         $friendslink->setCreationDatetime(new DateTime());
 
         $entityManager->persist($friendslink);
@@ -110,8 +108,7 @@ class FriendLinkTest extends TestCase
         $friendslink = new FriendsLink();
         $friendslink->setUser1($user);
         $friendslink->setUser2($user2);
-        $friendslink->setAuthorizationUser1(true);
-        $friendslink->setAuthorizationUser2(true);
+        $friendslink->setAuthorization(true);
         $friendslink->setCreationDatetime(new DateTime());
 
         $entityManager->persist($friendslink);
@@ -145,19 +142,18 @@ class FriendLinkTest extends TestCase
         $friendslink = new FriendsLink();
         $friendslink->setUser1($user);
         $friendslink->setUser2($user2);
-        $friendslink->setAuthorizationUser1(true);
-        $friendslink->setAuthorizationUser2(true);
+        $friendslink->setAuthorization(true);
         $friendslink->setCreationDatetime(new DateTime());
 
         $entityManager->persist($friendslink);
         $entityManager->flush();
-        $friendslink->setAuthorizationUser2(false);
+        $friendslink->setAuthorization(false);
         $entityManager->flush();
         /**
          * @var FriendsLink $friendslink_copy
          */
         $friendslink_copy = $friendslinkRepository->find($friendslink->getId());
-        $this->assertFalse($friendslink_copy->getAuthorizationUser2());
+        $this->assertFalse($friendslink_copy->getAuthorization());
 
         $entityManager->remove($friendslink);
         $entityManager->remove($user);
