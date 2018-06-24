@@ -12,8 +12,10 @@ require_once dirname(__FILE__) . '/../vendor/autoload.php';
 require_once dirname(__FILE__) . '/../config.php';
 
 use DateTime;
+use ZONNY\Models\Account\FriendsLink;
 use ZONNY\Models\Account\User;
 use PHPUnit\Framework\TestCase;
+use ZONNY\Repositories\Account\FriendsLinkRepository;
 use ZONNY\Repositories\Account\UserRepository;
 use ZONNY\Utils\Database;
 

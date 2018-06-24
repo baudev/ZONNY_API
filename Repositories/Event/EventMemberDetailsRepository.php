@@ -75,7 +75,7 @@ class EventMemberDetailsRepository extends EntityRepository
      */
     public function joinEventMemberDetailsAndEvents(QueryBuilder $qb){
         $qb
-            ->addSelect('e, events')
+            ->addSelect('events')
             ->join('e.event', 'events');
     }
 

@@ -1,6 +1,7 @@
 <?php
 namespace ZONNY\Models\Account;
 
+use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\DBAL\Schema\Column;
 use Doctrine\ORM\Mapping as ORM;
@@ -14,8 +15,12 @@ use ZONNY\Models\Event\EventRequest;
 use ZONNY\Models\Helpers\Error;
 use ZONNY\Models\Helpers\Log;
 use ZONNY\Models\Suggestion\Suggestion;
+use ZONNY\Repositories\Account\FriendsLinkRepository;
 use ZONNY\Repositories\Account\UserRepository;
 use ZONNY\Repositories\Event\EventMemberDetailsRepository;
+use ZONNY\Utils\ErrorCode;
+use ZONNY\Utils\Functions;
+use ZONNY\Utils\PublicError;
 
 
 /**
@@ -229,6 +234,24 @@ class User implements \JsonSerializable
         $this->suggestions = new ArrayCollection();
     }
 
+
+    /**
+     * @PrePersist
+     */
+    public function OnPrePersist(){
+        $this->setLatitude($this->getLatitude() + Functions::randomFloat() * cos($this->getLatitude()) * 0.005);
+        $this->setLongitude($this->getLongitude() + Functions::randomFloat() * cos($this->getLongitude()) * 0.005);
+        $this->setCreationDatetime(new DateTime());
+    }
+
+    /**
+     * @PreUpdate
+     */
+    public function OnPreUpdate(){
+        $this->setLatitude($this->getLatitude() + Functions::randomFloat() * cos($this->getLatitude()) * 0.005);
+        $this->setLongitude($this->getLongitude() + Functions::randomFloat() * cos($this->getLongitude()) * 0.005);
+    }
+
     /**
      * Return the user level
      * @return int
@@ -312,15 +335,37 @@ class User implements \JsonSerializable
     }
 
     /**
+     * return all user friends
+     * @throws \Doctrine\ORM\ORMException
+     */
+    public function getAllHisFriends() {
+        return FriendsLinkRepository::getRepository()->getUserFriends($this);
+    }
+
+    /**
      * Specify data which should be serialized to JSON
      * @link http://php.net/manual/en/jsonserializable.jsonserialize.php
      * @return mixed data which can be serialized by <b>json_encode</b>,
      * which is a value of any type other than a resource.
      * @since 5.4.0
+     * @throws \Doctrine\ORM\ORMException
      */
     public function jsonSerialize()
     {
-        // TODO: Implement jsonSerialize() method.
+        $return = array();
+        $return['id'] = $this->getId();
+        $return['name'] = $this->getName();
+        $return['first_name'] = $this->getFirstName();
+        $return['last_name'] = $this->getLastName();
+        $return['profile_picture_url'] = $this->getProfilePictureUrl();
+        $return['pseudo'] = $this->getPseudo();
+        $return['unavailable'] = $this->getUnavailable();
+        $return['key_app'] = $this->getKeyApp();
+        $return['latitude'] = $this->getLatitude();
+        $return['longitude'] = $this->getLongitude();
+        $return['level'] = $this->getLevel();
+        // need to be localised variable
+        // if facebook, need update token variable
     }
 
     /**
@@ -333,9 +378,14 @@ class User implements \JsonSerializable
 
     /**
      * @param mixed $id
+     * @throws PublicError
      */
     public function setId($id): void
     {
+        if (!empty($id) && !preg_match('#^[0-9]+$#', $id)) {
+            throw new PublicError("UserId invalid format.", ErrorCode::INVALID_FORMAT);
+        }
+
         $this->id = $id;
     }
 
