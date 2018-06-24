@@ -94,4 +94,21 @@ class UserTest extends TestCase
         $entityManager->flush();
     }
 
+    public function testGetLevel(){
+        $entityManager = Database::getEntityManager();
+        $user = new User();
+        $user->setName("user1");
+        $user->setKeyApp("key1");
+        $user->setPlatform(1);
+        $user->setCreationDatetime(new DateTime());
+        $entityManager->persist($user);
+        $entityManager->flush();
+
+        // as the user has any passed events, his level should be the default one
+        $this->assertEquals(10, $user->getLevel());
+
+        $entityManager->remove($user);
+        $entityManager->flush();
+    }
+
 }
