@@ -19,7 +19,8 @@ class PostGIS
      */
     public static function addSupportFunctions(&$configuration){
         self::addSTDistance($configuration);
-        self:self::addSTPOINT($configuration);
+        self::addSTPOINT($configuration);
+        self::addGeography($configuration);
     }
 
     /**
@@ -41,6 +42,17 @@ class PostGIS
         $configuration->addCustomStringFunction(
             'ST_Point',
             'Jsor\Doctrine\PostGIS\Functions\ST_Point'
+        );
+    }
+
+    /**
+     * Add support of PostGIS ST_POINT() function
+     * @param Configuration $configuration
+     */
+    private static function addGeography(Configuration &$configuration){
+        $configuration->addCustomStringFunction(
+            'Geography',
+            'Jsor\Doctrine\PostGIS\Functions\Geography'
         );
     }
 
