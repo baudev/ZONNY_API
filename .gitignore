@@ -687,3 +687,7 @@ vendor/autoload.php
 .idea/workspace.xml
 composer.phar
 private/config.php
+composer.lock
+vendor/
+config.php
+doc/swagger.json
