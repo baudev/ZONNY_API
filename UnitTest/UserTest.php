@@ -129,4 +129,23 @@ class UserTest extends TestCase
         $entityManager->flush();
     }
 
+
+    public function testIsUnavailable(){
+        $entityManager = Database::getEntityManager();
+        $user = new User();
+        $user->setName("user1");
+        $user->setKeyApp("key1");
+        $user->setUnavailable((new DateTime())->modify('+ 2 hours'));
+        $user->setPlatform(1);
+        $user->setCreationDatetime(new DateTime());
+        $entityManager->persist($user);
+        $entityManager->flush();
+
+        // as the user has any passed events, his level should be the default one
+        $this->assertTrue($user->isUnavailable());
+
+        $entityManager->remove($user);
+        $entityManager->flush();
+    }
+
 }
